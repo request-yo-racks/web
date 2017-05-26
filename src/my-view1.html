@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="ryr-rack-request-form.html" />
+<link rel="import" href="ryr-rack-request-email-preview.html" />
 
 <dom-module id="my-view1">
   <template>
@@ -19,19 +21,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
-    </style>
+      h1 {
+        display: inline;
+      }
+      ryr-rack-request-form, ryr-rack-request-email-preview {
+        width: 50%;
+        border: solid;
+        margin: 10px;
+        padding: 8px;
+      }
+      .rack-request {
+        display: flex;
+      }
+  </style>
 
     <div class="card">
       <div class="circle">1</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <h1>Request a bike rack</h1>
+      <div class="rack-request">
+        <ryr-rack-request-form location="{{location}}"></ryr-rack-request-form>
+        <ryr-rack-request-email-preview location="{{location}}"></ryr-rack-request-email-preview>
+      </div>
     </div>
   </template>
 
   <script>
     class MyView1 extends Polymer.Element {
-      static get is() { return 'my-view1'; }
+      static get is() {
+        return 'my-view1';
+      }
+
+      static get properties() {
+        return {
+          location: String
+        }
+      };
     }
 
     window.customElements.define(MyView1.is, MyView1);
