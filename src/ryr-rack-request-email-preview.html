@@ -1,0 +1,58 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="ryr-rack-request-email-preview">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Email preview</h2>
+    <p>
+      [[_renderTemplate(location)]]
+    </p>
+  </template>
+
+  <script>
+    /**
+     * `ryr-rack-request-form`
+     * Request a rack
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RyrRackRequestEmailPreview extends Polymer.Element {
+      static get is() {
+        return 'ryr-rack-request-email-preview';
+      }
+
+      static get properties() {
+        return {
+          location: String,
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('locationchange', e => this._handleLocationChange(e));
+      }
+
+      _renderTemplate(location) {
+        return `Dear city of Austin,
+
+        I would like to have a bike rack here: ${location}.
+
+        Cheers,
+        Rémy
+        `;
+      }
+
+      _handleLocationChange(e) {
+        this.location = e.detail.msg;
+      }
+    }
+
+    window.customElements.define(RyrRackRequestEmailPreview.is, RyrRackRequestEmailPreview);
+  </script>
+</dom-module>

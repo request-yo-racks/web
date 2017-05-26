@@ -1,0 +1,56 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html" />
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html" />
+
+<dom-module id="ryr-rack-request-form">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Let's fill this form!</h3>
+    <paper-input label="Rack location" value="{{location}}" on-input="_onInputLocationChange"></paper-input>
+    <paper-input label="Supporting business name" value=[[location]]></paper-input>
+    <paper-input label="Supporting business address"></paper-input>
+    <paper-input label="Business owner/manager name"></paper-input>
+    <paper-input label="Business owner/manager phone"></paper-input>
+    <paper-input label="Business owner/manager email"></paper-input>
+    <paper-textarea label="Current car/bike parking information"></paper-textarea>
+    <paper-textarea label="Extra information"></paper-textarea>
+  </template>
+
+  <script>
+    /**
+     * `ryr-rack-request-form`
+     * Request a rack
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RyrRackRequestForm extends Polymer.Element {
+      static get is() {
+        return 'ryr-rack-request-form';
+      }
+
+      static get properties() {
+        return {
+          location: String
+        }
+      };
+
+      _onInputLocationChange(e) {
+        this.dispatchEvent(new CustomEvent('locationchange', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            msg: this.location
+          }
+        }));
+      }
+    }
+
+    window.customElements.define(RyrRackRequestForm.is, RyrRackRequestForm);
+  </script>
+</dom-module>

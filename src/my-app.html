@@ -37,6 +37,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
+      ul {
+        list-style-type: none;
+        margin: 0px auto;
+        padding: 0;
+        text-align: center;
+      }
+
+      li  {
+        display: inline;
+        color: white;
+        text-align: center;
+        padding: 0px 10px;
+      }
+
+      li a {
+        text-decoration: none;
+      }
+
       app-drawer-layout:not([narrow]) [drawer-toggle] {
         display: none;
       }
@@ -48,6 +66,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
+      }
+
+      app-toolbar {
+        --app-toolbar-font-size: 36px;
+        text-align: center;
       }
 
       .drawer-list {
@@ -77,14 +100,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer">
+      <!-- <app-drawer id="drawer" slot="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="view1" href="view1">View One</a>
           <a name="view2" href="view2">View Two</a>
           <a name="view3" href="view3">View Three</a>
         </iron-selector>
-      </app-drawer>
+      </app-drawer> -->
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
@@ -92,8 +115,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Request yo racks</div>
           </app-toolbar>
+          <div class="navigation">
+            <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
+              <ul>
+                <li><a name="view1" href="view1">Request</a></li>
+                <li><a name="view2" href="view2">Statistics</a></li>
+                <li><a name="view3" href="view3">About</a></li>
+              </ul>
+            </iron-selector>
+          </div>
         </app-header>
 
         <iron-pages
@@ -113,7 +145,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class MyApp extends Polymer.Element {
 
-      static get is() { return 'my-app'; }
+      static get is() {
+        return 'my-app';
+      }
 
       static get properties() {
         return {
@@ -154,19 +188,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.page = page || 'view1';
 
         // Close a non-persistent drawer when the page & route are changed.
-        if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
-        }
+        // if (!this.$.drawer.persistent) {
+        //   this.$.drawer.close();
+        // }
       }
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
         Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
       }
 
       _showPage404() {
