@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ryr-web-nginx:
+    build: .
+    ports:
+      - "38888:8888"
+    volumes:
+      - .:/var/www/build/bundled
+    networks:
+      - default
+      - ryr
+
+networks:
+  ryr:
+    external: true
