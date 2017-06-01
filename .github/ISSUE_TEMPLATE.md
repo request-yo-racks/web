@@ -1,33 +1,35 @@
-<!-- Instructions: https://github.com/PolymerElements/polymer-starter-kit/CONTRIBUTING.md#filing-issues -->
-### Description
-<!-- Example: The `paper-foo` element causes the page to turn pink when clicked. -->
+<!--- Provide a general summary of the issue in the Title above -->
+## Issue Type
 
-### Expected outcome
+- Bug report
+- Feature request
 
-<!-- Example: The page stays the same color. -->
+## Expected Behavior
+<!--- If you're describing a bug, tell us what should happen -->
+<!--- If you're suggesting a change/improvement, tell us how it should work -->
 
-### Actual outcome
+## Current Behavior
+<!--- If describing a bug, tell us what happens instead of the expected behavior -->
+<!--- If suggesting a change/improvement, explain the difference from current behavior -->
 
-<!-- Example: The page turns pink. -->
+## Possible Solution
+<!--- Not obligatory, but suggest a fix/reason for the bug, -->
+<!--- or ideas how to implement the addition or change -->
 
-### Live Demo
-<!-- Example: https://jsbin.com/cagaye/edit?html,output -->
+## Steps to Reproduce (for bugs)
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug. Include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
 
-### Steps to reproduce
+## Context
+<!--- How has this issue affected you? What are you trying to accomplish? -->
+<!--- Providing context helps us come up with a solution that is most useful in the real world -->
 
-<!-- Example
-1. Put a `paper-foo` element in the page.
-2. Open the page in a web browser.
-3. Click the `paper-foo` element.
--->
-
-### Browsers Affected
-<!-- Check all that apply -->
-- [ ] Chrome
-- [ ] Firefox
-- [ ] Safari 9
-- [ ] Safari 8
-- [ ] Safari 7
-- [ ] Edge
-- [ ] IE 11
-- [ ] IE 10
+## Your Environment
+<!--- Include as many relevant details about the environment you experienced the bug in -->
+* Version used:
+* Browser Name and version:
+* Operating System and version (desktop or mobile):
