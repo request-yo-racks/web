@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
+<!-- External libraries. -->
+<link rel="import" href="../bower_components/mustache.js/mustache.js">
+
 <dom-module id="ryr-rack-request-email-preview">
   <template>
     <style>
@@ -9,10 +12,12 @@
     </style>
     <h2>Email preview</h2>
     <p>
-      [[_renderTemplate(location)]]
+      [[email]]
     </p>
   </template>
 
+  <script type="text/javascript" src="../bower_components/mustache.js/mustache.js"></script>
+  <script type="text/javascript" src="../bower_components/showdown/dist/showdown.js"></script>
   <script>
     /**
      * `ryr-rack-request-form`
@@ -29,7 +34,13 @@
 
       static get properties() {
         return {
-          location: String,
+          preview: {
+            type: String,
+          },
+          templateVars: {
+            type: Object,
+            value: {}
+          }
         };
       }
 
@@ -38,18 +49,34 @@
         window.addEventListener('locationchange', e => this._handleLocationChange(e));
       }
 
-      _renderTemplate(location) {
-        return `Dear city of Austin,
+      _renderTemplate(templateVars) {
+        let template =
+          `Dear city of Austin,
 
-        I would like to have a bike rack here: ${location}.
+        I would like to have a bike rack here: {{rackLocation}}.
+
+        The business supporting this demand is {{businessName}}, located at {{businessAddress}}. The point of contact is {{contactName}} and can be contacted via phone ({{contactPhone}}) or email ({{contactEmail}}).
+
+        Current parking situation:
+        {{parkingInfo}}
+
+        {{extraInfo}}
 
         Cheers,
-        Rémy
+        Request Yo Racks Team
         `;
+
+        let templatized = Mustache.render(template, templateVars);
+        // let showdown = require('showdown')
+        let converter = new showdown.Converter()
+        let htmlRendered = converter.makeHtml(templatized);
+        return htmlRendered;
       }
 
       _handleLocationChange(e) {
-        this.location = e.detail.msg;
+        this.set('templateVars', e.detail);
+        console.log('templateVars: ' + this.templateVars);
+        this.email = this._renderTemplate(this.templateVars);
       }
     }
 

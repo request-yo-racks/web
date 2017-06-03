@@ -15,7 +15,9 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
     "polymer": "Polymer/polymer#^2.0.0-rc.3",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
-    "paper-input": "PolymerElements/paper-input#^2.0.0"
+    "paper-input": "PolymerElements/paper-input#^2.0.0",
+    "mustache.js": "mustache#^2.3.0",
+    "showdown": "^1.7.1"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.3",
@@ -24,7 +26,6 @@
     "iron-a11y-keys-behavior": "2.0-preview",
     "iron-behaviors": "2.0-preview",
     "iron-form-element-behavior": "2.0-preview",
-    "iron-meta": "2.0-preview",
     "iron-validatable-behavior": "2.0-preview"
   },
   "devDependencies": {
