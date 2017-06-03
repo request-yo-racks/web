@@ -1,0 +1,79 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="ryr-email-templatizer">
+  <!-- Third party libraries. -->
+  <script type="text/javascript" src="../lib/js/markup.js"></script>
+  <script type="text/javascript" src="../bower_components/showdown/dist/showdown.js"></script>
+
+  <!-- Web component class. -->
+  <script>
+    /**
+     * `ryr-rack-request-form`
+     * Request a rack
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RyrEmailTemplatizer extends Polymer.Element {
+      static get is() {
+        return 'ryr-email-templatizer';
+      }
+
+      static get properties() {
+        return {
+          templatevars: {
+            type: Object,
+            value: {},
+            observer: '_handleTemplateChange'
+          },
+          htmlrenderedtemplate: {
+            type: String,
+            notify: true
+          }
+        };
+      }
+
+      _renderTemplate(templateVars) {
+        let template =
+          `
+Dear city of Austin,
+
+I would like to have a bike rack here: {{rackLocation | shout |blank>_not provided_}}.
+
+{{if businessName}}The business supporting this demand is {{businessName | blank>_not provided_}}{{if businessAddress }}, located at {{businessAddress | blank>_not provided_}}.{{else}}.{{/if}}{{/if}}
+
+{{if contactName}}The point of contact is {{contactName | blank>_not provided_}} and can be contacted via phone ({{contactPhone | blank>_not provided_}}) or email ({{contactEmail | blank>_not provided_}}).{{/if}}
+
+{{if parkingInfo}}Current parking situation: {{parkingInfo | blank>_not provided_}}{{/if}}
+
+{{extraInfo | blank>}}
+
+Cheers,
+Request Yo Racks Team
+        `;
+
+        let templatized = Mark.up(template, this.templatevars);
+        return templatized;
+      }
+
+      _markdown2html(markdown) {
+        let converter = new showdown.Converter()
+        let htmlRendered = converter.makeHtml(markdown);
+        return htmlRendered;
+      }
+
+      _handleTemplateChange() {
+        if (Object.keys(this.templatevars).length == 0) {
+          this.htmlrenderedtemplate = '';
+        } else {
+          let renderedTemplate = this._renderTemplate(this.templateVars);
+          let htmlTemplate = this._markdown2html(renderedTemplate);
+          this.htmlrenderedtemplate = htmlTemplate;
+        }
+      }
+    }
+
+    window.customElements.define(RyrEmailTemplatizer.is, RyrEmailTemplatizer);
+  </script>
+</dom-module>

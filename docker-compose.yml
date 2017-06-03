@@ -7,7 +7,6 @@ services:
     volumes:
       - .:/var/www/build/bundled
     networks:
-      - default
       - ryr
 
 networks:
