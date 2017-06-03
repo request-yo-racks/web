@@ -17,7 +17,8 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "mustache.js": "mustache#^2.3.0",
-    "showdown": "^1.7.1"
+    "showdown": "^1.7.1",
+    "underscore.string": "^3.3.4"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.3",

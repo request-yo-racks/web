@@ -11,13 +11,17 @@
       }
     </style>
     <h2>Email preview</h2>
-    <p>
+    <div id="preview">
       [[email]]
-    </p>
+    </div>
   </template>
 
+  <!-- Third party libraries. -->
   <script type="text/javascript" src="../bower_components/mustache.js/mustache.js"></script>
   <script type="text/javascript" src="../bower_components/showdown/dist/showdown.js"></script>
+  <script type="text/javascript" src="../bower_components/underscore.string/dist/underscore.string.js"></script>
+
+  <!-- Web component class. -->
   <script>
     /**
      * `ryr-rack-request-form`
@@ -49,24 +53,58 @@
         window.addEventListener('locationchange', e => this._handleLocationChange(e));
       }
 
+      _makeString(object) {
+        if (object == null) return '';
+        return '' + object;
+      }
+
+      _getIndent(str) {
+        var matches = str.match(/^[\s\\t]*/gm);
+        var indent = matches[0].length;
+
+        for (var i = 1; i < matches.length; i++) {
+          indent = Math.min(matches[i].length, indent);
+        }
+
+        return indent;
+      }
+
+      _dedent(str, pattern) {
+        str = this._makeString(str);
+        var indent = this._getIndent(str);
+        var reg;
+
+        if (indent === 0) return str;
+
+        if (typeof pattern === 'string') {
+          reg = new RegExp('^' + pattern, 'gm');
+        } else {
+          reg = new RegExp('^[ \\t]{' + indent + '}', 'gm');
+        }
+
+        return str.replace(reg, '');
+      }
+
       _renderTemplate(templateVars) {
         let template =
-          `Dear city of Austin,
+          `
+Dear city of Austin,
 
-        I would like to have a bike rack here: {{rackLocation}}.
+I would like to have a bike rack here: {{rackLocation}}.
 
-        The business supporting this demand is {{businessName}}, located at {{businessAddress}}. The point of contact is {{contactName}} and can be contacted via phone ({{contactPhone}}) or email ({{contactEmail}}).
+The business supporting this demand is {{businessName}}, located at {{businessAddress}}. The point of contact is {{contactName}} and can be contacted via phone ({{contactPhone}}) or email ({{contactEmail}}).
 
-        Current parking situation:
-        {{parkingInfo}}
+Current parking situation:
+{{parkingInfo}}
 
-        {{extraInfo}}
+{{extraInfo}}
 
-        Cheers,
-        Request Yo Racks Team
+Cheers,
+Request Yo Racks Team
         `;
 
-        let templatized = Mustache.render(template, templateVars);
+        // (Rémy): dedent does not work...
+        let templatized = Mustache.render(this._dedent(template), templateVars);
         // let showdown = require('showdown')
         let converter = new showdown.Converter()
         let htmlRendered = converter.makeHtml(templatized);
@@ -77,6 +115,7 @@
         this.set('templateVars', e.detail);
         console.log('templateVars: ' + this.templateVars);
         this.email = this._renderTemplate(this.templateVars);
+        // this.$.preview.textContent = this.email;
       }
     }
 
