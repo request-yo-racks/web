@@ -92,9 +92,11 @@ Dear city of Austin,
 
 I would like to have a bike rack here: {{rackLocation | blank>_not provided_}}.
 
-The business supporting this demand is {{businessName | blank>_not provided_}}, located at {{businessAddress | blank>_not provided_}}. The point of contact is {{contactName | blank>_not provided_}} and can be contacted via phone ({{contactPhone | blank>_not provided_}}) or email ({{contactEmail | blank>_not provided_}}).
+{{if businessName}}The business supporting this demand is {{businessName | blank>_not provided_}}{{if businessAddress }}, located at {{businessAddress | blank>_not provided_}}.{{else}}.{{/if}}{{/if}}
 
-Current parking situation: {{parkingInfo | blank>_not provided_}}
+{{if contactName}}The point of contact is {{contactName | blank>_not provided_}} and can be contacted via phone ({{contactPhone | blank>_not provided_}}) or email ({{contactEmail | blank>_not provided_}}).{{/if}}
+
+{{if parkingInfo}}Current parking situation: {{parkingInfo | blank>_not provided_}}{{/if}}
 
 {{extraInfo | blank>}}
 
