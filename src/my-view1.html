@@ -39,8 +39,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="circle">1</div>
       <h1>Request a bike rack</h1>
       <div class="rack-request">
-        <ryr-rack-request-form location="{{location}}"></ryr-rack-request-form>
-        <ryr-rack-request-email-preview location="{{location}}"></ryr-rack-request-email-preview>
+        <ryr-rack-request-form id="ryrform"></ryr-rack-request-form>
+        <ryr-rack-request-email-preview></ryr-rack-request-email-preview>
       </div>
     </div>
   </template>
@@ -53,7 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          location: String
+          templateVars: Object
         }
       };
     }

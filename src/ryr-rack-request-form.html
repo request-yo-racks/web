@@ -10,14 +10,14 @@
       }
     </style>
     <h2>Let's fill this form!</h3>
-    <paper-input label="Rack location" value="{{location}}" on-input="_onInputLocationChange"></paper-input>
-    <paper-input label="Supporting business name" value=[[location]]></paper-input>
-    <paper-input label="Supporting business address"></paper-input>
-    <paper-input label="Business owner/manager name"></paper-input>
-    <paper-input label="Business owner/manager phone"></paper-input>
-    <paper-input label="Business owner/manager email"></paper-input>
-    <paper-textarea label="Current car/bike parking information"></paper-textarea>
-    <paper-textarea label="Extra information"></paper-textarea>
+    <paper-input label="Rack location" value="{{rackLocation}}" on-input="_onInputDataChange"></paper-input>
+    <paper-input label="Supporting business name" value="{{businessName}}" on-input="_onInputDataChange"></paper-input>
+    <paper-input label="Supporting business address" value="{{businessAddress}}" on-input="_onInputDataChange"></paper-input>
+    <paper-input label="Business owner/manager name" value="{{contactName}}" on-input="_onInputDataChange"></paper-input>
+    <paper-input label="Business owner/manager phone" value="{{contactPhone}}" on-input="_onInputDataChange"></paper-input>
+    <paper-input label="Business owner/manager email" value="{{contactEmail}}" on-input="_onInputDataChange"></paper-input>
+    <paper-textarea label="Current car/bike parking information" value="{{parkingInfo}}" on-input="_onInputDataChange"></paper-textarea>
+    <paper-textarea label="Extra information" value="{{extraInfo}}" on-input="_onInputDataChange"></paper-textarea>
   </template>
 
   <script>
@@ -36,16 +36,30 @@
 
       static get properties() {
         return {
-          location: String
+          rackLocation: String,
+          businessName: String,
+          businessAddress: String,
+          contactName: String,
+          contactPhone: String,
+          contactEmail: String,
+          parkingInfo: String,
+          extraInfo: String
         }
       };
 
-      _onInputLocationChange(e) {
+      _onInputDataChange(e) {
         this.dispatchEvent(new CustomEvent('locationchange', {
           bubbles: true,
           composed: true,
           detail: {
-            msg: this.location
+            rackLocation: this.rackLocation,
+            businessName: this.businessName,
+            businessAddress: this.businessAddress,
+            contactName: this.contactName,
+            contactPhone: this.contactPhone,
+            contactEmail: this.contactEmail,
+            parkingInfo: this.parkingInfo,
+            extraInfo: this.extraInfo
           }
         }));
       }

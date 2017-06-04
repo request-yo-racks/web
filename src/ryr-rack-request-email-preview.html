@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
+<!-- External libraries. -->
+<link rel="import" href="../bower_components/mustache.js/mustache.js">
+
 <dom-module id="ryr-rack-request-email-preview">
   <template>
     <style>
@@ -8,11 +11,17 @@
       }
     </style>
     <h2>Email preview</h2>
-    <p>
-      [[_renderTemplate(location)]]
-    </p>
+    <div id="preview">
+    </div>
   </template>
 
+  <!-- Third party libraries. -->
+  <!-- <script type="text/javascript" src="../bower_components/mustache.js/mustache.js"></script> -->
+  <script type="text/javascript" src="../lib/js/markup.js"></script>
+  <script type="text/javascript" src="../bower_components/showdown/dist/showdown.js"></script>
+  <!-- <script type="text/javascript" src="../bower_components/underscore.string/dist/underscore.string.js"></script> -->
+
+  <!-- Web component class. -->
   <script>
     /**
      * `ryr-rack-request-form`
@@ -29,7 +38,13 @@
 
       static get properties() {
         return {
-          location: String,
+          // preview: {
+          //   type: String,
+          // },
+          templateVars: {
+            type: Object,
+            value: {}
+          }
         };
       }
 
@@ -38,18 +53,76 @@
         window.addEventListener('locationchange', e => this._handleLocationChange(e));
       }
 
-      _renderTemplate(location) {
-        return `Dear city of Austin,
+      // _makeString(object) {
+      //   if (object == null) return '';
+      //   return '' + object;
+      // }
+      //
+      // _getIndent(str) {
+      //   var matches = str.match(/^[\s\\t]*/gm);
+      //   var indent = matches[0].length;
+      //
+      //   for (var i = 1; i < matches.length; i++) {
+      //     indent = Math.min(matches[i].length, indent);
+      //   }
+      //
+      //   return indent;
+      // }
+      //
+      // _dedent(str, pattern) {
+      //   str = this._makeString(str);
+      //   var indent = this._getIndent(str);
+      //   var reg;
+      //
+      //   if (indent === 0) return str;
+      //
+      //   if (typeof pattern === 'string') {
+      //     reg = new RegExp('^' + pattern, 'gm');
+      //   } else {
+      //     reg = new RegExp('^[ \\t]{' + indent + '}', 'gm');
+      //   }
+      //
+      //   return str.replace(reg, '');
+      // }
 
-        I would like to have a bike rack here: ${location}.
+      _renderTemplate(templateVars) {
+        let template =
+          `
+Dear city of Austin,
 
-        Cheers,
-        Rémy
+I would like to have a bike rack here: {{rackLocation | blank>_not provided_}}.
+
+{{if businessName}}The business supporting this demand is {{businessName | blank>_not provided_}}{{if businessAddress }}, located at {{businessAddress | blank>_not provided_}}.{{else}}.{{/if}}{{/if}}
+
+{{if contactName}}The point of contact is {{contactName | blank>_not provided_}} and can be contacted via phone ({{contactPhone | blank>_not provided_}}) or email ({{contactEmail | blank>_not provided_}}).{{/if}}
+
+{{if parkingInfo}}Current parking situation: {{parkingInfo | blank>_not provided_}}{{/if}}
+
+{{extraInfo | blank>}}
+
+Cheers,
+Request Yo Racks Team
         `;
+
+        // (Rémy): dedent does not work...
+        // let templatized = Mustache.render(mustacheTemplate, templateVars);
+        let templatized = Mark.up(template, templateVars);
+        return this._markdown2html(templatized);
+      }
+
+      _markdown2html(markdown) {
+        // let showdown = require('showdown')
+        let converter = new showdown.Converter()
+        let htmlRendered = converter.makeHtml(markdown);
+        return htmlRendered;
       }
 
       _handleLocationChange(e) {
-        this.location = e.detail.msg;
+        this.set('templateVars', e.detail);
+        // console.log('templateVars: ' + this.templateVars);
+        // this.email = this._renderTemplate(this.templateVars);
+        // this.$.preview.textContent = this.email;
+        this.$.preview.innerHTML = this._renderTemplate(this.templateVars);
       }
     }
 
