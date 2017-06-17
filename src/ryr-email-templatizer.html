@@ -30,6 +30,10 @@
           htmlrenderedtemplate: {
             type: String,
             notify: true
+          },
+          markdownrenderedtemplate: {
+            type: String,
+            notify: true
           }
         };
       }
@@ -53,7 +57,11 @@ Cheers,
 Request Yo Racks Team
         `;
 
-        let templatized = Mark.up(template, this.templatevars);
+        let options = {
+          compact: true
+        };
+        Mark.compact = true;
+        let templatized = Mark.up(template, this.templatevars, options);
         return templatized;
       }
 
@@ -64,12 +72,18 @@ Request Yo Racks Team
       }
 
       _handleTemplateChange() {
+        // Render the template as an empty string if there is no template variables.
         if (Object.keys(this.templatevars).length == 0) {
           this.htmlrenderedtemplate = '';
         } else {
+          // Render the template.
           let renderedTemplate = this._renderTemplate(this.templateVars);
-          let htmlTemplate = this._markdown2html(renderedTemplate);
-          this.htmlrenderedtemplate = htmlTemplate;
+
+          // Strip the blank lines and trim the text.
+          this.markdownrenderedtemplate = renderedTemplate.replace(/^\s*[\r\n]/gm, '\n').replace(/^\s+|\s+$/g, '');
+
+          // Convert to the Markdown to HTML.
+          this.htmlrenderedtemplate = this._markdown2html(renderedTemplate);
         }
       }
     }
