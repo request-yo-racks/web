@@ -1,0 +1,50 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="ryr-preview">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>[[previewtitle]]</h2>
+    <div id="preview">
+    </div>
+  </template>
+
+  <!-- Web component class. -->
+  <script>
+    /**
+     * `ryr-rack-request-form`
+     * Request a rack
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RyrPreview extends Polymer.Element {
+      static get is() {
+        return 'ryr-preview';
+      }
+
+      static get properties() {
+        return {
+          previewtitle: {
+            type: String,
+            value: 'Email preview'
+          },
+          htmlrenderedtemplate: {
+            type: String,
+            observer: '_handleTemplateChange'
+          }
+        };
+      }
+
+      _handleTemplateChange() {
+        this.$.preview.innerHTML = this.htmlrenderedtemplate;
+      }
+    }
+
+    window.customElements.define(RyrPreview.is, RyrPreview);
+  </script>
+</dom-module>
