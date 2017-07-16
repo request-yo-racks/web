@@ -17,6 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="ryr-rack-request-form.html" />
 <link rel="import" href="ryr-email-templatizer.html" />
 <link rel="import" href="ryr-preview.html" />
+<link rel="import" href="ryr-suggestion-list.html" />
 
 <dom-module id="my-view1">
   <template>
@@ -37,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .rack-request {
         display: flex;
       }
-  </style>
+    </style>
 
     <div class="card">
       <div class="circle">1</div>
@@ -49,6 +50,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <granite-clipboard text="[[md]]">
           <paper-icon-button icon="content-copy" title="copy"></paper-icon-button>
         </granite-clipboard>
+      </div>
+      <div>
+        <ryr-suggestion-list></ryr-suggestion-list>
       </div>
     </div>
   </template>
