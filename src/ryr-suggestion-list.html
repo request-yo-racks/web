@@ -4,10 +4,15 @@
 
 <dom-module id="ryr-suggestion-list">
   <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
     <!-- TODO(rémyg): Find a way to provide the URL via environment variables -->
     <iron-ajax
     auto
-    url="http://localhost:18000/places/"
+    url="http://localhost:18000/places/?latlong=[[latlong]]"
     handle-as="json"
     last-response="{{response}}"
     jsonPrefix="results"></iron-ajax>
@@ -46,6 +51,9 @@
         return {
           activeItem: {
             observer: '_activeItemChanged'
+          },
+          latlong: {
+            type: String
           }
         };
       }

@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html" />
+
+<dom-module id="ryr-specify-coordinates">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-input label="Latitude,longitude" value="{{latlong}}"></paper-input>
+    <paper-icon-button icon="search" title="search"></paper-icon-button>
+  </template>
+  <!-- Web component class. -->
+  <script>
+    /**
+     * `ryr-specify-coordinates`
+     * Request a rack
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RyrSpecifyCoordinates extends Polymer.Element {
+      static get is() {
+        return 'ryr-specify-coordinates';
+      }
+
+      static get properties() {
+        return {
+          latlong: {
+            type: String,
+            value: "30.31865599999999,-97.72445499999999",
+            notify: true
+          }
+        };
+      }
+    }
+
+    window.customElements.define(RyrSpecifyCoordinates.is, RyrSpecifyCoordinates);
+  </script>
+</dom-module>
