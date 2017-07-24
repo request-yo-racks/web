@@ -12,7 +12,8 @@
     <!-- TODO(rémyg): Find a way to provide the URL via environment variables -->
     <iron-ajax
     auto
-    url="http://localhost:18000/places/?latlong=[[latlong]]"
+    url="http://localhost:18000/places/"
+    params="{{options}}"
     handle-as="json"
     last-response="{{response}}"
     jsonPrefix="results"></iron-ajax>
@@ -54,6 +55,10 @@
           },
           latlong: {
             type: String
+          },
+          options: {
+            computed: '_optionsChanged(latlong)',
+            notify: true
           }
         };
       }
@@ -62,6 +67,11 @@
         this.$.grid.selectedItems = item ? [item] : [];
       }
 
+      _optionsChanged(latlong) {
+        return {
+          latlong: latlong
+        }
+      }
     }
 
     window.customElements.define(RyrSuggestionList.is, RyrSuggestionList);
