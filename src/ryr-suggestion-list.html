@@ -13,12 +13,17 @@
     <iron-ajax
     auto
     url="http://localhost:18000/places/"
-    params="{{options}}"
+    params="{{places_options}}"
     handle-as="json"
-    last-response="{{response}}"
+    last-response="{{places_response}}"
     jsonPrefix="results"></iron-ajax>
+    <iron-ajax
+    auto
+    url="{{place_url}}"
+    handle-as="json"
+    last-response="{{place_response}}"></iron-ajax>
     <!-- <vaadin-grid id="grid" active-item="{{activeItem}}" items='[{"name":"100-214 W N Loop Blvd","place_id":"ChIJScAAmmvKRIYRn42comEgS20"}, {"name":"Epoch Coffee - NorthLoop","place_id":"ChIJG-gJw2vKRIYROWi2uwOp8QE"}, {"name":"Blue Velvet","place_id":"ChIJBzPI6WvKRIYRO059hPJZndU"}, {"name":"Breakaway Records","place_id":"ChIJl97swWvKRIYR04M3oxYPG-Y"}, {"name":"The Center Spot","place_id":"ChIJb-iQwWvKRIYREcuAEGb-Brw"}, {"name":"Waller Creek","place_id":"ChIJzSjl3GvKRIYRk3hfNfLuAL4"}, {"name":"Austin","place_id":"ChIJLwPMoJm1RIYRetVp1EtGm10"}]'> -->
-    <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[response.results]]" size="10">
+    <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[places_response.results]]" size="10">
       <vaadin-grid-column width="50px" flex-grow="0">
         <template class="header">#</template>
   <template>[[index]]</template>
@@ -56,8 +61,18 @@
           latlong: {
             type: String
           },
-          options: {
-            computed: '_optionsChanged(latlong)',
+          place_id: {
+            type: String,
+            notify: true
+          },
+          place_response: {
+            type: Object
+          },
+          place_url: {
+            computed: '_computePlaceUrl(place_id)'
+          },
+          places_options: {
+            computed: '_placesOptionsChanged(latlong)',
             notify: true
           }
         };
@@ -65,12 +80,19 @@
 
       _activeItemChanged(item) {
         this.$.grid.selectedItems = item ? [item] : [];
+        if (item) {
+          this.place_id = item.place_id || 'plop';
+        }
       }
 
-      _optionsChanged(latlong) {
+      _placesOptionsChanged(latlong) {
         return {
           latlong: latlong
         }
+      }
+
+      _computePlaceUrl(place_id) {
+        return ['http://localhost:18000/place', place_id].join('/');
       }
     }
 
