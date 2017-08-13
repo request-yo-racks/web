@@ -13,17 +13,17 @@
     <iron-ajax
     auto
     url="http://localhost:18000/places/"
-    params="{{places_options}}"
+    params="{{placesOptions}}"
     handle-as="json"
-    last-response="{{places_response}}"
+    last-response="{{placesResponse}}"
     jsonPrefix="results"></iron-ajax>
     <iron-ajax
-    auto
-    url="{{place_url}}"
+    id="placeDetails"
+    url="{{placeUrl}}"
     handle-as="json"
-    last-response="{{place_response}}"></iron-ajax>
+    on-response="_handlePlaceResponse"></iron-ajax>
     <!-- <vaadin-grid id="grid" active-item="{{activeItem}}" items='[{"name":"100-214 W N Loop Blvd","place_id":"ChIJScAAmmvKRIYRn42comEgS20"}, {"name":"Epoch Coffee - NorthLoop","place_id":"ChIJG-gJw2vKRIYROWi2uwOp8QE"}, {"name":"Blue Velvet","place_id":"ChIJBzPI6WvKRIYRO059hPJZndU"}, {"name":"Breakaway Records","place_id":"ChIJl97swWvKRIYR04M3oxYPG-Y"}, {"name":"The Center Spot","place_id":"ChIJb-iQwWvKRIYREcuAEGb-Brw"}, {"name":"Waller Creek","place_id":"ChIJzSjl3GvKRIYRk3hfNfLuAL4"}, {"name":"Austin","place_id":"ChIJLwPMoJm1RIYRetVp1EtGm10"}]'> -->
-    <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[places_response.results]]" size="10">
+    <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[placesResponse.results]]" size="10">
       <vaadin-grid-column width="50px" flex-grow="0">
         <template class="header">#</template>
   <template>[[index]]</template>
@@ -61,17 +61,23 @@
           latlong: {
             type: String
           },
-          place_id: {
+          placeId: {
             type: String,
             notify: true
           },
-          place_response: {
-            type: Object
+          placeResponse: {
+            type: Object,
+            notify: true
           },
-          place_url: {
-            computed: '_computePlaceUrl(place_id)'
+          // placeResponseApi: {
+          //   type: Object,
+          //   computed: '_normalizePlaceResponse(place_response)',
+          //   notify: true
+          // },
+          placeUrl: {
+            computed: '_computePlaceUrl(placeId)'
           },
-          places_options: {
+          placesOptions: {
             computed: '_placesOptionsChanged(latlong)',
             notify: true
           }
@@ -81,7 +87,8 @@
       _activeItemChanged(item) {
         this.$.grid.selectedItems = item ? [item] : [];
         if (item) {
-          this.place_id = item.place_id || 'plop';
+          this.placeId = item.place_id || 'plop';
+          this.$.placeDetails.generateRequest();
         }
       }
 
@@ -91,8 +98,31 @@
         }
       }
 
-      _computePlaceUrl(place_id) {
-        return ['http://localhost:18000/place', place_id].join('/');
+      _computePlaceUrl(placeId) {
+        if (placeId) {
+          return ['http://localhost:18000/place', placeId].join('/');
+        }
+      }
+
+      _handlePlaceResponse(event, request) {
+        let response = request.response;
+        let result = response.result;
+        if (result == null) {
+          this.placeResponse = {
+            rackLocation: 'HERE!'
+          };
+          return;
+        }
+        this.placeResponse = {
+          rackLocation: result.geometry.location.lat + ', ' + result.geometry.location.lng,
+          businessName: result.name,
+          businessAddress: result.formatted_address,
+          contactName: result.contactName || '',
+          contactPhone: result.formatted_phone_number,
+          contactEmail: result.contactEmail || '',
+          parkingInfo: result.parkingInfo || '',
+          extraInfo: result.extraInfo || ''
+        };
       }
     }
 
