@@ -72,12 +72,34 @@ Request Yo Racks Team
       }
 
       _handleTemplateChange() {
+        if (this.templatevars == null) {
+          return;
+        }
         // Render the template as an empty string if there is no template variables.
         if (Object.keys(this.templatevars).length == 0) {
           this.htmlrenderedtemplate = '';
         } else {
+          // Convert.
+          let convertedVars = this.templateVars
+          if (this.templatevars.result != null) {
+            res = this.templatevars.result;
+            businessName = res.name;
+            businessAddress = res.formatted_address;
+            contactPhone = res.formatted_phone_number;
+            convertedVars = {
+              rackLocation: rackLocation,
+              businessName: businessName,
+              businessAddress: businessAddress,
+              contactName: contactName,
+              contactPhone: contactPhone,
+              contactEmail: contactEmail,
+              parkingInfo: parkingInfo,
+              extraInfo: extraInfo
+            };
+          }
+
           // Render the template.
-          let renderedTemplate = this._renderTemplate(this.templateVars);
+          let renderedTemplate = this._renderTemplate(convertedVars);
 
           // Strip the blank lines and trim the text.
           this.markdownrenderedtemplate = renderedTemplate.replace(/^\s*[\r\n]/gm, '\n').replace(/^\s+|\s+$/g, '');

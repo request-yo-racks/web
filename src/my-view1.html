@@ -103,7 +103,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="circle">2</div>
             <h3>Select a business</h3>
           </div>
-          <ryr-suggestion-list latlong="[[latlong]]"></ryr-suggestion-list>
+          <ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list>
         </div>
       </section>
 
@@ -114,7 +114,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <h3>Provide extra information if needed</h3>
           </div>
           <ryr-rack-request-form templatevars="{{vars}}"></ryr-rack-request-form>
-          <ryr-email-templatizer templatevars="[[vars]]" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+          <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
         </div>
       </section>
 
