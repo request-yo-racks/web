@@ -3,7 +3,7 @@ TOPDIR = $(shell git rev-parse --show-toplevel)
 
 # Docker.
 DOCKER_NETWORK=ryr
-DOCKER_WEB_TOOLS_IMAGE = loannister/web-devtools:1.1.0
+DOCKER_WEB_TOOLS_IMAGE = loannister/web-devtools:1.2.1
 DOCKER_RUN = docker run -t -v=$$(pwd):/code --rm
 
 # Web tools.
