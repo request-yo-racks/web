@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/graphite-clipboard/granite-clipboard.html" />
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="ryr-rack-request-form.html" />
 <link rel="import" href="ryr-email-templatizer.html" />
@@ -78,6 +79,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .rack-request {
         display: flex;
       }
+
+      google-map {
+        height: 600px;
+      }
     </style>
 
     <div class="content">
@@ -93,6 +98,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="circle">1</div>
             <h3>Select a location</h3>
           </div>
+          <google-map latitude="30.318655" longitude="-97.724454" zoom="15">
+            <google-map-marker latitude="30.318655" longitude="-97.7244549"></google-map-marker>
+          </google-map>
           <ryr-specify-coordinates latlong="{{latlong}}"></ryr-specify-coordinates>
         </div>
       </section>
