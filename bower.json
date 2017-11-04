@@ -20,7 +20,8 @@
     "showdown": "^1.7.1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
     "vaadin-grid": "^3.0.0",
-    "iron-ajax": "PolymerElements/iron-ajax#^2.0.2"
+    "iron-ajax": "PolymerElements/iron-ajax#^2.0.2",
+    "google-map": "GoogleWebComponents/google-map#^2.0.2"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"
