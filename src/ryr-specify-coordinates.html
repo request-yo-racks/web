@@ -1,9 +1,12 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html" />
+
+<script type="text/javascript" src="config.json"></script>
 
 <dom-module id="ryr-specify-coordinates">
   <template>
@@ -18,6 +21,12 @@
         @apply(--layout-wrap);
       }
 
+      google-map {
+        height: 400px;
+        width: 100%;
+        margin: auto;
+      }
+
       @media screen and (max-width: 720px) {
         .container {
           @apply(--layout-vertical);
@@ -28,9 +37,12 @@
         }
       }
     </style>
-    <div class="container">
-      <paper-input label="Latitude,longitude" value="{{latlong}}"></paper-input>
-      <paper-icon-button icon="search" title="search"></paper-icon-button>
+    <google-map id="gmap" latitude="30.318655" longitude="-97.724454" zoom="15" api-key="[[this.myApiKey]]">
+      <google-map-marker latitude="30.318655" longitude="-97.7244549"></google-map-marker>
+    </google-map>
+    <div class="container ">
+      <paper-input label="Latitude,longitude " value="{{latlong}} "></paper-input>
+      <paper-icon-button icon="search " title="search "></paper-icon-button>
     </div>
   </template>
   <!-- Web component class. -->
@@ -52,8 +64,12 @@
         return {
           latlong: {
             type: String,
-            value: "30.31865599999999,-97.72445499999999",
+            value: "30.31865599999999,-97.72445499999999 ",
             notify: true
+          },
+          myApiKey: {
+            type: String,
+            value: config.GOOGLE_WEB_MAPS_API_KEY
           }
         };
       }
