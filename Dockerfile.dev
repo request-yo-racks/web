@@ -1,0 +1,10 @@
+FROM node:6.12.3-alpine
+MAINTAINER Rémy Greinhofer <remy.greinhofer@gmail.com>
+
+# Create app directory
+WORKDIR /code
+
+RUN npm install -g polymer-cli --unsafe-perm
+
+EXPOSE 8080
+CMD ["polymer", "serve", "--hostname", "0.0.0.0", "--port", "8080"]
