@@ -9,7 +9,6 @@
         display: block;
       }
     </style>
-    <!-- TODO(rémyg): Find a way to provide the URL via environment variables -->
     <iron-ajax
     auto
     url="http://localhost:18000/places/"
@@ -22,7 +21,6 @@
     url="{{placeUrl}}"
     handle-as="json"
     on-response="_handlePlaceResponse"></iron-ajax>
-    <!-- <vaadin-grid id="grid" active-item="{{activeItem}}" items='[{"name":"100-214 W N Loop Blvd","place_id":"ChIJScAAmmvKRIYRn42comEgS20"}, {"name":"Epoch Coffee - NorthLoop","place_id":"ChIJG-gJw2vKRIYROWi2uwOp8QE"}, {"name":"Blue Velvet","place_id":"ChIJBzPI6WvKRIYRO059hPJZndU"}, {"name":"Breakaway Records","place_id":"ChIJl97swWvKRIYR04M3oxYPG-Y"}, {"name":"The Center Spot","place_id":"ChIJb-iQwWvKRIYREcuAEGb-Brw"}, {"name":"Waller Creek","place_id":"ChIJzSjl3GvKRIYRk3hfNfLuAL4"}, {"name":"Austin","place_id":"ChIJLwPMoJm1RIYRetVp1EtGm10"}]'> -->
     <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[placesResponse.results]]" size="10">
       <vaadin-grid-column width="50px" flex-grow="0">
         <template class="header">#</template>
@@ -40,14 +38,6 @@
   </template>
   <!-- Web component class. -->
   <script>
-    /**
-     * `ryr-suggestion-list`
-     * Request a rack
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
     class RyrSuggestionList extends Polymer.Element {
       static get is() {
         return 'ryr-suggestion-list';
@@ -69,11 +59,6 @@
             type: Object,
             notify: true
           },
-          // placeResponseApi: {
-          //   type: Object,
-          //   computed: '_normalizePlaceResponse(place_response)',
-          //   notify: true
-          // },
           placeUrl: {
             computed: '_computePlaceUrl(placeId)'
           },
