@@ -50,7 +50,7 @@ clean-minikube: ## Remove minikube deployment (!DESTRUCTIVE!)
 	helm delete --purge $(PROJECT_NAME)
 
 docker-build: ## Build the docker image
-	@docker build -t $(REPOSITORY):$(TAG) -f Dockerfile.dev .
+	@docker build -t $(REPOSITORY):$(TAG) -f Dockerfile .
 	# @docker build -t $(REPOSITORY):$(TAG) .
 
 docker-clean: ## Stop and remove containers, volumes, networks and images for this project
