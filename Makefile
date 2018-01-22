@@ -1,30 +1,29 @@
-# Docker.
-DOCKER_NETWORK=ryr
-DOCKER_WEB_TOOLS_IMAGE = loannister/web-devtools:1.2.1
-DOCKER_RUN = docker run -t -v=$$(pwd):/code --rm
-
-# Web tools.
-DOCKER_RUN_BOWER = $(DOCKER_RUN) --entrypoint bower $(DOCKER_WEB_TOOLS_IMAGE)
-DOCKER_RUN_POLYMER = $(DOCKER_RUN) --entrypoint "" $(DOCKER_WEB_TOOLS_IMAGE) polymer
-DOCKER_RUN_XVFB = $(DOCKER_RUN) --privileged $(DOCKER_WEB_TOOLS_IMAGE)
-
-# Project configuration
+# Project configuration.
 PROJECT_NAME = web
+
+# Makefile parameters.
+RUN ?= docker
+SUFFIX ?=
+TAG ?= $(shell git describe)$(SUFFIX)
 
 # General.
 SHELL = /bin/bash
 TOPDIR = $(shell git rev-parse --show-toplevel)
 
 # Docker.
-DOCKER_NETWORK = ryr
+DOCKERFILE = Dockerfile$(SUFFIX)
 DOCKER_ORG = requestyoracks
-REPOSITORY = $(DOCKER_ORG)/$(PROJECT_NAME)
-IMG = $(PROJECT_NAME)
-TAG ?= $(shell git describe)
+DOCKER_REPO = $(DOCKER_ORG)/$(PROJECT_NAME)
+DOCKER_IMG = $(DOCKER_REPO):$(TAG)
+DOCKER_IMG_WEB_TOOLS = loannister/web-devtools:1.2.1
 
-# Helm Charts.
-CHART_NAME = /Users/remy/projects/request-yo-racks/charts/charts/$(PROJECT_NAME)
-DEPLOY_EXTRA_OPTS = "--set image.tag=$(TAG)"
+# Chart.
+CHART_REPO = ryr
+CHART_NAME = $(CHART_REPO)/$(PROJECT_NAME)
+
+# Run commands.
+DOCKER_RUN = docker run -t -v=$$(pwd):/code --rm
+DOCKER_RUN_XVFB = $(DOCKER_RUN) --privileged $(DOCKER_IMG_WEB_TOOLS)
 
 default: setup
 
@@ -34,41 +33,36 @@ help: # Display help
 			printf "\033[36m%-30s\033[0m %s\n", $$1, $$NF \
 }' $(MAKEFILE_LIST) | sort
 
-ci-coala: ## Run the static analyzers
-	@find src -name '*.html' -print | xargs $(DOCKER_RUN_POLYMER) lint --input
+build-docker: ## Build the docker image
+	@docker build -t $(DOCKER_IMG) -f $(DOCKERFILE) .
+
+ci: ci-linters ci-docs ci-tests ##
 
 ci-docs: ## Ensure the documentation builds
 	@echo "Not implemented yet."
 
+ci-linters: ## Run the static analyzers
+	@find src -name '*.html' -print | xargs polymer lint --input
+
 ci-tests: ## Run the unit tests
 	$(DOCKER_RUN_XVFB) polymer test
 
-clean: ## Remove unwanted files in project (!DESTRUCTIVE!)
-	cd $(TOPDIR) && git clean -ffdx && git reset --hard
+clean: clean-repo clean-minikube clean-docker  ## Clean everything (!DESTRUCTIVE!)
+
+clean-docker: ## Remove all docker artifacts for this project (!DESTRUCTIVE!)
+	@docker image rm -f $(shell docker image ls --filter reference='$(DOCKER_REPO)' -q)
 
 clean-minikube: ## Remove minikube deployment (!DESTRUCTIVE!)
 	helm delete --purge $(PROJECT_NAME)
 
-docker-build: ## Build the docker image
-	@docker build -t $(REPOSITORY):$(TAG) -f Dockerfile .
-	# @docker build -t $(REPOSITORY):$(TAG) .
-
-docker-clean: ## Stop and remove containers, volumes, networks and images for this project
-	@docker-compose down --rmi local -v
-	@docker network prune -f
-
-docker-network: ## Create a bridge network
-	FOUND=$$(docker network ls -f name=$(DOCKER_NETWORK) -q); \
-	if [ -z "$$FOUND" ]; then \
-		docker network create --driver bridge $(DOCKER_NETWORK); \
-	fi
+clean-repo: ## Remove unwanted files in project (!DESTRUCTIVE!)
+	cd $(TOPDIR) && git clean -ffdx && git reset --hard
 
 deploy-minikube:
 	@helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
 	  --install \
 		-f charts/values.minikube.yaml \
-	  --set image.tag=$(TAG) \
-		--set persistence.hostPath.path=$(PWD)
+	  --set image.tag=$(TAG)
 
 dist: ## Package the application
 	polymer build --preset es5-bundled
@@ -76,14 +70,7 @@ dist: ## Package the application
 docs: ## Build documentation
 	@echo "Not implemented yet."
 
-polymer-build: ## Build the polymer project
-	$(DOCKER_RUN_POLYMER) build
+setup: build-docker ## Setup the full environment (default)
+	npm install -g bower polymer-cli && polymer install
 
-bower-install: ## Install the dependencies using bower
-	$(DOCKER_RUN_BOWER) install
-
-setup: docker-network bower-install ## Setup the full environment (default)
-	@docker-compose build
-	@docker-compose pull
-
-.PHONY: bower-install ci-coala ci-docs ci-tests clean docker-clean docker-network docs polymer-build setup
+.PHONY: build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo dist docs setup

@@ -9,7 +9,8 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install bower, polymer-cli and build the project.
-RUN npm install -g bower polymer-cli \
+RUN npm install -g gulp bower polymer-cli --unsafe-perm \
+  && npm install  \
   && polymer install \
   && polymer build --preset es5-bundled
 
