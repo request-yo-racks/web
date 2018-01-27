@@ -11,7 +11,7 @@
     </style>
     <iron-ajax
     auto
-    url="http://localhost:18000/places/"
+    url="http://api.192.168.99.100.nip.io/places/"
     params="{{placesOptions}}"
     handle-as="json"
     last-response="{{placesResponse}}"
@@ -85,7 +85,7 @@
 
       _computePlaceUrl(placeId) {
         if (placeId) {
-          return ['http://localhost:18000/place', placeId].join('/');
+          return ['http://api.192.168.99.100.nip.io//place', placeId].join('/');
         }
       }
 
@@ -112,5 +112,6 @@
     }
 
     window.customElements.define(RyrSuggestionList.is, RyrSuggestionList);
+
   </script>
 </dom-module>
