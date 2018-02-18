@@ -11,8 +11,7 @@
     </style>
     <iron-ajax
     auto
-    url="http://api.192.168.99.100.nip.io/places/"
-    params="{{placesOptions}}"
+    url="{{placesUrl}}"
     handle-as="json"
     last-response="{{placesResponse}}"
     jsonPrefix="results"></iron-ajax>
@@ -22,21 +21,13 @@
     handle-as="json"
     on-response="_handlePlaceResponse"></iron-ajax>
     <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[placesResponse.results]]" size="10">
-      <vaadin-grid-column width="50px" flex-grow="0">
-        <template class="header">#</template>
-  <template>[[index]]</template>
-  </vaadin-grid-column>
   <vaadin-grid-column>
     <template class="header">Name</template>
-    <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column>
-    <template class="header">Place ID</template>
-    <template>[[item.place_id]]</template>
+  <template>[[item.name]]</template>
   </vaadin-grid-column>
   </vaadin-grid>
   </template>
-  <!-- Web component class. -->
+
   <script>
     class RyrSuggestionList extends Polymer.Element {
       static get is() {
@@ -59,6 +50,9 @@
             type: Object,
             notify: true
           },
+          placesUrl: {
+            computed: '_computePlacesUrl(latlong)'
+          },
           placeUrl: {
             computed: '_computePlaceUrl(placeId)'
           },
@@ -72,7 +66,7 @@
       _activeItemChanged(item) {
         this.$.grid.selectedItems = item ? [item] : [];
         if (item) {
-          this.placeId = item.place_id || 'plop';
+          this.placeId = item.place_id;
           this.$.placeDetails.generateRequest();
         }
       }
@@ -83,9 +77,18 @@
         }
       }
 
+      _computePlacesUrl(latlong) {
+        if (latlong) {
+          return ['http://api.192.168.99.100.nip.io/places', latlong].join('/');
+          // return ['http://api.127.0.0.1.nip.io:8000/places', latlong].join('/');
+
+        }
+      }
+
       _computePlaceUrl(placeId) {
         if (placeId) {
-          return ['http://api.192.168.99.100.nip.io//place', placeId].join('/');
+          return ['http://api.192.168.99.100.nip.io/place', placeId].join('/');
+          // return ['http://api.127.0.0.1.nip.io:8000/place', placeId].join('/');
         }
       }
 
