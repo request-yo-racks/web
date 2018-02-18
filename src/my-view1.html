@@ -13,22 +13,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/graphite-clipboard/granite-clipboard.html" />
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="ryr-rack-request-form.html" />
 <link rel="import" href="ryr-email-templatizer.html" />
 <link rel="import" href="ryr-preview.html" />
-<link rel="import" href="ryr-specify-coordinates.html" />
+<!-- <link rel="import" href="ryr-specify-coordinates.html" /> -->
+<link rel="import" href="ryr-location.html" />
 <link rel="import" href="ryr-suggestion-list.html" />
 
 <dom-module id="my-view1">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles app-grid-style">
       :host {
         display: block;
         padding: 10px;
 
         --app-primary-color: #ABD252;
         --app-secondary-color: black;
+
+        --app-grid-columns: 3;
+        --app-grid-gutter: 5px;
+        --app-grid-expandible-item-columns: 2
+        /* --app-grid-item-height: 500px; */
       }
       h1 {
         display: inline;
@@ -78,6 +85,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .rack-request {
         display: flex;
       }
+
+      /* *** */
+      .item:first-child {
+        @apply --app-grid-expandible-item;
+      }
+
+
     </style>
 
     <div class="content">
@@ -93,35 +107,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="circle">1</div>
             <h3>Select a location</h3>
           </div>
-          <ryr-specify-coordinates latlong="{{latlong}}"></ryr-specify-coordinates>
+          <!-- <ryr-specify-coordinates latlong="{{latlong}}"></ryr-specify-coordinates> -->
+          <div class="app-grid">
+            <div class="item item-2cols"><ryr-location  latlong="{{latlong}}"></ryr-location></div>
+            <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
+          </div>
+
+          <!-- <ryr-location  latlong="{{latlong}}"></ryr-location>
+          <ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list> -->
         </div>
       </section>
 
-      <section id="business">
+      <!-- <section id="business">
         <div class="container">
           <div class=section-separator>
             <div class="circle">2</div>
             <h3>Select a business</h3>
           </div>
-          <ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list>
-        </div>
-      </section>
 
-      <section id="extras">
+        </div>
+      </section> -->
+
+      <!-- <section id="extras">
         <div class="container">
           <div class=section-separator>
             <div class="circle">3</div>
             <h3>Provide extra information if needed</h3>
           </div>
           <ryr-rack-request-form templatevars="{{vars}}"></ryr-rack-request-form>
-          <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+
         </div>
-      </section>
+      </section> -->
+      <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
 
       <section id="preview">
         <div class="container">
           <div class=section-separator>
-            <div class="circle">4</div>
+            <div class="circle">2</div>
             <h3>Preview</h3>
           </div>
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
@@ -143,5 +165,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     window.customElements.define(MyView1.is, MyView1);
+
   </script>
 </dom-module>
