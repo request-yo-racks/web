@@ -50,19 +50,20 @@ ci-tests: ## Run the unit tests
 clean: clean-repo clean-minikube clean-docker  ## Clean everything (!DESTRUCTIVE!)
 
 clean-docker: ## Remove all docker artifacts for this project (!DESTRUCTIVE!)
-	@docker image rm -f $(shell docker image ls --filter reference='$(DOCKER_REPO)' -q)
+	@docker image rm -f $(shell docker image ls --filter reference='$(DOCKER_REPO)' -q) || true
 
 clean-minikube: ## Remove minikube deployment (!DESTRUCTIVE!)
-	helm delete --purge $(PROJECT_NAME)
+	helm delete --purge $(PROJECT_NAME) || true
 
 clean-repo: ## Remove unwanted files in project (!DESTRUCTIVE!)
 	cd $(TOPDIR) && git clean -ffdx && git reset --hard
 
 deploy-minikube:
-	@helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
-	  --install \
-		-f charts/values.minikube.yaml \
-	  --set image.tag=$(TAG)
+	@kubectl config use-context minikube \
+	&& helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
+	  	--install \
+			-f charts/values.minikube.yaml \
+	  	--set image.tag=$(TAG)
 
 dist: ## Package the application
 	polymer build --preset es5-bundled
@@ -70,7 +71,9 @@ dist: ## Package the application
 docs: ## Build documentation
 	@echo "Not implemented yet."
 
-setup: build-docker ## Setup the full environment (default)
-	npm install -g bower polymer-cli && polymer install
+setup: ## Setup the full environment (default)
+	npm install -g bower polymer-cli \
+	&& bower install \
+	&& polymer install
 
 .PHONY: build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo dist docs setup
