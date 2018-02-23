@@ -6,18 +6,51 @@ Requesting bike racks to the city of Austin was never that easy.
 Quickstart
 ----------
 
-Install `docker`_ and `docker-compose`_.
-
 Setup the full environment::
 
   make
 
-Start the services::
+This will download all the project dependencies.
 
-  docker-compose up [-d]
+``make help`` will show you the available targets that will help you work on this project.
 
-The `-d` switch allows you to start the services in the background. Without it, the logs would be printed on the
-console, and you would need to press `CTRL-C` to stop the services.
+Setup the project
+-----------------
+
+The `full setup guide`_ provides instructions to help you set up the external services required by the project locally
+(postgresql, rabbitmq, redis) and explains how to deploy this project on a local Kubernetes cluster (Minikube).
+
+You can also refer to the ``kubernetes`` folder of the `infra`_ project for more details about the deployment
+implementation.
+
+Setup a directory to store the RYR projects::
+
+  export RYR_PROJECT_DIR="${HOME}/projects/request-yo-racks"
+
+Clone the project::
+
+  mkdir -p "${RYR_PROJECT_DIR}"
+  cd "${RYR_PROJECT_DIR}"
+  git clone git@github.com:request-yo-racks/web.git
+
+Create a ``config.js`` file to store the API key for Google Maps::
+
+  cat << EOF > "${RYR_PROJECT_DIR}/web/src/config.js"
+  var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
+  EOF
+
+Prepare your developement environment::
+
+  cd "${RYR_PROJECT_DIR}/web"
+  make setup
+
+Local development
+-----------------
+
+To serve the project locally::
+
+  polymer serve
+
 
 Using the web devtools
 ----------------------
