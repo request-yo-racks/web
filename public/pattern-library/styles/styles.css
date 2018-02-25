@@ -1,0 +1,42 @@
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+.default-button {
+	background-color: #15B407;
+    border: none;
+    color: white;
+    padding: 12px 36px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.topnav {
+	overflow: hidden;
+    background-color: #15B407;
+    border: 2px solid #15B407;
+}
+.topnav a {
+	color: white;
+	text-align: center;
+	padding: 10px 16px;
+	text-decoration: none;
+	font-size: 24px;
+}
+.topnav a:hover {
+  background-color: #54C84A;
+  color: white;
+}
+.topnav a.active {
+	background-color: white;
+	color: #15B407;
+	vertical-align: middle;
+}
+.home {
+	float: left;
+}
+.secondary-nav {
+	float: right;
+}
