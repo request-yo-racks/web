@@ -1,6 +1,6 @@
 {
     "project_logo": null,
-    "project_favicon": "favicon.png",
+    "project_favicon": "ryr_logo.png",
     "project_name": "Request Yo Racks",
     "project_url": null,
     "copyright_start_year": "2017",
@@ -38,7 +38,11 @@
     "font_libraries": {
         "typekit_code": null,
         "typography_web_fonts": null,
-        "google_web_fonts": null
+        "google_web_fonts": [
+            {
+                "Archivo": "https://fonts.googleapis.com/css?family=Archivo:400"
+            }
+        ]
     },
     "content": {
         "show_first_page_on_load": true,
@@ -64,8 +68,25 @@
                     "colors": [
                         "#15B407, #54C84A",
                         "#333333, #EEEEEE",
-                        "#A28851, #551B1E"
+                        "#A28851, #551B1E",
+                        "#BF5700"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Typography",
+            "title": "Headers",
+            "components": [
+                {
+                    "group": "typography",
+                    "name": "headers",
+                    "title": "Navigation and Headers"
+                },
+                {
+                    "group": "typography",
+                    "name": "text",
+                    "title": "Body and Text Inputs"
                 }
             ]
         },

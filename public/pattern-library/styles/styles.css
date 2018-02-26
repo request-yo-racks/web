@@ -1,6 +1,14 @@
 body {
 	font-family: 'Source Sans Pro', sans-serif;
 }
+h2 {
+	font-family: 'Archivo', sans-serif;
+	font-size: 24px;
+}
+p {
+	font-family: Helvetica, sans-serif;
+	font-size: 16px;
+}
 .default-button {
 	background-color: #15B407;
     border: none;
@@ -16,7 +24,7 @@ body {
 .topnav {
 	overflow: hidden;
     background-color: #15B407;
-    border: 2px solid #15B407;
+    font-family: 'Archivo', sans-serif;
 }
 .topnav a {
 	color: white;
@@ -27,15 +35,14 @@ body {
 }
 .topnav a:hover {
   background-color: #54C84A;
-  color: white;
 }
 .topnav a.active {
-	background-color: white;
-	color: #15B407;
-	vertical-align: middle;
+	border-bottom: 1px white;
+	color: white;
 }
 .home {
 	float: left;
+	padding: 10px 16px;
 }
 .secondary-nav {
 	float: right;
