@@ -72,7 +72,7 @@ docs: ## Build documentation
 	@echo "Not implemented yet."
 
 setup: ## Setup the full environment (default)
-	npm install -g bower polymer-cli \
+	npm install -g --unsafe-perm bower polymer-cli \
 	&& bower install \
 	&& polymer install
 
