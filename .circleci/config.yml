@@ -1,0 +1,49 @@
+defaults: &defaults
+  working_directory: ~/repo
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8.9.4-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package.json" }}
+
+      - run:
+          name: Prepare the test environment
+          # Note(remyg): There is probably a better way to do that...
+          command: |
+            cat << EOF > "src/config.js"
+            var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
+            EOF
+            sudo make setup
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - .node_modules
+
+      - run:
+          name: Run the linters
+          command: make ci-linters
+
+      - run:
+          name: Run unit tests
+          command: make ci-tests
+
+      - run:
+          name: Run doc tests
+          command: make ci-docs
+
+
+workflows:
+  version: 2
+  gates:
+    jobs:
+      - build

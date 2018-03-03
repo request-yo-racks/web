@@ -17,7 +17,7 @@ Formatting your code
 
 The code is formatted automatically by `JSBeautify`_.
 
-.. _`Issue`: https://github.com/rgreinho/request-yo-racks-web/issues
+.. _`Issue`: https://github.com/request-yo-racks/web/issues
 .. _`JSBeautify`: https://github.com/beautify-web/js-beautify
-.. _`Pull Request`: https://github.com/rgreinho/request-yo-racks-web/pulls
+.. _`Pull Request`: https://github.com/request-yo-racks/web/pulls
 .. _`YAPF`: https://github.com/google/yapf

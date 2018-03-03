@@ -2,7 +2,7 @@
 PROJECT_NAME = web
 
 # Makefile parameters.
-RUN ?= docker
+RUN ?= local
 SUFFIX ?=
 TAG ?= $(shell git describe)$(SUFFIX)
 
@@ -24,6 +24,14 @@ CHART_NAME = $(CHART_REPO)/$(PROJECT_NAME)
 # Run commands.
 DOCKER_RUN = docker run -t -v=$$(pwd):/code --rm
 DOCKER_RUN_XVFB = $(DOCKER_RUN) --privileged $(DOCKER_IMG_WEB_TOOLS)
+LOCAL_RUN_CMD =
+
+# Determine whether running the command in a container or locally.
+ifeq ($(RUN),docker)
+  RUN_CMD = $(DOCKER_RUN_XVFB)
+else
+  RUN_CMD = $(LOCAL_RUN_CMD)
+endif
 
 default: setup
 
@@ -45,7 +53,7 @@ ci-linters: ## Run the static analyzers
 	@find src -name '*.html' -print | xargs polymer lint --input
 
 ci-tests: ## Run the unit tests
-	$(DOCKER_RUN_XVFB) polymer test
+	$(RUN_CMD) polymer test
 
 clean: clean-repo clean-minikube clean-docker  ## Clean everything (!DESTRUCTIVE!)
 
@@ -73,7 +81,7 @@ docs: ## Build documentation
 
 setup: ## Setup the full environment (default)
 	npm install -g --unsafe-perm bower polymer-cli \
-	&& bower install \
+	&& bower install --allow-root \
 	&& polymer install
 
 .PHONY: build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo dist docs setup

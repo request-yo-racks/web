@@ -16,9 +16,9 @@
       }
 
       .container {
-        @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
-        @apply(--layout-wrap);
+        @apply --layout-horizontal;
+        @apply --layout-center-justified;
+        @apply --layout-wrap;
       }
 
       google-map {
@@ -29,8 +29,8 @@
 
       @media screen and (max-width: 720px) {
         .container {
-          @apply(--layout-vertical);
-          @apply(--layout-center);
+          @apply --layout-vertical;
+          @apply --layout-center;
         }
         paper-input {
           width: 80%;
@@ -68,5 +68,6 @@
     }
 
     window.customElements.define(RyrSpecifyCoordinates.is, RyrSpecifyCoordinates);
+
   </script>
 </dom-module>
