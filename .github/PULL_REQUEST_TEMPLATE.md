@@ -40,4 +40,4 @@ ask. We're here to help! -->
 -  [] I have written unit tests
 
 <!-- Place the *FULL* URL of the issue here it this PR fixes an existing issue. -->
-Fixes: https://github.com/rgreinho/request-yo-racks-web/<issue_number>
+Fixes: https://github.com/request-yo-racks/web/<issue_number>
