@@ -15,8 +15,8 @@
     "theme": {
         "border_color": "#A85707",
         "highlight_color": "#eeeeee",
-        "brand_color": "#A28851",
-        "background_color": "#FFFFFF",
+        "brand_color": "#15B407",
+        "background_color": "#F9F9F9",
         "code_highlight_theme": "github",
         "override_code_highlight_bg": "#F9FAFC",
         "sample_dark_background": "#333333",
@@ -40,7 +40,7 @@
         "typography_web_fonts": null,
         "google_web_fonts": [
             {
-                "Archivo": "https://fonts.googleapis.com/css?family=Archivo:400"
+                "Archivo": "https://fonts.googleapis.com/css?family=Archivo" 
             }
         ]
     },
@@ -98,6 +98,17 @@
                     "group": "Navigation",
                     "name": "Primary",
                     "title": "Top Nav Bar"
+                }
+            ]
+        },
+        {
+            "name": "inputs",
+            "title": "Inputs",
+            "components": [
+                {
+                    "group": "input",
+                    "name": "text",
+                    "title": "Text"
                 }
             ]
         },

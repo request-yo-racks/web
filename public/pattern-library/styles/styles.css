@@ -1,14 +1,57 @@
 body {
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 }
 h2 {
 	font-family: 'Archivo', sans-serif;
-	font-size: 24px;
+	font-size: 20px;
 }
 p {
-	font-family: Helvetica, sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 16px;
 }
+/*
+Navigation
+*/
+.topnav {
+    list-style-type: none;
+    overflow: hidden;
+		margin:0;
+		padding:0;
+		background-color: #15B407;
+}
+.topnav a {
+	color: white;
+	padding: 16px;
+	text-decoration: none;
+	font-size: 20px;
+	font-family: 'Archivo', sans-serif;
+}
+.topnav a:hover:not(.active) {
+	background-color: #54C84A;
+}
+.active {
+	border-bottom: 4px solid white;
+}
+.secondary-nav {
+	float: right;
+}
+.home-link {
+	float: left;
+}
+/*
+Inputs
+*/
+input {
+	border: 1px solid #333333;
+	width: 400px;
+	font-size: 16px;
+	font-family: 'Helvetica', sans-serif;
+	margin: 8px;
+	padding: 8px;
+}
+/*
+Button
+*/
 .default-button {
 	background-color: #15B407;
     border: none;
@@ -20,30 +63,4 @@ p {
     margin: 4px 2px;
     cursor: pointer;
     font-size: 18px;
-}
-.topnav {
-	overflow: hidden;
-    background-color: #15B407;
-    font-family: 'Archivo', sans-serif;
-}
-.topnav a {
-	color: white;
-	text-align: center;
-	padding: 10px 16px;
-	text-decoration: none;
-	font-size: 24px;
-}
-.topnav a:hover {
-  background-color: #54C84A;
-}
-.topnav a.active {
-	border-bottom: 1px white;
-	color: white;
-}
-.home {
-	float: left;
-	padding: 10px 16px;
-}
-.secondary-nav {
-	float: right;
 }
