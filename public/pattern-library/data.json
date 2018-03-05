@@ -1,11 +1,11 @@
 {
-    "project_logo": null,
+    "project_logo": "ryr_logo.png",
     "project_favicon": "ryr_logo.png",
     "project_name": "Request Yo Racks",
     "project_url": null,
     "copyright_start_year": "2017",
     "client_name": null,
-    "client_url": null,
+    "client_url": "http://request-yo-racks.github.io/",
     "creators": [
         {
             "name": null,
@@ -40,7 +40,7 @@
         "typography_web_fonts": null,
         "google_web_fonts": [
             {
-                "Archivo": "https://fonts.googleapis.com/css?family=Archivo" 
+                "Archivo": "https://fonts.googleapis.com/css?family=Archivo"
             }
         ]
     },
