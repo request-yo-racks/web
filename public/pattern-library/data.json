@@ -40,7 +40,7 @@
         "typography_web_fonts": null,
         "google_web_fonts": [
             {
-                "Archivo": "https://fonts.googleapis.com/css?family=Archivo"
+                "Archivo": "https://fonts.googleapis.com/css?family=Archivo" 
             }
         ]
     },
