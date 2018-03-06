@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Run unit tests
-          command: make ci-tests
+          command: sudo polymer test -l chrome
 
       - run:
           name: Run doc tests
