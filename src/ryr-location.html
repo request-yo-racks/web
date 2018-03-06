@@ -41,22 +41,22 @@
 
     <google-map
       id="gmaps"
-      latitude="{{initialLat}}"
-      longitude="{{initialLong}}"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
       zoom="15"
       api-key="[[apiKey]]"
       click-events="true"
     >
       <google-map-marker
         id="gmarker"
-        latitude="{{initialLat}}"
-        longitude="{{initialLong}}"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
       >
       </google-map-marker>
     </google-map>
 
     <div class="container">
-      <paper-input label="Latitude, longitude" value="{{latlong}}"></paper-input>
+      <paper-input label="Latitude, longitude" value="{{latlong}}" on-keyup="_onInputChange"></paper-input>
       <paper-icon-button icon="search" title="search"></paper-icon-button>
     </div>
   </template>
@@ -68,24 +68,26 @@
       }
 
       static get properties() {
-        const initialLatCoord = "30.31865599999999";
-        const initialLongCoord = "-97.72445499999999";
+        const latCoord = "30.31865599999999";
+        const longCoord = "-97.72445499999999";
 
         return {
+          latitude: {
+            type: String,
+            value: latCoord,
+            reflect: true
+          },
+
+          longitude: {
+            type: String,
+            value: longCoord,
+            reflect: true
+          },
+
           latlong: {
             type: String,
-            value: `${latCoord}, ${longCoord}`,
-            notify: true
-          },
-
-          initialLatCoord: {
-            type: String,
-            value: latCoord
-          },
-
-          initialLongCoord: {
-            type: String,
-            value: longCoord
+            value: `${latCoord},${longCoord}`,
+            reflect: true
           },
 
           apiKey: {
@@ -102,21 +104,22 @@
       }
 
       _onMapClick(e) {
-        // Retrieve the latlong of the click.
         const mLat = e.detail.latLng.lat();
         const mLng = e.detail.latLng.lng();
-
-        // Move the marker to this new location.
         const marker = this.$.gmarker;
+
         marker.latitude = mLat;
         marker.longitude = mLng;
 
-        // Update the latlong property.
-        this.latlong = `${mLat.toString()},${mLng.toString()}`;
+        this.latitude = mLat;
+        this.longitude = mLng;
+        this.latlong = `${mLat},${mLng}`;
       }
 
-      _onInputChange() {
-
+      _onInputChange(e) {
+        const [latitude, longitude] = e.target.value.split(',');
+        this.latitude = latitude;
+        this.longitude = longitude;
       }
     }
 
