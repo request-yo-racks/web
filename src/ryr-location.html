@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html" />
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <script type="text/javascript" src="config.js"></script>
 
@@ -38,15 +38,29 @@
         }
       }
     </style>
-    <google-map id="gmaps" latitude="30.318655" longitude="-97.724454" zoom="15" api-key="[[myApiKey]]" click-events="true">
-      <google-map-marker id="gmarker" latitude="30.318655" longitude="-97.7244549"></google-map-marker>
+
+    <google-map
+      id="gmaps"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      zoom="15"
+      api-key="[[apiKey]]"
+      click-events="true"
+    >
+      <google-map-marker
+        id="gmarker"
+        latitude="30.318655"
+        longitude="-97.7244549"
+      >
+      </google-map-marker>
     </google-map>
-    <div class="container ">
-      <paper-input label="Latitude,longitude " value="{{latlong}} "></paper-input>
-      <paper-icon-button icon="search " title="search "></paper-icon-button>
+
+    <div class="container">
+      <paper-input label="Latitude, longitude" value="{{latlong}}"></paper-input>
+      <paper-icon-button icon="search" title="search"></paper-icon-button>
     </div>
   </template>
-  <!-- Web component class. -->
+
   <script>
     class RyrLocation extends Polymer.Element {
       static get is() {
@@ -54,13 +68,27 @@
       }
 
       static get properties() {
+        const latCoord = "30.31865599999999";
+        const longCoord = "-97.72445499999999";
+
         return {
           latlong: {
             type: String,
-            value: "30.31865599999999,-97.72445499999999 ",
+            value: `${latCoord}, ${longCoord}`,
             notify: true
           },
-          myApiKey: {
+
+          latitude: {
+            type: String,
+            value: latCoord
+          },
+
+          longitude: {
+            type: String,
+            value: longCoord
+          },
+
+          apiKey: {
             type: String,
             value: config.GOOGLE_WEB_MAPS_API_KEY
           }
@@ -70,10 +98,10 @@
       connectedCallback() {
         super.connectedCallback();
         this.gmaps = this.$.gmaps;
-        this.addEventListener('google-map-click', this.onMapClick);
+        this.addEventListener('google-map-click', this._onMapClick.bind(this));
       }
 
-      onMapClick(e) {
+      _onMapClick(e) {
         // Retrieve the latlong of the click.
         let mLat = e.detail.latLng.lat();
         let mLng = e.detail.latLng.lng();
@@ -85,12 +113,9 @@
 
         // Update the latlong property.
         this.latlong = mLat.toString() + ',' + mLng.toString();
-
-        console.log(this.latlong);
       }
     }
 
     window.customElements.define(RyrLocation.is, RyrLocation);
-
   </script>
 </dom-module>
