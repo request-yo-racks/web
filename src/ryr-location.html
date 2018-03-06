@@ -80,20 +80,18 @@
         return {
           latitude: {
             type: String,
-            value: latCoord,
-            reflect: true
+            value: latCoord
           },
 
           longitude: {
             type: String,
-            value: longCoord,
-            reflect: true
+            value: longCoord
           },
 
           latlong: {
             type: String,
             value: `${latCoord},${longCoord}`,
-            reflect: true
+            notify: true
           },
 
           zoom: {
