@@ -41,16 +41,16 @@
 
     <google-map
       id="gmaps"
-      latitude="{{latitude}}"
-      longitude="{{longitude}}"
+      latitude="{{initialLat}}"
+      longitude="{{initialLong}}"
       zoom="15"
       api-key="[[apiKey]]"
       click-events="true"
     >
       <google-map-marker
         id="gmarker"
-        latitude="30.318655"
-        longitude="-97.7244549"
+        latitude="{{initialLat}}"
+        longitude="{{initialLong}}"
       >
       </google-map-marker>
     </google-map>
@@ -68,8 +68,8 @@
       }
 
       static get properties() {
-        const latCoord = "30.31865599999999";
-        const longCoord = "-97.72445499999999";
+        const initialLatCoord = "30.31865599999999";
+        const initialLongCoord = "-97.72445499999999";
 
         return {
           latlong: {
@@ -78,12 +78,12 @@
             notify: true
           },
 
-          latitude: {
+          initialLatCoord: {
             type: String,
             value: latCoord
           },
 
-          longitude: {
+          initialLongCoord: {
             type: String,
             value: longCoord
           },
@@ -113,6 +113,10 @@
 
         // Update the latlong property.
         this.latlong = `${mLat.toString()},${mLng.toString()}`;
+      }
+
+      _onInputChange() {
+
       }
     }
 
