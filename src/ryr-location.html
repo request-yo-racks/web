@@ -103,16 +103,16 @@
 
       _onMapClick(e) {
         // Retrieve the latlong of the click.
-        let mLat = e.detail.latLng.lat();
-        let mLng = e.detail.latLng.lng();
+        const mLat = e.detail.latLng.lat();
+        const mLng = e.detail.latLng.lng();
 
         // Move the marker to this new location.
-        let marker = this.$.gmarker;
+        const marker = this.$.gmarker;
         marker.latitude = mLat;
         marker.longitude = mLng;
 
         // Update the latlong property.
-        this.latlong = mLat.toString() + ',' + mLng.toString();
+        this.latlong = `${mLat.toString()},${mLng.toString()}`;
       }
     }
 
