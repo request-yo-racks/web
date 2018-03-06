@@ -51,13 +51,19 @@
         id="gmarker"
         latitude="{{latitude}}"
         longitude="{{longitude}}"
-      >
-      </google-map-marker>
+      ></google-map-marker>
     </google-map>
 
     <div class="container">
-      <paper-input label="Latitude, longitude" value="{{latlong}}" on-keyup="_onInputChange"></paper-input>
-      <paper-icon-button icon="search" title="search"></paper-icon-button>
+      <paper-input
+        label="Latitude, longitude"
+        value="{{latlong}}"
+        on-keyup="_onInputChange"
+      ></paper-input>
+      <paper-icon-button
+        icon="search"
+        title="search"
+      ></paper-icon-button>
     </div>
   </template>
 
