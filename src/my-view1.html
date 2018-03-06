@@ -14,6 +14,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
+<link rel="import" href="../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../bower_components/skeleton-carousel/skeleton-carousel.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="ryr-rack-request-form.html" />
 <link rel="import" href="ryr-email-templatizer.html" />
@@ -27,39 +30,98 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles app-grid-style">
       :host {
         display: block;
-        padding: 10px;
-
-        --app-primary-color: #ABD252;
-        --app-secondary-color: black;
 
         --app-grid-columns: 3;
         --app-grid-gutter: 5px;
-        --app-grid-expandible-item-columns: 2
-        /* --app-grid-item-height: 500px; */
+        --app-grid-expandible-item-columns: 2;
+
+        --paper-icon-button: {
+          width: 64px;
+          height: 64px;
+        };
       }
-      h1 {
-        display: inline;
+
+      section {
+        padding: 15px;
+      }
+
+      section:nth-of-type(odd) {
+        background-color: var(--app-primary-color);
+      }
+
+      section:nth-of-type(even) {
+        background-color: var(--app-secondary-color);
+      }
+
+      granite-clipboard {
+        display: block;
+        margin: auto;
+        @apply --paper-icon-button;
+      }
+
+      #intro p{
+        width: 70%;
+        margin: auto;
+        text-align: center
+      }
+
+      #location .item:first-child {
+        @apply --app-grid-expandible-item;
+      }
+
+      #preview {
+        position: relative;
+      }
+
+      .bg-primary {
+        background-color: var(--app-primary-color);
+      }
+
+      .bg-secondary {
+        background-color: var(--app-secondary-color);
       }
 
       .content {
         width: 80%;
-        margin: auto auto;
+        margin: 0 auto;
       }
 
-      .section-separator {
-        margin: 10px 10px;
-        border-radius: 10px 10px 10px 10px;
+      .content img {
+        display: block;
+        width: 100%;
+      }
+
+      .section-connector {
+        width: 100%;
+        height: 75px;
+        /* The margin-bottom of -4px is an ugly fix to solve a problem I don't understand. */
+        margin: 0 0 -4px 0;
+        padding: 0;
+      }
+
+      .section-connector:nth-of-type(odd) {
+        background-color: var(--app-secondary-color);
+        fill: var(--app-primary-color);
+      }
+
+      .section-connector:nth-of-type(even) {
         background-color: var(--app-primary-color);
+        fill: var(--app-secondary-color);
       }
 
-      .section-separator h3 {
+      .section-title {
+        margin: 10px 0;
+        border-radius: 10px 10px 10px 10px;
+      }
+
+      .section-title h3 {
         display: inline;
         margin: auto 10px;
         color: #212121;
         font-size: 22px;
       }
 
-      .section-separator .circle {
+      .section-title .circle {
         margin: 4px 4px;
         width: 24px;
         height: 24px;
@@ -69,99 +131,100 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background: #FFF;
         font-size: 16px;
         line-height: 24px;
+        border: 1px solid;
       }
 
-      ryr-specify-coordinates, ryr-suggestion-list, ryr-rack-request-form, ryr-preview {
-        width: 80%;
-        border: solid;
-        margin: auto auto;
-        padding: 8px;
+      @media (max-width: 600px) {
+        :host {
+          display: block;
+
+          --app-grid-columns: 1;
+          --app-grid-gutter: 5px;
+          --app-grid-expandible-item-columns: 1;
+        }
       }
-
-      #preview .container {
-        position: relative;
-      }
-
-      granite-clipboard {
-        display: inline;
-        position: absolute;
-        bottom: 5px;
-        right: 100px;
-      }
-
-      .rack-request {
-        display: flex;
-      }
-
-      /* *** */
-      .item:first-child {
-        @apply --app-grid-expandible-item;
-      }
-
-
     </style>
 
     <div class="content">
 
-      <header>
-        <h2>Welcome Request-Yo-Racks</h2>
-        <p>This is a test for the new layout.</p>
-      </header>
+      <img src="/images/carousel/bikehere-r.png"/>
 
-      <section id="location">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">1</div>
-            <h3>Select a location</h3>
+      <section id="intro">
+        <div class="app-grid">
+          <div class="item icon-big center">
+            <iron-icon icon="vaadin:map-marker"></iron-icon>
+            <h3>Point</h3>
+            <p>
+              Point the location on the map where you would like to see a bike rack.
+            </p>
           </div>
-          <!-- <ryr-specify-coordinates latlong="{{latlong}}"></ryr-specify-coordinates> -->
-          <div class="app-grid">
-            <div class="item item-2cols"><ryr-location  latlong="{{latlong}}"></ryr-location></div>
-            <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
+          <div class="item icon-big center col-4">
+            <iron-icon icon="vaadin:check-square-o"></iron-icon>
+            <h3>Select</h3>
+            <p>
+              Select the business sponsoring the request in the list.
+            </p>
           </div>
-
-          <!-- <ryr-location  latlong="{{latlong}}"></ryr-location>
-          <ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list> -->
+          <div class="item icon-big center col-4">
+            <iron-icon icon="vaadin:envelope-o"></iron-icon>
+            <h3>Submit</h3>
+            <p>
+              Submit the request to the city hall.
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- <section id="business">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">2</div>
-            <h3>Select a business</h3>
-          </div>
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
 
+      <section id="location">
+        <div class="section-title bg-primary">
+          <div class="circle">1</div>
+          <h3>Select a location</h3>
         </div>
-      </section> -->
-
-      <!-- <section id="extras">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">3</div>
-            <h3>Provide extra information if needed</h3>
-          </div>
-          <ryr-rack-request-form templatevars="{{vars}}"></ryr-rack-request-form>
-
+        <div class="app-grid">
+          <div class="item item-2cols"><ryr-location  latlong="{{latlong}}"></ryr-location></div>
+          <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
         </div>
-      </section> -->
-      <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+      </section>
+
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
 
       <section id="preview">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">2</div>
-            <h3>Preview</h3>
-          </div>
-          <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
-          <granite-clipboard text="[[md]]">
-            <paper-icon-button icon="content-copy" title="copy"></paper-icon-button>
-          </granite-clipboard>
+        <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+        <div class="section-title bg-secondary">
+          <div class="circle">2</div>
+          <h3>Preview</h3>
         </div>
+        <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
+        <granite-clipboard text="[[md]]">
+          <!-- <iron-icon class="icon-medium" icon="vaadin:copy-o"></iron-icon> -->
+          <paper-icon-button icon="vaadin:copy-o" title="copy"></paper-icon-button>
+        </granite-clipboard>
+      </section>
+
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
+
+      <section>
+        <div class="section-title bg-primary">
+          <div class="circle">3</div>
+          <h3>What to do next?</h3>
+        </div>
+          <p>
+            A clear set of instructions.
+          </p>
+          <p>
+            Glossier readymade pabst PBR&B. Bicycle rights authentic beard hashtag artisan. Fam brunch normcore, vice sartorial twee you probably haven't heard of them snackwave kitsch shabby chic microdosing. Occupy williamsburg +1 keytar, hot chicken cred taiyaki mlkshk master cleanse echo park trust fund post-ironic green juice hell of. Echo park ennui 8-bit man braid, pickled crucifix gochujang ramps.
+          </p>
       </section>
 
     </div>
-
   </template>
 
   <script>

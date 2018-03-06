@@ -67,11 +67,9 @@ Request Yo Racks Team
         if (this.templatevars == null) {
           return;
         }
-        // Render the template as an empty string if there is no template variables.
         if (Object.keys(this.templatevars).length == 0) {
           this.htmlrenderedtemplate = '';
         } else {
-          // Convert.
           let convertedVars = this.templateVars
           if (this.templatevars.result != null) {
             res = this.templatevars.result;
@@ -90,13 +88,10 @@ Request Yo Racks Team
             };
           }
 
-          // Render the template.
           let renderedTemplate = this._renderTemplate(convertedVars);
 
-          // Strip the blank lines and trim the text.
           this.markdownrenderedtemplate = renderedTemplate.replace(/^\s*[\r\n]/gm, '\n').replace(/^\s+|\s+$/g, '');
 
-          // Convert to the Markdown to HTML.
           this.htmlrenderedtemplate = this._markdown2html(renderedTemplate);
         }
       }
