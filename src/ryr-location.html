@@ -43,7 +43,7 @@
       id="gmaps"
       latitude="{{latitude}}"
       longitude="{{longitude}}"
-      zoom="15"
+      zoom="{{zoom}}"
       api-key="[[apiKey]]"
       click-events="true"
     >
@@ -88,6 +88,11 @@
             type: String,
             value: `${latCoord},${longCoord}`,
             reflect: true
+          },
+
+          zoom: {
+            type: String,
+            value: 15
           },
 
           apiKey: {
