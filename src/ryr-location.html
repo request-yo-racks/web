@@ -3,7 +3,6 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <script type="text/javascript" src="config.js"></script>
@@ -60,10 +59,6 @@
         value="{{latlong}}"
         on-keyup="_onInputChange"
       ></paper-input>
-      <paper-icon-button
-        icon="search"
-        title="search"
-      ></paper-icon-button>
     </div>
   </template>
 
@@ -116,9 +111,6 @@
         const mLat = e.detail.latLng.lat();
         const mLng = e.detail.latLng.lng();
         const marker = this.$.gmarker;
-
-        marker.latitude = mLat;
-        marker.longitude = mLng;
 
         this.latitude = mLat;
         this.longitude = mLng;

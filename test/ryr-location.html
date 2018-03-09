@@ -10,6 +10,9 @@
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <link rel="import" href="./fixtures/google-map-mock.html">
+    <link rel="import" href="./fixtures/google-map-marker-mock.html">
+    <link rel="import" href="./fixtures/paper-input-mock.html">
+
     <link rel="import" href="../src/ryr-location.html">
   </head>
   <body>
@@ -26,6 +29,8 @@
         setup(function() {
           ryrLocation = fixture('ryr-location');
           replace('google-map').with('google-map-mock');
+          replace('google-map-marker').with('google-map-marker-mock');
+          replace('paper-input').with('paper-input-mock');
         });
 
         test('Clicking map updates latitude and longitude', function() {
