@@ -1,0 +1,17 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="paper-input-mock">
+  <template>
+    <paper-input-mock></paper-input-mock>
+  </template>
+
+  <script>
+    class PaperInputMock extends Polymer.Element {
+      static get is() {
+        return 'paper-input-mock';
+      }
+    }
+
+    window.customElements.define(PaperInputMock.is, PaperInputMock);
+  </script>
+</dom-module>
