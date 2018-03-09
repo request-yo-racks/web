@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ryr-location</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="./fixtures/google-map-mock.html">
+    <link rel="import" href="../src/ryr-location.html">
+  </head>
+  <body>
+    <test-fixture id="ryr-location">
+      <template>
+        <ryr-location></ryr-location>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('<ryr-location>', function() {
+        let ryrLocation;
+
+        setup(function() {
+          ryrLocation = fixture('ryr-location');
+          replace('google-map').with('google-map-mock');
+        });
+
+        test('Clicking map updates latitude and longitude', function() {
+          const e = {
+            detail: {
+              latLng: {
+                lat() {
+                  return '1';
+                },
+
+                lng() {
+                  return '2';
+                }
+              }
+            }
+          };
+          ryrLocation._onMapClick(e);
+          const expectedLat = e.detail.latLng.lat();
+          const expectedLng = e.detail.latLng.lng();
+          assert.equal(ryrLocation.latitude, expectedLat);
+          assert.equal(ryrLocation.longitude, expectedLng);
+          assert.equal(ryrLocation.latlong, `${expectedLat},${expectedLng}`);
+        });
+      });
+    </script>
+  </body>
+</html>
