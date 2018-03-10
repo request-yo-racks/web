@@ -6,7 +6,14 @@ Requesting bike racks to the city of Austin was never that easy.
 Quickstart
 ----------
 
-Setup the full environment::
+If you need to install tools that must be installed globally on your system (OSX only) (most likely the first time you run this
+project)::
+
+  make bootstrap
+
+This will install tools like node.js, polymer-cli, etc...
+
+Setup the local environment::
 
   make
 
