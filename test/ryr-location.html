@@ -33,7 +33,22 @@
           replace('paper-input').with('paper-input-mock');
         });
 
-        test('Clicking map updates latitude and longitude', function() {
+        test('Component is properly initialized', function() {
+          const {
+            latitude,
+            longitude,
+            latlong,
+            zoom,
+            apiKey
+          } = ryrLocation;
+          assert.equal(latitude, '30.31865599999999');
+          assert.equal(longitude, '-97.72445499999999');
+          assert.equal(latlong, '30.31865599999999,-97.72445499999999');
+          assert.equal(zoom, 15);
+          assert.isString(apiKey);
+        });
+
+        test('Clicking map updates latitude and longitude individually and concatenated', function() {
           const e = {
             detail: {
               latLng: {
@@ -53,6 +68,14 @@
           assert.equal(ryrLocation.latitude, expectedLat);
           assert.equal(ryrLocation.longitude, expectedLng);
           assert.equal(ryrLocation.latlong, `${expectedLat},${expectedLng}`);
+        });
+
+        test('Changing text input updates lat/lng individually', function() {
+          const e = { target: { value: '3,4' } };
+          ryrLocation._onInputChange(e);
+          const [expectedLat, expectedLng] = e.target.value.split(',');
+          assert.equal(ryrLocation.latitude, expectedLat);
+          assert.equal(ryrLocation.longitude, expectedLng);
         });
       });
     </script>
