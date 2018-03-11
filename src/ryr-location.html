@@ -39,7 +39,6 @@
     </style>
 
     <google-map
-      id="gmaps"
       latitude="{{latitude}}"
       longitude="{{longitude}}"
       zoom="{{zoom}}"
@@ -47,7 +46,6 @@
       click-events="true"
     >
       <google-map-marker
-        id="gmarker"
         latitude="{{latitude}}"
         longitude="{{longitude}}"
       ></google-map-marker>
@@ -103,14 +101,12 @@
 
       connectedCallback() {
         super.connectedCallback();
-        this.gmaps = this.$.gmaps;
         this.addEventListener('google-map-click', this._onMapClick.bind(this));
       }
 
       _onMapClick(e) {
         const mLat = e.detail.latLng.lat();
         const mLng = e.detail.latLng.lng();
-        const marker = this.$.gmarker;
 
         this.latitude = mLat;
         this.longitude = mLng;
