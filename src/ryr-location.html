@@ -99,8 +99,8 @@
         };
       }
 
-      connectedCallback() {
-        super.connectedCallback();
+      ready() {
+        super.ready();
         this.addEventListener('google-map-click', this._onMapClick.bind(this));
       }
 
