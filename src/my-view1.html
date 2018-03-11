@@ -82,15 +82,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .content {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
       }
 
-      .content img {
+      .content .description {
         display: block;
         width: 100%;
+        background-image: url('/images/bikes-on-rack.png');
+        height: 200px;
       }
 
+      .content .description h2 {
+        padding: 80px
+      }
+
+      .intro-description {
+        text-align: center;
+        margin: auto;
+        color: #FFF;
+      }
       .section-connector {
         width: 100%;
         height: 75px;
@@ -115,10 +126,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .section-title h3 {
-        display: inline;
-        margin: auto 10px;
+        /* display: inline; */
+        margin: auto;
+        text-align: center;
         color: #212121;
-        font-size: 22px;
+        font-size: 22px
       }
 
       .section-title .circle {
@@ -126,9 +138,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 24px;
         height: 24px;
         text-align: center;
-        color: #555;
+        color: #000000;
         border-radius: 50%;
-        background: #FFF;
+        background: #15B407;
         font-size: 16px;
         line-height: 24px;
         border: 1px solid;
@@ -146,9 +158,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="content">
-
-      <img src="/images/carousel/bikehere-r.png"/>
-
+      <div class="description">
+      <h2 class="intro-description">
+        Create an email to request a free bike corral from the City of Austin
+      </h2>
+      </div>
       <section id="intro">
         <div class="app-grid">
           <div class="item icon-big center">
