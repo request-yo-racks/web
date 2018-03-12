@@ -1,6 +1,52 @@
 defaults: &defaults
   working_directory: ~/repo
 
+retrieve_steps: &retrieve_steps
+    - checkout
+    - restore_cache:
+        keys:
+          - dependency-cache-bower-{{ checksum "bower.json" }}
+
+prep_steps: &prep_steps
+    - run:
+        name: Prepare the test environment
+        # Note(remyg): There is probably a better way to do that...
+        command: |
+          cat << EOF > "src/config.js"
+          var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
+          EOF
+          sudo make bootstrap-npm setup
+    - save_cache:
+        key: dependency-cache-bower-{{ checksum "bower.json" }}
+        paths:
+          - .node_modules
+
+tests_steps: &tests_steps
+  - run:
+      name: Run the linters
+      command: make ci-linters
+  - run:
+      name: Run unit tests
+      command: make ci-tests
+  - run:
+      name: Run doc tests
+      command: make ci-docs
+
+system_steps: &system_steps
+  - run:
+      name: Install system tools
+      command: |
+        sudo apt-get update
+        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
+          curl \
+          git \
+          make
+        curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
+          nodejs
+        npm -v
+        npm install npm@latest -g.
+
 version: 2
 jobs:
   wct-chrome:
@@ -9,36 +55,7 @@ jobs:
       - image: circleci/node:8.9.4-browsers
 
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-bower-{{ checksum "bower.json" }}
-
-      - run:
-          name: Prepare the test environment
-          # Note(remyg): There is probably a better way to do that...
-          command: |
-            cat << EOF > "src/config.js"
-            var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
-            EOF
-            sudo make bootstrap-npm setup
-
-      - save_cache:
-          key: dependency-cache-bower-{{ checksum "bower.json" }}
-          paths:
-            - .node_modules
-
-      - run:
-          name: Run the linters
-          command: make ci-linters
-
-      - run:
-          name: Run unit tests
-          command: make ci-tests
-
-      - run:
-          name: Run doc tests
-          command: make ci-docs
+      {*retrieve_steps, *prep_steps}
 
   wct-firefox:
     <<: *defaults
@@ -46,52 +63,7 @@ jobs:
       - image: selenium/standalone-firefox:3.11.0
 
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-bower-{{ checksum "bower.json" }}
-
-      - run:
-          name: Install system tools
-          command: |
-            sudo apt-get update
-            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
-              curl \
-              git \
-              make
-            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
-              nodejs
-            npm -v
-            npm install npm@latest -g.
-
-      - run:
-          name: Prepare the test environment
-          # Note(remyg): There is probably a better way to do that...
-          command: |
-            cat << EOF > "src/config.js"
-            var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
-            EOF
-            sudo make bootstrap-npm setup
-
-      - save_cache:
-          key: dependency-cache-bower-{{ checksum "bower.json" }}
-          paths:
-            - .node_modules
-
-      - run:
-          name: Run the linters
-          command: make ci-linters
-
-      - run:
-          name: Run unit tests
-          command: |
-            sudo chown -R $USER:$(id -gn $USER) /home/seluser/.config
-            sudo polymer test -l firefox
-
-      - run:
-          name: Run doc tests
-          command: make ci-docs
+      {*system_steps, *retrieve_steps, *prep_steps, *tests_steps}
 
 workflows:
   version: 2
