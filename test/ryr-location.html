@@ -9,14 +9,14 @@
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
-    <link rel="import" href="./fixtures/google-map-mock.html">
-    <link rel="import" href="./fixtures/google-map-marker-mock.html">
-    <link rel="import" href="./fixtures/paper-input-mock.html">
+    <link rel="import" href="./mocks/google-map-mock.html">
+    <link rel="import" href="./mocks/google-map-marker-mock.html">
+    <link rel="import" href="./mocks/paper-input-mock.html">
 
     <link rel="import" href="../src/ryr-location.html">
   </head>
   <body>
-    <test-fixture id="ryr-location">
+    <test-fixture id="RyrLocation">
       <template>
         <ryr-location></ryr-location>
       </template>
@@ -27,7 +27,7 @@
         let ryrLocation;
 
         setup(function() {
-          ryrLocation = fixture('ryr-location');
+          ryrLocation = fixture('RyrLocation');
           replace('google-map').with('google-map-mock');
           replace('google-map-marker').with('google-map-marker-mock');
           replace('paper-input').with('paper-input-mock');
