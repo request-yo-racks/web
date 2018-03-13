@@ -10,7 +10,11 @@
     "lint": "npm run lint:javascript",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build",
+    "env": "replace 'dev-config' 'prod-config' ./build/default/src/my-app.html",
+    "prod": "polymer build && npm run env"
   },
-  "dependencies": {}
+  "dependencies": {
+    "replace": "^0.3.0"
+  }
 }
