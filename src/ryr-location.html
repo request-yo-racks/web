@@ -6,8 +6,6 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html" />
 
-<script type="text/javascript" src="config.js"></script>
-
 <dom-module id="ryr-location">
   <template>
     <style include="iron-flex iron-flex-alignment">
@@ -55,7 +53,7 @@
           },
           myApiKey: {
             type: String,
-            value: config.GOOGLE_WEB_MAPS_API_KEY
+            value: RYR_CONFIG.GOOGLE_WEB_MAPS_API_KEY
           }
         };
       }

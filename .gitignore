@@ -1,6 +1,4 @@
 bower_components/
 build/
 node_modules/
-config.js
-
-.DS_Store
+config/
