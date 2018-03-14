@@ -82,15 +82,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       footer {
         text-align: center;
-        background-color: black;
         color: white;
         font-size: 14px;
         width: 80%;
         margin: auto;
       }
 
-      footer p{
-        margin: 10px 0;
+      footer p {
+        margin: 10px;
+      }
+
+      footer li {
+        margin: 10px;
+        /* line-height: 16px; */
       }
 
       .drawer-list {
@@ -119,6 +123,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0 auto;
       }
 
+      .footer-description {
+        margin-bottom:60px;
+      }
+
+      .footer-right {
+        float: right;
+      }
+
+      .footer-left {
+        float: left;
+      }
+
       @media (max-width: 600px) {
         :host {
           display: block;
@@ -138,15 +154,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
     <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <!-- <app-drawer id="drawer" slot="drawer">
+       <!-- Drawer content
+      <app-drawer id="drawer" slot="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="view1" href="view1">View One</a>
           <a name="view2" href="view2">View Two</a>
           <a name="view3" href="view3">View Three</a>
-        </iron-selector>
-      </app-drawer> -->
+        </iron-selector> -->
+      </app-drawer>
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
@@ -173,22 +189,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-view404 name="view404"></my-view404>
         </iron-pages>
         <footer>
-          <div class="app-grid">
-            <div class="item">
-                <h3>About us</h3>
-                <p class="justified">
-                  Cloud bread hammock kogi polaroid. Jianbing bushwick iPhone bespoke. Before they sold out hella microdosing, portland whatever organic shabby chic vape.
-                </p>
+          <!-- <div class="app-grid"> -->
+            <div class="item footer-left">
+                <h3>Contact us</h3>
+                <!-- <p class="footer-description">
+                  Cloud bread hammock kogi polaroid. Jianbing bushwick iPhone bespoke.
+                  Before they sold out hella microdosing, portland whatever organic shabby chic vape.
+                </p> -->
             </div>
-            <div class="item">
+            <!-- <div class="item">
                 <h3>Useful links</h3>
                 <ul>
                   <li>link1</li>
                   <li>link2</li>
                   <li>link3</li>
                 </ul>
-            </div>
-            <div class="item">
+            </div> -->
+            <div class="item footer-right">
                 <h3>Get in touch</h3>
                 <ul>
                   <li>Facebook</li>
@@ -196,7 +213,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <li>Github</li>
                 </ul>
             </div>
-          </div>
+          <!-- </div> -->
         </footer>
       </app-header-layout>
     </app-drawer-layout>
