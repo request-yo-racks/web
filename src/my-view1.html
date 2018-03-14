@@ -82,13 +82,62 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .content {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
       }
 
-      .content img {
+      .content .description {
         display: block;
         width: 100%;
+        background-image: url('/images/bikes-on-rack.png');
+        height: 200px;
+      }
+
+      .content .description h2 {
+        padding: 80px
+      }
+
+      .intro-description {
+        text-align: center;
+        margin: auto;
+        color: #FFF;
+      }
+
+      .content p {
+        color: #333;
+      }
+
+      .process-header {
+        font-size: 36px;
+        color: #000;
+        text-align: center;
+      }
+
+      .start-button {
+        margin: auto;
+        color: #000;
+        background-color: var(--app-secondary-color);
+        padding: 12px;
+        text-decoration: none;
+        text-align: center;
+        max-width: 120px;
+      }
+
+      .start-button p {
+        margin: auto;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .icon-big {
+        color: #000;
+      }
+
+      .icon-medium {
+        color: #000;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 12px;
       }
 
       .section-connector {
@@ -110,15 +159,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .section-title {
-        margin: 10px 0;
+        margin: 10px;
         border-radius: 10px 10px 10px 10px;
       }
 
       .section-title h3 {
-        display: inline;
-        margin: auto 10px;
-        color: #212121;
-        font-size: 22px;
+        /* display: inline; */
+        margin: auto;
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        font-family: 'Archivo', sans-serif;
       }
 
       .section-title .circle {
@@ -126,12 +177,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 24px;
         height: 24px;
         text-align: center;
-        color: #555;
+        color: #000000;
         border-radius: 50%;
-        background: #FFF;
+        background: #15B407;
         font-size: 16px;
         line-height: 24px;
         border: 1px solid;
+      }
+
+      .circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin: auto;
+        background-color: #fff;
+      }
+
+      .placeholder {
+        width: 90%;
+        height: 200px;
+        background-color: #FFF;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+      }
+
+      .copy-text {
+        color: #fff;
+      }
+
+      .text-section p {
+        margin: 0 20px 40px 20px;
       }
 
       @media (max-width: 600px) {
@@ -146,10 +223,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="content">
-
-      <img src="/images/carousel/bikehere-r.png"/>
-
+      <div class="description">
+      <h2 class="intro-description">
+        Create an email to request a free bike corral from the City of Austin
+      </h2>
+      </div>
       <section id="intro">
+        <h1 class="process-header">How it Works</h1>
         <div class="app-grid">
           <div class="item icon-big center">
             <iron-icon icon="vaadin:map-marker"></iron-icon>
@@ -173,6 +253,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </p>
           </div>
         </div>
+        <a href="#location">
+        <div class="start-button center">
+            <p>Get started</p>
+            <iron-icon icon="expand-more"></iron-icon>
+        </div>
+        </a>
       </section>
 
       <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
@@ -180,8 +266,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </svg>
 
       <section id="location">
-        <div class="section-title bg-primary">
-          <div class="circle">1</div>
+        <div class="section-title bg-secondary">
+          <!-- <div class="circle">1</div> -->
           <h3>Select a location</h3>
         </div>
         <div class="app-grid">
@@ -196,24 +282,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <section id="preview">
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
-        <div class="section-title bg-secondary">
-          <div class="circle">2</div>
+        <div class="section-title bg-primary">
+          <!-- <div class="circle">2</div> -->
           <h3>Preview</h3>
         </div>
-        <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
+        <div class="placeholder">
+          <p>This is a placeholder for the email text.</p>
+        </div>
+        <!-- <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview> -->
         <granite-clipboard text="[[md]]">
-          <!-- <iron-icon class="icon-medium" icon="vaadin:copy-o"></iron-icon> -->
-          <paper-icon-button icon="vaadin:copy-o" title="copy"></paper-icon-button>
+          <br/>
+          <div class="copy-icon-text">
+        <div class="circle">
+        <iron-icon class="icon-medium" icon="vaadin:copy-o"></iron-icon>
+        <!-- <paper-icon-button class="icon-big" icon="vaadin:copy-o" title="copy"></paper-icon-button> -->
+        <h2 class="copy-text">Copy</p>
+      </div>
+      </div>
         </granite-clipboard>
       </section>
-
       <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
-      <section>
-        <div class="section-title bg-primary">
-          <div class="circle">3</div>
+      <section class="text-section">
+        <div class="section-title bg-secondary">
+          <!-- <div class="circle">3</div> -->
           <h3>What to do next?</h3>
         </div>
           <p>
