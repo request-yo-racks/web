@@ -80,7 +80,6 @@
       _computePlacesUrl(latlong) {
         if (latlong) {
           return ['http://api.192.168.99.100.nip.io/places', latlong].join('/');
-          // return ['http://api.127.0.0.1.nip.io:8000/places', latlong].join('/');
 
         }
       }
@@ -88,7 +87,6 @@
       _computePlaceUrl(placeId) {
         if (placeId) {
           return ['http://api.192.168.99.100.nip.io/place', placeId].join('/');
-          // return ['http://api.127.0.0.1.nip.io:8000/place', placeId].join('/');
         }
       }
 
