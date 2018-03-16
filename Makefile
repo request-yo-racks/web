@@ -88,6 +88,7 @@ docs: ## Build documentation
 	@echo "Not implemented yet."
 
 setup: ## Setup the full environment (default)
+	@bash tools/config-js.sh
 	polymer install
 
 .PHONY: bootstrap build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo deploy-minikube dist docs setup
