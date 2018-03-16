@@ -19,9 +19,9 @@ jobs:
       - run:
           name: Prepare the test environment
           command: |
-            sudo  mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
+            sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
             sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
-            sudo  make bootstrap-npm setup
+            sudo make bootstrap-npm setup
 
       - save_cache:
           key: dependency-cache-bower-{{ checksum "bower.json" }}
@@ -71,7 +71,6 @@ jobs:
           name: Prepare the test environment
           command: |
             sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
-            sudo touch "${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
             sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
             sudo make bootstrap-npm setup
 
