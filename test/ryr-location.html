@@ -69,14 +69,6 @@
           assert.equal(ryrLocation.longitude, expectedLng);
           assert.equal(ryrLocation.latlong, `${expectedLat},${expectedLng}`);
         });
-
-        test('Changing text input updates lat/lng individually', function() {
-          const e = { target: { value: '3,4' } };
-          ryrLocation._onInputChange(e);
-          const [expectedLat, expectedLng] = e.target.value.split(',');
-          assert.equal(ryrLocation.latitude, expectedLat);
-          assert.equal(ryrLocation.longitude, expectedLng);
-        });
       });
     </script>
   </body>
