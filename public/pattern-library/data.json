@@ -1,6 +1,6 @@
 {
     "project_logo": "ryr_logo.png",
-    "project_favicon": "ryr_logo.png",
+    "project_favicon": "ryr_logo_favicon.png",
     "project_name": "Request Yo Racks",
     "project_url": null,
     "copyright_start_year": "2017",
@@ -75,7 +75,7 @@
             ]
         },
         {
-            "name": "Typography",
+            "name": "typography",
             "title": "Headers",
             "components": [
                 {
@@ -91,18 +91,18 @@
             ]
         },
         {
-            "name": "Navigation",
+            "name": "navigation",
             "title": "Navigation",
             "components": [
                 {
-                    "group": "Navigation",
-                    "name": "Primary",
+                    "group": "navigation",
+                    "name": "primary",
                     "title": "Top Nav Bar"
                 }
             ]
         },
         {
-            "name": "inputs",
+            "name": "input",
             "title": "Inputs",
             "components": [
                 {
@@ -113,11 +113,11 @@
             ]
         },
         {
-            "name": "Buttons",
+            "name": "buttons",
             "title": "Buttons",
             "components": [
                 {
-                    "group": "Buttons",
+                    "group": "buttons",
                     "name": "default",
                     "title": "Default Button"
                 }

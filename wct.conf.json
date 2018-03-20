@@ -2,9 +2,6 @@
   "verbose": true,
   "plugins": {
     "local": {
-      "browsers": [
-        "chrome"
-      ],
       "browserOptions": {
         "chrome": [
           "window-size=1920,1080",

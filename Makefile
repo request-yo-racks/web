@@ -41,10 +41,18 @@ help: # Display help
 			printf "\033[36m%-30s\033[0m %s\n", $$1, $$NF \
 }' $(MAKEFILE_LIST) | sort
 
-build-docker: ## Build the docker image
+bootstrap: bootstrap-osx bootstrap-npm ## Install software globally
+
+bootstrap-npm: ## Install NPM packages globally
+	@bash tools/bootstrap-npm.sh
+
+bootstrap-osx: ## Install software using Brew
+	@bash tools/bootstrap-osx.sh
+
+build-docker: init-config ## Build the docker image
 	@docker build -t $(DOCKER_IMG) -f $(DOCKERFILE) .
 
-ci: ci-linters ci-docs ci-tests ##
+ci: ci-linters ci-docs ci-tests ## Run all the CI tasks
 
 ci-docs: ## Ensure the documentation builds
 	@echo "Not implemented yet."
@@ -79,9 +87,10 @@ dist: ## Package the application
 docs: ## Build documentation
 	@echo "Not implemented yet."
 
-setup: ## Setup the full environment (default)
-	npm install -g --unsafe-perm bower polymer-cli \
-	&& bower install --allow-root \
-	&& polymer install
+init-config: ## Setup the initial configuration
+	@bash tools/config-js.sh
 
-.PHONY: build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo dist docs setup
+setup: init-config ## Setup the full environment (default)
+	polymer install
+
+.PHONY: bootstrap build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo deploy-minikube dist docs init-config setup

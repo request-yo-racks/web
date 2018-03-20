@@ -10,151 +10,309 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
+<!-- <link rel="import" href="ryr-specify-coordinates.html" /> -->
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
 <link rel="import" href="../bower_components/graphite-clipboard/granite-clipboard.html" />
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
-<link rel="import" href="shared-styles.html">
-<link rel="import" href="ryr-rack-request-form.html" />
+<link rel="import" href="../bower_components/skeleton-carousel/skeleton-carousel.html">
+<link rel="import" href="../bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="ryr-email-templatizer.html" />
-<link rel="import" href="ryr-preview.html" />
-<!-- <link rel="import" href="ryr-specify-coordinates.html" /> -->
 <link rel="import" href="ryr-location.html" />
+<link rel="import" href="ryr-preview.html" />
+<link rel="import" href="ryr-rack-request-form.html" />
 <link rel="import" href="ryr-suggestion-list.html" />
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles app-grid-style">
       :host {
         display: block;
-        padding: 10px;
-
-        --app-primary-color: #ABD252;
-        --app-secondary-color: black;
 
         --app-grid-columns: 3;
         --app-grid-gutter: 5px;
-        --app-grid-expandible-item-columns: 2
-        /* --app-grid-item-height: 500px; */
-      }
-      h1 {
-        display: inline;
+        --app-grid-expandible-item-columns: 2;
+
+        --paper-icon-button: {
+          width: 64px;
+          height: 64px;
+        };
       }
 
-      .content {
-        width: 80%;
-        margin: auto auto;
+      section {
+        padding: 15px;
       }
 
-      .section-separator {
-        margin: 10px 10px;
-        border-radius: 10px 10px 10px 10px;
+      section:nth-of-type(odd) {
         background-color: var(--app-primary-color);
       }
 
-      .section-separator h3 {
-        display: inline;
-        margin: auto 10px;
-        color: #212121;
-        font-size: 22px;
+      section:nth-of-type(even) {
+        background-color: var(--app-secondary-color);
       }
 
-      .section-separator .circle {
+      granite-clipboard {
+        display: block;
+        margin: auto;
+        @apply --paper-icon-button;
+      }
+
+      #intro p{
+        width: 70%;
+        margin: auto;
+        text-align: center
+      }
+
+      #location .item:first-child {
+        @apply --app-grid-expandible-item;
+      }
+
+      #preview {
+        position: relative;
+      }
+
+      .bg-primary {
+        background-color: var(--app-primary-color);
+      }
+
+      .bg-secondary {
+        background-color: var(--app-secondary-color);
+      }
+
+      .content {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .content .description {
+        display: block;
+        width: 100%;
+        background-image: url('/images/bikes-on-rack.png');
+        height: 200px;
+      }
+
+      .content .description h2 {
+        padding: 80px
+      }
+
+      .intro-description {
+        text-align: center;
+        margin: auto;
+        color: #FFF;
+      }
+
+      .content p {
+        color: #333;
+      }
+
+      .process-header {
+        font-size: 36px;
+        color: #000;
+        text-align: center;
+      }
+
+      .start-button {
+        margin: auto;
+        color: #000;
+        background-color: var(--app-secondary-color);
+        padding: 12px;
+        text-decoration: none;
+        text-align: center;
+        max-width: 120px;
+      }
+
+      .start-button p {
+        margin: auto;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .icon-big {
+        color: #000;
+      }
+
+      .icon-medium {
+        color: #000;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 12px;
+      }
+
+      .section-connector {
+        width: 100%;
+        height: 75px;
+        /* The margin-bottom of -4px is an ugly fix to solve a problem I don't understand. */
+        margin: 0 0 -4px 0;
+        padding: 0;
+      }
+
+      .section-connector:nth-of-type(odd) {
+        background-color: var(--app-secondary-color);
+        fill: var(--app-primary-color);
+      }
+
+      .section-connector:nth-of-type(even) {
+        background-color: var(--app-primary-color);
+        fill: var(--app-secondary-color);
+      }
+
+      .section-title {
+        margin: 10px;
+        border-radius: 10px 10px 10px 10px;
+      }
+
+      .section-title h3 {
+        /* display: inline; */
+        margin: auto;
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        font-family: 'Archivo', sans-serif;
+      }
+
+      .section-title .circle {
         margin: 4px 4px;
         width: 24px;
         height: 24px;
         text-align: center;
-        color: #555;
+        color: #000000;
         border-radius: 50%;
-        background: #FFF;
+        background: #15B407;
         font-size: 16px;
         line-height: 24px;
+        border: 1px solid;
       }
 
-      ryr-specify-coordinates, ryr-suggestion-list, ryr-rack-request-form, ryr-preview {
-        width: 80%;
-        border: solid;
-        margin: auto auto;
-        padding: 8px;
+      .circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        margin: auto;
+        background-color: #fff;
       }
 
-      granite-clipboard {
-        display: inline;
+      .placeholder {
+        width: 90%;
+        height: 200px;
+        background-color: #FFF;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
       }
 
-      .rack-request {
-        display: flex;
+      .copy-text {
+        color: #fff;
       }
 
-      /* *** */
-      .item:first-child {
-        @apply --app-grid-expandible-item;
+      .text-section p {
+        margin: 0 20px 40px 20px;
       }
 
+      @media (max-width: 600px) {
+        :host {
+          display: block;
 
+          --app-grid-columns: 1;
+          --app-grid-gutter: 5px;
+          --app-grid-expandible-item-columns: 1;
+        }
+      }
     </style>
 
     <div class="content">
+      <div class="description">
+      <h2 class="intro-description">
+        Create an email to request a free bike corral from the City of Austin
+      </h2>
+      </div>
+      <section id="intro">
+        <h1 class="process-header">How it Works</h1>
+        <div class="app-grid">
+          <div class="item icon-big center">
+            <iron-icon icon="vaadin:map-marker"></iron-icon>
+            <h3>Point</h3>
+            <p>
+              Point the location on the map where you would like to see a bike rack.
+            </p>
+          </div>
+          <div class="item icon-big center col-4">
+            <iron-icon icon="vaadin:check-square-o"></iron-icon>
+            <h3>Select</h3>
+            <p>
+              Select the business sponsoring the request in the list.
+            </p>
+          </div>
+          <div class="item icon-big center col-4">
+            <iron-icon icon="vaadin:envelope-o"></iron-icon>
+            <h3>Submit</h3>
+            <p>
+              Submit the request to the city hall.
+            </p>
+          </div>
+        </div>
+        <a href="#location">
+        <div class="start-button center">
+            <p>Get started</p>
+            <iron-icon icon="expand-more"></iron-icon>
+        </div>
+        </a>
+      </section>
 
-      <header>
-        <h2>Welcome Request-Yo-Racks</h2>
-        <p>This is a test for the new layout.</p>
-      </header>
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
 
       <section id="location">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">1</div>
-            <h3>Select a location</h3>
-          </div>
-          <!-- <ryr-specify-coordinates latlong="{{latlong}}"></ryr-specify-coordinates> -->
-          <div class="app-grid">
-            <div class="item item-2cols"><ryr-location  latlong="{{latlong}}"></ryr-location></div>
-            <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
-          </div>
-
-          <!-- <ryr-location  latlong="{{latlong}}"></ryr-location>
-          <ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list> -->
+        <div class="section-title bg-secondary">
+          <h3>Select a location</h3>
+        </div>
+        <div class="app-grid">
+          <div class="item item-2cols"><ryr-location  latlong="{{latlong}}"></ryr-location></div>
+          <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
         </div>
       </section>
 
-      <!-- <section id="business">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">2</div>
-            <h3>Select a business</h3>
-          </div>
-
-        </div>
-      </section> -->
-
-      <!-- <section id="extras">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">3</div>
-            <h3>Provide extra information if needed</h3>
-          </div>
-          <ryr-rack-request-form templatevars="{{vars}}"></ryr-rack-request-form>
-
-        </div>
-      </section> -->
-      <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
 
       <section id="preview">
-        <div class="container">
-          <div class=section-separator>
-            <div class="circle">2</div>
-            <h3>Preview</h3>
-          </div>
-          <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
-          <granite-clipboard text="[[md]]">
-            <paper-icon-button icon="content-copy" title="copy"></paper-icon-button>
-          </granite-clipboard>
+        <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
+        <div class="section-title bg-primary">
+          <h3>Preview</h3>
         </div>
+        <div class="placeholder">
+          <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
+        </div>
+        <granite-clipboard text="[[md]]">
+          <br/>
+          <div class="copy-icon-text">
+        <div class="circle">
+          <paper-icon-button class="icon-big" icon="vaadin:copy-o" title="copy"></paper-icon-button>
+        </div>
+      </div>
+        </granite-clipboard>
+      </section>
+      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+        <polygon points="0,0 10,0 5,10"/>
+      </svg>
+
+      <section class="text-section">
+        <div class="section-title bg-secondary">
+          <h3>What to do next?</h3>
+        </div>
+          <p>
+            A clear set of instructions.
+          </p>
+          <p>
+            Glossier readymade pabst PBR&B. Bicycle rights authentic beard hashtag artisan. Fam brunch normcore, vice sartorial twee you probably haven't heard of them snackwave kitsch shabby chic microdosing. Occupy williamsburg +1 keytar, hot chicken cred taiyaki mlkshk master cleanse echo park trust fund post-ironic green juice hell of. Echo park ennui 8-bit man braid, pickled crucifix gochujang ramps.
+          </p>
       </section>
 
     </div>
-
   </template>
 
   <script>
@@ -165,6 +323,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     window.customElements.define(MyView1.is, MyView1);
-
   </script>
 </dom-module>
