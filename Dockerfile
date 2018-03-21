@@ -2,15 +2,14 @@ FROM node:8.9.4-alpine as builder
 MAINTAINER Rémy Greinhofer <remy.greinhofer@gmail.com>
 
 # Add Git (required by polymer-cli).
-RUN apk add --update git
+RUN apk add --update bash git make
 
 # Go to the directory holding the application and copy the source code.
 WORKDIR /usr/src/app
 COPY . .
 
 # Install bower, polymer-cli and build the project.
-RUN npm install -g gulp bower polymer-cli --unsafe-perm \
-  && npm install  \
+RUN make bootstrap-npm \
   && polymer install \
   && polymer build --preset es5-bundled
 

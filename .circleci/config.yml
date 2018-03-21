@@ -7,6 +7,8 @@ jobs:
     <<: *defaults
     docker:
       - image: circleci/node:8.9.4-browsers
+    environment:
+      - RYR_GLOBAL_CONFIG_DIR: "/root/.config/ryr"
 
     steps:
       - checkout
@@ -16,11 +18,9 @@ jobs:
 
       - run:
           name: Prepare the test environment
-          # Note(remyg): There is probably a better way to do that...
           command: |
-            cat << EOF > "src/config.js"
-            var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
-            EOF
+            sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
+            sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
             sudo make bootstrap-npm setup
 
       - save_cache:
@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Run unit tests
-          command: make ci-tests
+          command: sudo polymer test -l chrome
 
       - run:
           name: Run doc tests
@@ -44,6 +44,8 @@ jobs:
     <<: *defaults
     docker:
       - image: selenium/standalone-firefox:3.11.0
+    environment:
+      - RYR_GLOBAL_CONFIG_DIR: "/home/seluser/.config/ryr"
 
     steps:
       - checkout
@@ -67,11 +69,9 @@ jobs:
 
       - run:
           name: Prepare the test environment
-          # Note(remyg): There is probably a better way to do that...
           command: |
-            cat << EOF > "src/config.js"
-            var config = {"GOOGLE_WEB_MAPS_API_KEY": "<redacted>"};
-            EOF
+            sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
+            sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
             sudo make bootstrap-npm setup
 
       - save_cache:

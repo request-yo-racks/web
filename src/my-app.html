@@ -22,21 +22,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
 <link rel="import" href="my-icons.html">
-
 <link rel="lazy-import" href="my-view1.html">
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo">
 
 <dom-module id="my-app">
   <template>
-    <style>
+    <style include="shared-styles app-grid-style">
       :host {
-        --app-primary-color: #ABD252;
-        --app-secondary-color: black;
-
         display: block;
+
+        --app-primary-color: #129406;
+        --app-secondary-color: #FFF;
+
+        --app-grid-columns: 3;
+        --app-grid-gutter: 15px;
       }
 
       ul {
@@ -47,7 +51,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       li  {
-        display: inline;
         color: white;
         text-align: center;
         padding: 0px 10px;
@@ -61,9 +64,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: none;
       }
 
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
+      app-header-layout {
+        width: 80%;
+        margin: auto;
+        color: #FFF;
+        background-color: #111;
+        font-family: 'Archivo', sans-serif;
       }
 
       app-header paper-icon-button {
@@ -73,6 +79,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-toolbar {
         --app-toolbar-font-size: 36px;
         text-align: center;
+        height: 200px;
+      }
+
+      footer {
+        text-align: center;
+        color: white;
+        font-size: 14px;
+        width: 80%;
+        margin: auto;
+      }
+
+      footer p {
+        margin: 10px;
+      }
+
+      footer li {
+        margin: 10px;
+        /* line-height: 16px; */
       }
 
       .drawer-list {
@@ -91,6 +115,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+
+      .logo {
+        width: 128px;
+        height: 128px;
+        margin: 0 auto;
+      }
+      .main-title {
+        margin: 0 auto;
+      }
+
+      .footer-description {
+        margin-bottom:60px;
+      }
+
+      .footer-right {
+        float: right;
+      }
+
+      .footer-left {
+        float: left;
+      }
+
+      @media (max-width: 600px) {
+        :host {
+          display: block;
+
+          --app-grid-columns: 1;
+          --app-grid-gutter: 5px;
+          --app-grid-expandible-item-columns: 1;
+        }
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -101,33 +156,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
     <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <!-- <app-drawer id="drawer" slot="drawer">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="view1">View One</a>
-          <a name="view2" href="view2">View Two</a>
-          <a name="view3" href="view3">View Three</a>
-        </iron-selector>
-      </app-drawer> -->
-
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
+        <app-header slot="header">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>Request yo racks</div>
+            <div main-title top-item>
+              <img class="logo" src="images/ryr_logo.png" />
+            </div>
+            <p  bottom-item>
+              Request Yo Racks
+            </p>
           </app-toolbar>
-          <div class="navigation">
-            <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
-              <ul>
-                <li><a name="view1" href="view1">Request</a></li>
-                <li><a name="view2" href="view2">Statistics</a></li>
-                <li><a name="view3" href="view3">About</a></li>
-              </ul>
-            </iron-selector>
-          </div>
         </app-header>
 
         <iron-pages
@@ -140,6 +180,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
+        <footer>
+          <!-- <div class="app-grid"> -->
+            <div class="item footer-left">
+              <h3>Contact us</h3>
+            </div>
+            <div class="item footer-right">
+              <h3>Get in touch</h3>
+              <ul>
+                <li>Facebook</li>
+                <li>Twitter</li>
+                <li>Github</li>
+              </ul>
+            </div>
+          <!-- </div> -->
+        </footer>
       </app-header-layout>
     </app-drawer-layout>
   </template>

@@ -15,9 +15,6 @@
 
       .container {
         width: 80%;
-        /* @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
-        @apply(--layout-wrap); */
       }
 
       google-map {
@@ -39,10 +36,6 @@
     <google-map id="gmaps" latitude="30.318655" longitude="-97.724454" zoom="15" api-key="[[myApiKey]]" click-events="true">
       <google-map-marker id="gmarker" latitude="30.318655" longitude="-97.7244549"></google-map-marker>
     </google-map>
-    <div class="container ">
-      <paper-input label="Latitude,longitude " value="{{latlong}} "></paper-input>
-      <paper-icon-button icon="search " title="search "></paper-icon-button>
-    </div>
   </template>
   <!-- Web component class. -->
   <script>

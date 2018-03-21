@@ -49,7 +49,7 @@ bootstrap-npm: ## Install NPM packages globally
 bootstrap-osx: ## Install software using Brew
 	@bash tools/bootstrap-osx.sh
 
-build-docker: ## Build the docker image
+build-docker: init-config ## Build the docker image
 	@docker build -t $(DOCKER_IMG) -f $(DOCKERFILE) .
 
 ci: ci-linters ci-docs ci-tests ## Run all the CI tasks
@@ -87,7 +87,10 @@ dist: ## Package the application
 docs: ## Build documentation
 	@echo "Not implemented yet."
 
-setup: ## Setup the full environment (default)
+init-config: ## Setup the initial configuration
+	@bash tools/config-js.sh
+
+setup: init-config ## Setup the full environment (default)
 	polymer install
 
-.PHONY: bootstrap build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo deploy-minikube dist docs setup
+.PHONY: bootstrap build-docker ci ci-linters ci-docs ci-tests clean clean-docker clean-minikube clean-repo deploy-minikube dist docs init-config setup
