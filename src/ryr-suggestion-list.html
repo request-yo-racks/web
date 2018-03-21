@@ -80,14 +80,14 @@
 
       _computePlacesUrl(latlong) {
         if (latlong) {
-          return ['http://api.192.168.99.100.nip.io/places', latlong].join('/');
+          return [`${config.API_BASE_URL}places`, latlong].join('/');
 
         }
       }
 
       _computePlaceUrl(placeId) {
         if (placeId) {
-          return ['http://api.192.168.99.100.nip.io/place', placeId].join('/');
+          return [`${config.API_BASE_URL}place`, placeId].join('/');
         }
       }
 
@@ -114,6 +114,5 @@
     }
 
     window.customElements.define(RyrSuggestionList.is, RyrSuggestionList);
-
   </script>
 </dom-module>
