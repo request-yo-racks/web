@@ -55,23 +55,20 @@
       }
 
       static get properties() {
-        const latCoord = "30.274722";
-        const longCoord = "-97.740556";
-
         return {
           latitude: {
             type: String,
-            value: latCoord
+            value: "30.274722"
           },
 
           longitude: {
             type: String,
-            value: longCoord
+            value: "-97.740556"
           },
 
           latlong: {
             type: String,
-            value: `${latCoord},${longCoord}`,
+            computed: 'getLatlong(latitude, longitude)',
             notify: true
           },
 
@@ -85,6 +82,10 @@
             value: config.GOOGLE_WEB_MAPS_API_KEY
           }
         };
+      }
+
+      getLatlong(lat, long) {
+        return `${lat},${long}`;
       }
 
       ready() {
