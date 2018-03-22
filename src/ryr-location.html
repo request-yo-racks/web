@@ -68,7 +68,7 @@
 
           latlong: {
             type: String,
-            computed: 'getLatlong(latitude, longitude)',
+            computed: '_getLatlong(latitude, longitude)',
             notify: true
           },
 
@@ -84,7 +84,7 @@
         };
       }
 
-      getLatlong(lat, long) {
+      _getLatlong(lat, long) {
         return `${lat},${long}`;
       }
 

@@ -69,6 +69,14 @@
           assert.equal(ryrLocation.longitude, expectedLng);
           assert.equal(ryrLocation.latlong, `${expectedLat},${expectedLng}`);
         });
+
+        test('_getLatLong computed property works as expected', function() {
+          const firstVal = 'foo';
+          const secondVal = 'bar';
+          const expected = `${firstVal},${secondVal}`;
+          const actual = ryrLocation._getLatlong(firstVal, secondVal);
+          assert.equal(actual, expected);
+        });
       });
     </script>
   </body>
