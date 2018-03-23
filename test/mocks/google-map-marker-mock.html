@@ -1,0 +1,17 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="google-map-marker-mock">
+  <template>
+    <google-map-marker-mock></google-map-marker-mock>
+  </template>
+
+  <script>
+    class GoogleMapMarkerMock extends Polymer.Element {
+      static get is() {
+        return 'google-map-marker-mock';
+      }
+    }
+
+    window.customElements.define(GoogleMapMarkerMock.is, GoogleMapMarkerMock);
+  </script>
+</dom-module>
