@@ -61,7 +61,7 @@ ci-linters: ## Run the static analyzers
 	@find src -name '*.html' -print | xargs polymer lint --input
 
 ci-tests: ## Run the unit tests
-	$(RUN_CMD) polymer test
+	$(RUN_CMD) polymer test -l chrome,firefox
 
 clean: clean-repo clean-minikube clean-docker  ## Clean everything (!DESTRUCTIVE!)
 
