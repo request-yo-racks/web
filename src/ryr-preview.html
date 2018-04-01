@@ -5,10 +5,13 @@
     <style include="shared-styles">
       :host {
         display: block;
-        color: black;
+        --ryr-preview-color: black;
+      }
+      text-color{
+        color: var(--ryr-preview-color);
       }
     </style>
-    <div id="preview" class="color-black">
+    <div id="preview" class="text-color">
     </div>
   </template>
 
