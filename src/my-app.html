@@ -20,6 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html" />
@@ -128,14 +129,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         float: right;
       }
 
-      .footer-left {
+      #contact-us-button {
         float: left;
         font-size: 18px;
         margin-top: 28px;
         background-color: var(--app-primary-color);
         padding: 0  40px;
         border-radius: 16px;
+        max-height: 60px;
       }
+
       .social-icons {
         padding: 0 0 40px 20px;
       }
@@ -184,19 +187,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-view404 name="view404"></my-view404>
         </iron-pages>
         <footer>
-          <!-- <div class="app-grid"> -->
-            <div class="item footer-left">
+          <div class="app-grid">
+            <paper-button id="contact-us-button">
               <h3>Contact Us</h3>
+            </paper-button>
+            <div>
             </div>
             <div class="item footer-right">
               <h3>Get in touch</h3>
-                <img width="40px" height="40px" class="social-icons" src="../images/icons/FB-icon.png">
-                <img width="40px" height="40px" class="social-icons" src="../images/icons/Twitter_Social_Icon_Rounded_Square_White.png">
+              <iron-icon icon="vaadin:facebook-square"></iron-icon>
+              <iron-icon icon="vaadin:twitter"></iron-icon>
+                <!-- <img width="40px" height="40px" class="social-icons" src="../images/icons/FB-icon.png"> -->
+                <!-- <img width="40px" height="40px" class="social-icons" src="../images/icons/Twitter_Social_Icon_Rounded_Square_White.png"> -->
                 <a href="https://github.com/request-yo-racks" target="_blank">
-                  <img width="40px" height="40px" class="social-icons" src="../images/icons/GitHub-Mark-Light-64px.png">
+                  <img width="40px" height="40px" class="social-icons"
+                  src="../images/icons/GitHub-Mark-Light-64px.png">
                 </a>
             </div>
-          <!-- </div> -->
+          </div>
         </footer>
       </app-header-layout>
     </app-drawer-layout>
