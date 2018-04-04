@@ -2,12 +2,16 @@
 
 <dom-module id="ryr-preview">
   <template>
-    <style>
+    <style include="shared-styles">
       :host {
         display: block;
+        --ryr-preview-color: black;
+      }
+      text-color{
+        color: var(--ryr-preview-color);
       }
     </style>
-    <div id="preview">
+    <div id="preview" class="text-color">
     </div>
   </template>
 

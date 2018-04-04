@@ -70,14 +70,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #preview {
         position: relative;
+        color: var(--ryr-preview-color, black);
       }
 
-      .bg-primary {
-        background-color: var(--app-primary-color);
-      }
-
-      .bg-secondary {
-        background-color: var(--app-secondary-color);
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        margin-top: 10px;
       }
 
       .content {
@@ -86,57 +89,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .content .description {
-        display: block;
-        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         background-image: url('/images/bikes-on-rack.png');
         height: 200px;
-      }
-
-      .content .description h2 {
-        padding: 80px
-      }
-
-      .intro-description {
-        text-align: center;
-        margin: auto;
-        color: #FFF;
       }
 
       .content p {
         color: #333;
       }
 
-      .process-header {
-        font-size: 36px;
-        color: #000;
-        text-align: center;
-      }
-
-      .start-button {
-        margin: auto;
-        color: #000;
-        background-color: var(--app-secondary-color);
-        padding: 12px;
-        text-decoration: none;
-        text-align: center;
-        max-width: 120px;
-      }
-
-      .start-button p {
-        margin: auto;
-        text-decoration: none;
-        text-align: center;
-      }
-
-      .icon-big {
-        color: #000;
-      }
-
-      .icon-medium {
-        color: #000;
-        margin-right: auto;
+      .placeholder {
+        width: 90%;
+        height: 200px;
+        background-color: #FFF;
+        margin-top: 20px;
         margin-left: auto;
-        padding: 12px;
+        margin-right: auto;
+        padding: 20px;
       }
 
       .section-connector {
@@ -157,57 +128,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         fill: var(--app-secondary-color);
       }
 
-      .section-title {
-        margin: 10px;
-        border-radius: 10px 10px 10px 10px;
-      }
-
       .section-title h3 {
-        /* display: inline; */
-        margin: auto;
-        text-align: center;
         color: #333;
-        font-size: 28px;
-        font-family: 'Archivo', sans-serif;
-      }
-
-      .section-title .circle {
-        margin: 4px 4px;
-        width: 24px;
-        height: 24px;
-        text-align: center;
-        color: #000000;
-        border-radius: 50%;
-        background: #15B407;
-        font-size: 16px;
-        line-height: 24px;
-        border: 1px solid;
-      }
-
-      .circle {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        margin: auto;
-        background-color: #fff;
-      }
-
-      .placeholder {
-        width: 90%;
-        height: 200px;
-        background-color: #FFF;
-        margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 20px;
-      }
-
-      .copy-text {
-        color: #fff;
-      }
-
-      .text-section p {
-        margin: 0 20px 40px 20px;
       }
 
       @media (max-width: 600px) {
@@ -223,41 +145,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="content">
       <div class="description">
-      <h2 class="intro-description">
+      <h2 class="intro-description center color-secondary">
         Create an email to request a free bike corral from the City of Austin
       </h2>
       </div>
       <section id="intro">
-        <h1 class="process-header">How it Works</h1>
+        <h1 class="center">How it Works</h1>
         <div class="app-grid">
-          <div class="item icon-big center">
-            <iron-icon icon="vaadin:map-marker"></iron-icon>
+          <div class="item center color-black">
+            <iron-icon class="icon-big"  icon="vaadin:map-marker"></iron-icon>
             <h3>Point</h3>
             <p>
               Point the location on the map where you would like to see a bike rack.
             </p>
           </div>
-          <div class="item icon-big center col-4">
-            <iron-icon icon="vaadin:check-square-o"></iron-icon>
+          <div class="item center color-black">
+            <iron-icon class="icon-big" icon="vaadin:check-square-o"></iron-icon>
             <h3>Select</h3>
             <p>
               Select the business sponsoring the request in the list.
             </p>
           </div>
-          <div class="item icon-big center col-4">
-            <iron-icon icon="vaadin:envelope-o"></iron-icon>
+          <div class="item center color-black">
+            <iron-icon class="icon-big" icon="vaadin:envelope-o"></iron-icon>
             <h3>Submit</h3>
             <p>
               Submit the request to the city hall.
             </p>
           </div>
         </div>
-        <a href="#location">
-        <div class="start-button center">
-            <p>Get started</p>
-            <iron-icon icon="expand-more"></iron-icon>
+        <div class="center">
+            <h2>Get started</h2>
+            <iron-icon class="icon-big color-black" icon="vaadin:angle-double-down"></iron-icon>
         </div>
-        </a>
       </section>
 
       <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
@@ -265,9 +185,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </svg>
 
       <section id="location">
-        <div class="section-title bg-secondary">
-          <h3>Select a location</h3>
-        </div>
+        <h2 class="section-title bg-secondary center">Select a location</h2>
         <div class="app-grid">
           <div class="item item-2cols"><ryr-location latlong="{{latlong}}"></ryr-location></div>
           <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
@@ -280,35 +198,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <section id="preview">
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
-        <div class="section-title bg-primary">
-          <h3>Preview</h3>
-        </div>
+        <h2 class="section-title bg-primary center">Preview</h2>
         <div class="placeholder">
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
         </div>
         <granite-clipboard text="[[md]]">
-          <br/>
-          <div class="copy-icon-text">
-        <div class="circle">
-          <paper-icon-button class="icon-big" icon="vaadin:copy-o" title="copy"></paper-icon-button>
-        </div>
-      </div>
+          <div class="circle bg-secondary center">
+            <paper-icon-button class="icon-big color-black" icon="vaadin:copy-o" title="copy"></paper-icon-button>
+          </div>
         </granite-clipboard>
       </section>
       <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
-      <section class="text-section">
-        <div class="section-title bg-secondary">
-          <h3>What to do next?</h3>
-        </div>
-          <p>
-            A clear set of instructions.
-          </p>
-          <p>
-            Glossier readymade pabst PBR&B. Bicycle rights authentic beard hashtag artisan. Fam brunch normcore, vice sartorial twee you probably haven't heard of them snackwave kitsch shabby chic microdosing. Occupy williamsburg +1 keytar, hot chicken cred taiyaki mlkshk master cleanse echo park trust fund post-ironic green juice hell of. Echo park ennui 8-bit man braid, pickled crucifix gochujang ramps.
-          </p>
+      <section id="instructions">
+        <h2 class="section-title bg-secondary center">What to do next?</h2>
+        <p>
+          A clear set of instructions.
+        </p>
+        <p>
+          Glossier readymade pabst PBR&B. Bicycle rights authentic beard hashtag artisan. Fam brunch normcore, vice sartorial twee you probably haven't heard of them snackwave kitsch shabby chic microdosing. Occupy williamsburg +1 keytar, hot chicken cred taiyaki mlkshk master cleanse echo park trust fund post-ironic green juice hell of. Echo park ennui 8-bit man braid, pickled crucifix gochujang ramps.
+        </p>
       </section>
 
     </div>
