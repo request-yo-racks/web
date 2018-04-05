@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ryr-suggestion-list</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="./mocks/iron-ajax-mock.html">
+
+    <link rel="import" href="../src/ryr-suggestion-list.html">
+  </head>
+  <body>
+    <test-fixture id="RyrSuggestionList">
+      <template>
+        <ryr-suggestion-list></ryr-suggestion-list>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('<ryr-suggestion-list>', function() {
+        let ryrSuggestionList;
+        const fauxPlaceResponse = {
+          response: {
+            result: {
+              name: 'foo',
+              formatted_address: 'bar',
+              contactName: 'baz',
+              formatted_phone_number: 'hello',
+              contactEmail: 'hello@world.com',
+              parkingInfo: 'fun',
+              extraInfo: 'sun',
+              geometry: {
+                location: {
+                  lat: 1,
+                  lng: 2
+                }
+              }
+            }
+          }
+        };
+
+        setup(function() {
+          replace('iron-ajax').with('iron-ajax-mock');
+          ryrSuggestionList = fixture('RyrSuggestionList');
+        });
+
+        test('Component is properly initialized', function() {
+          const {
+            activeItem,
+            latlong,
+            placeId,
+            placeResponse,
+            placesUrl,
+            placeUrl
+          } = ryrSuggestionList;
+          expect(activeItem).to.be.null;
+          expect(latlong).to.be.undefined;
+          expect(placeId).to.be.undefined;
+          expect(placeResponse).to.be.undefined;
+          expect(placesUrl).to.be.undefined;
+          expect(placeUrl).to.be.undefined;
+        });
+
+        test('API call not made when list first initialized', function() {
+          const stub = sinon.stub(ryrSuggestionList.$.placeDetails, 'generateRequest');
+          ryrSuggestionList._activeItemChanged(null);
+          assert.isFalse(stub.called);
+          assert.equal(ryrSuggestionList.placeId, undefined);
+        });
+
+        test('API call made when active item changes', function() {
+          const stub = sinon.stub(ryrSuggestionList.$.placeDetails, 'generateRequest');
+          ryrSuggestionList._activeItemChanged({ place_id: 'foo' });
+          assert.isTrue(stub.calledOnce);
+          assert.equal(ryrSuggestionList.placeId, 'foo');
+        });
+
+        test('_placesOptionsChanged', function() {
+          const latlong = '1,2';
+          const returnedData = ryrSuggestionList._placesOptionsChanged(latlong);
+          expect(returnedData).to.deep.equal({ latlong });
+        });
+
+        test('_handlePlaceResponse when result is null', function() {
+          ryrSuggestionList._handlePlaceResponse({}, { response: { result: null } });
+          assert.equal(ryrSuggestionList.placeResponse.rackLocation, 'HERE!');
+          assert.equal(Object.keys(ryrSuggestionList.placeResponse).length, 1);
+        });
+
+        test('_handlePlaceResponse when result is not null', function() {
+          const {
+            response: {
+              result: {
+                name,
+                formatted_address,
+                contactName,
+                formatted_phone_number,
+                contactEmail,
+                parkingInfo,
+                extraInfo,
+                geometry: {
+                  location: {
+                    lat,
+                    lng
+                  }
+                }
+              }
+            }
+          } = fauxPlaceResponse;
+          ryrSuggestionList._handlePlaceResponse({}, fauxPlaceResponse);
+          expect(ryrSuggestionList.placeResponse).to.deep.equal({
+            rackLocation: `${lat}, ${lng}`,
+            businessName: name,
+            businessAddress: formatted_address,
+            contactName: contactName,
+            contactPhone: formatted_phone_number,
+            contactEmail: contactEmail,
+            parkingInfo: parkingInfo,
+            extraInfo: extraInfo
+          });
+        });
+
+        test('_computePlacesUrl', function() {
+          const baseUrl = 'http://foo.io/';
+          const latlng = '1,2';
+          window.config.API_BASE_URL = baseUrl;
+          const placeUrl = ryrSuggestionList._computePlacesUrl(latlng);
+          assert.equal(placeUrl, [`${baseUrl}places/${latlng}`]);
+        });
+
+        test('_computePlaceUrl', function() {
+          const baseUrl = 'http://foo.io/';
+          const placeId = 'abc-123';
+          window.config.API_BASE_URL = baseUrl;
+          const placeUrl = ryrSuggestionList._computePlaceUrl(placeId);
+          assert.equal(placeUrl, [`${baseUrl}place/${placeId}`]);
+        });
+      });
+    </script>
+  </body>
+</html>

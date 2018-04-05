@@ -2,6 +2,8 @@
 <link rel="import" href="../bower_components/vaadin-grid/all-imports.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
+<script type="text/javascript" src="./config.js"></script>
+
 <dom-module id="ryr-suggestion-list">
   <template>
     <style>
@@ -10,23 +12,28 @@
         color: #000;
       }
     </style>
+
     <iron-ajax
-    auto
-    url="{{placesUrl}}"
-    handle-as="json"
-    last-response="{{placesResponse}}"
-    jsonPrefix="results"></iron-ajax>
+      auto
+      url="{{placesUrl}}"
+      handle-as="json"
+      last-response="{{placesResponse}}"
+      jsonPrefix="results"
+    ></iron-ajax>
+
     <iron-ajax
-    id="placeDetails"
-    url="{{placeUrl}}"
-    handle-as="json"
-    on-response="_handlePlaceResponse"></iron-ajax>
+      id="placeDetails"
+      url="{{placeUrl}}"
+      handle-as="json"
+      on-response="_handlePlaceResponse"
+    ></iron-ajax>
+
     <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[placesResponse.results]]" size="10">
-  <vaadin-grid-column>
-    <template class="header">Name</template>
-  <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  </vaadin-grid>
+      <vaadin-grid-column>
+        <template class="header">Name</template>
+        <template>[[item.name]]</template>
+      </vaadin-grid-column>
+    </vaadin-grid>
   </template>
 
   <script>
@@ -81,7 +88,6 @@
       _computePlacesUrl(latlong) {
         if (latlong) {
           return [`${config.API_BASE_URL}places`, latlong].join('/');
-
         }
       }
 
@@ -114,6 +120,5 @@
     }
 
     window.customElements.define(RyrSuggestionList.is, RyrSuggestionList);
-
   </script>
 </dom-module>

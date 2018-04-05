@@ -1,0 +1,19 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="iron-ajax-mock">
+  <template></template>
+
+  <script>
+    class IronAjaxMock extends Polymer.Element {
+      static get is() {
+        return 'iron-ajax-mock';
+      }
+
+      generateRequest() {
+        return { foo: 'bar' };
+      }
+    }
+
+    window.customElements.define(IronAjaxMock.is, IronAjaxMock);
+  </script>
+</dom-module>
