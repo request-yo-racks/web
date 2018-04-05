@@ -79,6 +79,12 @@
           assert.equal(ryrSuggestionList.placeId, 'foo');
         });
 
+        test('_placesOptionsChanged', function() {
+          const latlong = '1,2';
+          const returnedData = ryrSuggestionList._placesOptionsChanged(latlong);
+          expect(returnedData).to.deep.equal({ latlong });
+        });
+
         test('_handlePlaceResponse when result is null', function() {
           ryrSuggestionList._handlePlaceResponse({}, { response: { result: null } });
           assert.equal(ryrSuggestionList.placeResponse.rackLocation, 'HERE!');
