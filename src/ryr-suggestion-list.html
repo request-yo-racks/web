@@ -63,6 +63,10 @@
           },
           placeUrl: {
             computed: '_computePlaceUrl(placeId)'
+          },
+          placesOptions: {
+            computed: '_placesOptionsChanged(latlong)',
+            notify: true
           }
         };
       }
@@ -72,6 +76,12 @@
         if (item) {
           this.placeId = item.place_id;
           this.$.placeDetails.generateRequest();
+        }
+      }
+
+      _placesOptionsChanged(latlong) {
+        return {
+          latlong: latlong
         }
       }
 
