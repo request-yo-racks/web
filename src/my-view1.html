@@ -69,7 +69,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       #preview {
-        position: relative;
         color: var(--ryr-preview-color, black);
       }
 
@@ -77,8 +76,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 84px;
-        height: 84px;
+        width: 72px;
+        height: 72px;
         border-radius: 50%;
         margin-top: 10px;
       }
@@ -94,10 +93,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         justify-content: center;
         background-image: url('/images/bikes-on-rack.png');
         height: 200px;
-      }
-
-      .content p {
-        color: #333;
       }
 
       .placeholder {
@@ -132,6 +127,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: #333;
       }
 
+      .warning-box {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: #9F6000;
+        background-color: #FEEFB3;
+        border-radius: 5px;
+      }
+
+      .warning-box iron-icon {
+        font-size: 2em;
+        min-width: 24px;
+        margin-right: 10px;
+      }
+
+      .warning-box p {
+        display: inline;
+        text-align: center;
+      }
+
+      .list-numbered {
+        list-style: none;
+        margin-left: 1em;
+        counter-reset: line;
+      }
+
+      .list-numbered > li {
+        position: relative;
+        margin-bottom: 1.5em;
+      }
+
+      .list-numbered > li:before {
+      	position: absolute;
+      	left: -2.25em;
+      	display: inline-block;
+        width: 1.25em;
+      	height: 1.25em;
+      	margin-right: 0.5em;
+        background-color: var(--app-primary-color);
+      	border-radius: 50%;
+      	color: #fff;
+      	text-align: center;
+        vertical-align: middle;
+        line-height: 1.25em;
+      	counter-increment: line;
+      	content: counter(line);
+      }
+
       @media (max-width: 600px) {
         :host {
           display: block;
@@ -139,6 +182,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-columns: 1;
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
+        }
+
+        .warning-box p {
+          display: inline;
+          text-align: justify;
         }
       }
     </style>
@@ -212,16 +260,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
-      <section id="instructions">
+      <section id="instructions" class="color-black">
         <h2 class="section-title bg-secondary center">What to do next?</h2>
-        <p>
-          A clear set of instructions.
-        </p>
-        <p>
-          Glossier readymade pabst PBR&B. Bicycle rights authentic beard hashtag artisan. Fam brunch normcore, vice sartorial twee you probably haven't heard of them snackwave kitsch shabby chic microdosing. Occupy williamsburg +1 keytar, hot chicken cred taiyaki mlkshk master cleanse echo park trust fund post-ironic green juice hell of. Echo park ennui 8-bit man braid, pickled crucifix gochujang ramps.
-        </p>
+        <div class="warning-box">
+          <iron-icon icon="vaadin:warning"></iron-icon>
+          <p class="justify">
+            Make sure a business is supporting your request. Without it, the request will be not be processed.
+          </p>
+        </div>
+        <div>
+          <ol class="list-numbered">
+            <li>
+                Copy the generated text using the copy button.
+            </li>
+            <li>
+              Send your email to <a href="mailto:bicycleprogram@austintexas.gov?subject=Bicycle Corral Request">
+                bicycleprogram@austintexas.gov.
+              </a>
+            </li>
+            <li>
+                Set "Bicycle Corral Request" as the subject.
+            </li>
+          </ol>
+        </div>
       </section>
-
     </div>
   </template>
 
