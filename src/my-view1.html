@@ -97,7 +97,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .content p {
-        color: #333;
+        color: var(--app-secondary-color);
+      }
+
+      .content h3 {
+        color: var(--app-secondary-color);
       }
 
       .placeholder {
@@ -204,7 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <granite-clipboard text="[[md]]">
           <div class="circle bg-secondary center">
-            <paper-icon-button class="icon-big color-black" icon="vaadin:copy-o" title="copy"></paper-icon-button>
+            <paper-icon-button class="icon-medium color-black" icon="vaadin:copy-o" title="copy"></paper-icon-button>
           </div>
         </granite-clipboard>
       </section>
