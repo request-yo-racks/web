@@ -44,6 +44,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --app-grid-gutter: 15px;
       }
 
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+
       ul {
         list-style-type: none;
         margin: 0px auto;
@@ -121,10 +126,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0 auto;
       }
 
-      .footer-description {
-        margin-bottom:60px;
-      }
-
       .footer-right {
         float: right;
       }
@@ -132,14 +133,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       #contact-us-button {
         float: left;
         font-size: 18px;
-        margin-top: 28px;
+        margin-top: 49px;
         background-color: var(--app-primary-color);
-        padding: 0  40px;
+        padding: 0  20px 0 20px;
         border-radius: 16px;
         max-height: 60px;
+        line-height: 18px;
       }
 
       .social-icons {
+        max-width: 40px;
         padding: 0 0 40px 20px;
       }
 
@@ -189,20 +192,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <footer>
           <div class="app-grid">
             <paper-button class="item" id="contact-us-button">
-              <h3>Contact Us</h3>
+              <h3><a href="mailto:info@requestyoracks.org">
+                Contact Us</a></h3>
             </paper-button>
             <div class="item">
             </div>
             <div class="item footer-right">
               <h3>Get in touch</h3>
-              <iron-icon icon="vaadin:facebook-square"></iron-icon>
-              <iron-icon icon="vaadin:twitter"></iron-icon>
-                <!-- <img width="40px" height="40px" class="social-icons" src="../images/icons/FB-icon.png"> -->
-                <!-- <img width="40px" height="40px" class="social-icons" src="../images/icons/Twitter_Social_Icon_Rounded_Square_White.png"> -->
+              <div class="app-grid">
+                <iron-icon class="item social-icons" icon="vaadin:facebook-square"></iron-icon>
+                <iron-icon class="item social-icons" icon="vaadin:twitter"></iron-icon>
                 <a href="https://github.com/request-yo-racks" target="_blank">
-                  <img width="40px" height="40px" class="social-icons"
-                  src="../images/icons/GitHub-Mark-Light-64px.png">
-                </a>
+                    <img class="item" width="40px" height="40px" class="social-icons"
+                    src="../images/icons/GitHub-Mark-Light-64px.png">
+                  </a>
+              </div>
             </div>
           </div>
         </footer>
