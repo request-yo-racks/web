@@ -31,9 +31,9 @@
     <vaadin-grid id="grid" active-item="{{activeItem}}" items="[[placesResponse.results]]" size="10">
       <vaadin-grid-column>
         <template class="header">Name</template>
-        <template>[[item.name]]</template>
-      </vaadin-grid-column>
-    </vaadin-grid>
+  <template>[[item.name]]</template>
+  </vaadin-grid-column>
+  </vaadin-grid>
   </template>
 
   <script>
@@ -87,13 +87,13 @@
 
       _computePlacesUrl(latlong) {
         if (latlong) {
-          return [`${config.API_BASE_URL}places`, latlong].join('/');
+          return [`${config.API_BASE_URL}`, 'places', latlong].join('/');
         }
       }
 
       _computePlaceUrl(placeId) {
         if (placeId) {
-          return [`${config.API_BASE_URL}place`, placeId].join('/');
+          return [`${config.API_BASE_URL}`, 'place', placeId].join('/');
         }
       }
 
@@ -120,5 +120,6 @@
     }
 
     window.customElements.define(RyrSuggestionList.is, RyrSuggestionList);
+
   </script>
 </dom-module>
