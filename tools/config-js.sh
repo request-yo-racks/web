@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Define variables.
 TOPDIR=$(git rev-parse --show-toplevel)
-CONFIG_JS="${TOPDIR}/src/config.js"
+CONFIG_JS="${TOPDIR}/src/config-dev.js"
 
 # Load the RYR environment variables.
 source "${RYR_GLOBAL_CONFIG_DIR:="${HOME}/.config/ryr"}/ryr-env.sh"

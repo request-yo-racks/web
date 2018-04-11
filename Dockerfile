@@ -7,12 +7,12 @@ RUN apk add --update bash git make
 # Go to the directory holding the application and copy the source code.
 WORKDIR /usr/src/app
 COPY . .
+RUN rm -fr /usr/src/app/bower_components
 
 # Install bower, polymer-cli and build the project.
 RUN make bootstrap-npm \
   && polymer install \
-  && polymer build --preset es5-bundled
-
+  && make dist
 
 # Create the release image by serving the project previously built using nginx.
 FROM nginx:1.13.8-alpine
