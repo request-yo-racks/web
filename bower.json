@@ -22,7 +22,8 @@
     "showdown": "^1.7.1",
     "vaadin-grid": "^3.0.0",
     "vaadin-icons": "vaadin/vaadin-icons#^4.1.3",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
+    "paper-button": "PolymerElements/paper-button#^2.1.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"
