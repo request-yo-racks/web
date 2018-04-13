@@ -1,6 +1,5 @@
+.DS_Store
 bower_components/
 build/
+src/config-dev.js
 node_modules/
-config.js
-
-.DS_Store
