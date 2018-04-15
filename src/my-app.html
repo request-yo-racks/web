@@ -132,7 +132,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       #contact-us-button {
-        float: left;
         font-size: 18px;
         margin-top: 49px;
         background-color: var(--app-primary-color);
@@ -143,8 +142,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .social-icons {
+        width: 40px;
+        margin: 0 auto;
+        /* padding: 0 0 40px 20px; */
+        --app-grid-item-height: 40px;
+      }
+
+      .social-icons-image {
+        width: 100%;
         max-width: 40px;
-        padding: 0 0 40px 20px;
+        margin: 0 auto;
+        /* padding: 0 0 40px 20px; */
+        --app-grid-item-height: 40px;
       }
 
       @media (max-width: 600px) {
@@ -154,6 +163,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-columns: 1;
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
+        }
+        .social-icons {
+          padding-top: 8px;
+        }
+        .social-icons-image {
+          padding-top: 8px;
         }
       }
     </style>
@@ -192,10 +207,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-pages>
         <footer>
           <div class="app-grid">
-            <paper-button class="item" id="contact-us-button">
-              <h3><a href="mailto:info@requestyoracks.org">
-                Contact Us</a></h3>
-            </paper-button>
+            <div class="item">
+              <paper-button class="item" id="contact-us-button">
+                <h3><a href="mailto:info@requestyoracks.org">
+                  Contact Us</a></h3>
+              </paper-button>
+            </div>
             <div class="item">
             </div>
             <div class="item footer-right">
@@ -204,8 +221,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <iron-icon class="item social-icons" icon="vaadin:facebook-square"></iron-icon>
                 <iron-icon class="item social-icons" icon="vaadin:twitter"></iron-icon>
                 <a href="https://github.com/request-yo-racks" target="_blank">
-                    <img class="item" width="40px" height="40px" class="social-icons"
-                    src="../images/icons/GitHub-Mark-Light-64px.png">
+                    <img class="item social-icons-image" src="../images/icons/GitHub-Mark-Light-64px.png">
                   </a>
               </div>
             </div>
