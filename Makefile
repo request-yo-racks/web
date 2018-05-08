@@ -74,15 +74,23 @@ clean-minikube: ## Remove minikube deployment (!DESTRUCTIVE!)
 clean-repo: ## Remove unwanted files in project (!DESTRUCTIVE!)
 	cd $(TOPDIR) && git clean -ffdx && git reset --hard
 
-deploy-minikube:
+deploy-minikube: ## Deploy the web project in a dev environemnt
 	@kubectl config use-context minikube \
 	&& helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
 	  	--install \
 			-f charts/values.minikube.yaml \
 	  	--set image.tag=$(TAG)
 
+deploy-prod: ## Deploy the web project in production
+	kubectl config use-context gke_request-yo-racks-1499134244211_us-central1-a_ryr-prod \
+	&& cd charts \
+	&& helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
+  	--install \
+		-f values.prod.yaml \
+	  --set image.tag=$(TAG)
+
 dist: ## Package the application
-	polymer build --preset es5-bundled
+	polymer build --preset es6-bundled
 
 docs: ## Build documentation
 	@echo "Not implemented yet."

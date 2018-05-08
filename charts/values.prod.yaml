@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  hosts:
+    - www.requestyoracks.org
+  annotations:
+    kubernetes.io/ingress.class: gce
+
+persistence:
+  enabled: false
+
+service:
+  type: NodePort
+  externalPort: 80
+  internalPort: 80
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: www.requestyoracks.org.

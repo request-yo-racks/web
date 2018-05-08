@@ -22,4 +22,4 @@ MAINTAINER Rémy Greinhofer <remy.greinhofer@gmail.com>
 COPY docker/nginx/ /etc/nginx/
 
 # Copy the bundled version of the site.
-COPY --from=builder /usr/src/app/build/es5-bundled /var/www/build/es5-bundled
+COPY --from=builder /usr/src/app/build/es6-bundled /var/www/build/es6-bundled
