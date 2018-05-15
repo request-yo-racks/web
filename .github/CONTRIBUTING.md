@@ -9,7 +9,7 @@ efficient collaboration and avoid duplicate effort, or submit a
 
 Fork the project and set this repository as the upstream remote.
 ```bash
-git remote add upstream git@github.com:request-yo-racks/infra.git
+git remote add upstream git@github.com:request-yo-racks/web.git
 ```
 
 Use the provided templates to file an [Issue](https://github.com/request-yo-racks/web/issues) or a
