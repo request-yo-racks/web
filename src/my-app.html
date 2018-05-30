@@ -127,10 +127,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0 auto;
       }
 
-      .footer-right {
-        float: right;
-      }
-
       #contact-us-button {
         font-size: 18px;
         margin-top: 49px;
@@ -144,14 +140,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .social-icons {
         width: 40px;
         margin: 0 auto;
-        --app-grid-item-height: 40px;
-      }
+        margin-bottom: 16px;
 
-      .social-icons-image {
-        width: 100%;
-        max-width: 40px;
-        margin: 0 auto;
-        /* padding: 0 0 40px 20px; */
         --app-grid-item-height: 40px;
       }
 
@@ -162,12 +152,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-columns: 1;
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
-        }
-        .social-icons {
-          padding-top: 8px;
-        }
-        .social-icons-image {
-          padding-top: 8px;
         }
       }
     </style>
@@ -214,13 +198,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <div class="item">
             </div>
-            <div class="item footer-right">
+            <div class="item">
               <h3>Get in touch</h3>
               <div class="app-grid">
                 <iron-icon class="item social-icons" icon="vaadin:facebook-square"></iron-icon>
                 <iron-icon class="item social-icons" icon="vaadin:twitter"></iron-icon>
                 <a href="https://github.com/request-yo-racks" target="_blank">
-                    <img class="item social-icons-image" src="../images/icons/GitHub-Mark-Light-64px.png">
+                    <img class="item social-icons" src="../images/icons/GitHub-Mark-Light-64px.png">
                   </a>
               </div>
             </div>
