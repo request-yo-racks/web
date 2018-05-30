@@ -69,22 +69,22 @@ clean-docker: ## Remove all docker artifacts for this project (!DESTRUCTIVE!)
 	@docker image rm -f $(shell docker image ls --filter reference='$(DOCKER_REPO)' -q) || true
 
 clean-minikube: ## Remove minikube deployment (!DESTRUCTIVE!)
-	helm delete --purge $(PROJECT_NAME) || true
+	helm delete --kube-context minikube --purge $(PROJECT_NAME) || true
 
 clean-repo: ## Remove unwanted files in project (!DESTRUCTIVE!)
 	cd $(TOPDIR) && git clean -ffdx && git reset --hard
 
 deploy-minikube: ## Deploy the web project in a dev environemnt
-	@kubectl config use-context minikube \
-	&& helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
-	  	--install \
-			-f charts/values.minikube.yaml \
-	  	--set image.tag=$(TAG)
+	helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
+		--kube-context minikube \
+	  --install \
+		-f charts/values.minikube.yaml \
+	  --set image.tag=$(TAG)
 
 deploy-prod: ## Deploy the web project in production
-	kubectl config use-context gke_request-yo-racks-1499134244211_us-central1-a_ryr-prod \
-	&& cd charts \
+	cd charts \
 	&& helm upgrade $(PROJECT_NAME) $(CHART_NAME) \
+		--kube-context gke_request-yo-racks-1499134244211_us-central1-a_ryr-prod \
   	--install \
 		-f values.prod.yaml \
 	  --set image.tag=$(TAG)
