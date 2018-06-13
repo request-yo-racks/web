@@ -1,42 +1,90 @@
-<!--- Provide a general summary of the issue in the Title above -->
+<!-- Provide a general summary of the issue in the Title above. -->
+
 Issue Type
 ----------
-
+<!-- Define the type of issue you are reporting. -->
 - Bug report
 - Feature request
 
 Current Behavior
 ----------------
-<!--- If describing a bug, tell us what happens instead of the expected behavior -->
-<!--- If suggesting a change/improvement, explain the difference from current behavior -->
+<!-- Tell us what is currently happening. -->
+
 
 Expected Behavior
 -----------------
-<!--- If you're describing a bug, tell us what should happen -->
-<!--- If you're suggesting a change/improvement, tell us how it should work -->
+<!--
+If you are reporting a bug, tell us what should happen.
+If you are suggesting a change/improvement, tell us how it should work,
+how it differs from the current implementation.
+-->
+
 
 Possible Solution
 -----------------
-<!--- Not obligatory, but suggest a fix/reason for the bug, -->
-<!--- or ideas how to implement the addition or change -->
+<!--
+Suggest a fix/reason for the bug, or ideas how to implement the
+addition or change. Delete if not applicable/relevant.
+-->
 
-Steps to Reproduce (for bugs)
------------------------------
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
+
+<!-- ---------------------------------------------------------- -->
+<!-- Information bellow this line is *ONLY* for bug reports.    -->
+<!-- Delete these sections if you're filing a Feature request.  -->
+<!-- ---------------------------------------------------------- -->
+Steps to Reproduce
+------------------
+<!--
+Provide a link to a live example, or an unambiguous set of steps to
+reproduce this bug. Include code to reproduce, if relevant.
+-->
 1.
 2.
 3.
-4.
+
 
 Context
 -------
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+<!--
+How has this issue affected you? What are you trying to accomplish?
+Providing context helps us come up with a solution that is most useful
+in the real world.
+-->
+
 
 Your Environment
 ----------------
-<!--- Include as many relevant details about the environment you experienced the bug in -->
-* Version used:
-* Browser Name and version:
-* Operating System and version (desktop or mobile):
+<!--
+Instructions:
+  * Run the following script in a terminal (OSX only)
+  * Paste the output in the code section at the bottom of this report
+    (the output is automatically copied to your clipboard buffer)
+  * Adjust the values if needed
+  * If you cannot run the script for any reason, simply replace the
+    values in the example
+
+COMMIT=$(git log -1 --pretty=format:"%h %s %d")
+FIREFOX=$(/Applications/Firefox.app/Contents/MacOS/firefox --version 2>/dev/null||true)
+CHROME=$(/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version 2>/dev/null||true)
+SYSTEM=$(system_profiler SPSoftwareDataType|grep macOS | xargs)
+OUTPUT="$(cat <<EOF
+Last commit:
+  ${COMMIT}
+Browser(s):
+  ${FIREFOX}
+  ${CHROME}
+${SYSTEM}
+EOF
+)"
+echo "$OUTPUT" | tee >(pbcopy)
+
+-->
+```
+(replace the example bellow with the script output)
+Last commit:
+  583bc87 Fix configuration issue
+Browser(s):
+  Mozilla Firefox 60.0
+  Google Chrome 66.0.3359.139
+System Version: macOS 10.13.4 (17E202)
+```
