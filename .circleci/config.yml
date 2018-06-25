@@ -6,7 +6,7 @@ jobs:
   wct-chrome:
     <<: *defaults
     docker:
-      - image: circleci/node:8.9.4-browsers
+      - image: circleci/node:8.11.3-stretch-browsers
     environment:
       - RYR_GLOBAL_CONFIG_DIR: "/root/.config/ryr"
 
