@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/slate-font-awesome/slate-font-awesome.html">
 <link rel="import" href="../bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="shared-styles.html">
@@ -31,9 +32,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
 
+
 <dom-module id="my-app">
   <template>
-    <style include="shared-styles app-grid-style">
+    <style include="shared-styles app-grid-style slate-font-awesome">
       :host {
         display: block;
 
@@ -126,10 +128,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0 auto;
       }
 
-      .footer-right {
-        float: right;
-      }
-
       #contact-us-button {
         font-size: 18px;
         margin-top: 49px;
@@ -142,16 +140,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .social-icons {
         width: 40px;
-        margin: 0 auto;
         --app-grid-item-height: 40px;
-      }
-
-      .social-icons-image {
-        width: 100%;
-        max-width: 40px;
-        margin: 0 auto;
-        /* padding: 0 0 40px 20px; */
-        --app-grid-item-height: 40px;
+        margin: 8px auto;
       }
 
       @media (max-width: 600px) {
@@ -162,13 +152,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
         }
-        .social-icons {
-          padding-top: 8px;
-        }
-        .social-icons-image {
-          padding-top: 8px;
-        }
       }
+      }
+
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -216,11 +202,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="item footer-right">
               <h3>Get in touch</h3>
               <div class="app-grid">
-                <iron-icon class="item social-icons" icon="vaadin:facebook-square"></iron-icon>
-                <iron-icon class="item social-icons" icon="vaadin:twitter"></iron-icon>
+                <i class="fa fa-facebook fa-3x item social-icons"></i>
+                <i class="fa fa-twitter fa-3x item social-icons"></i>
                 <a href="https://github.com/request-yo-racks" target="_blank">
-                    <img class="item social-icons-image" src="../images/icons/GitHub-Mark-Light-64px.png">
-                  </a>
+                <i class="fa fa-github fa-3x item social-icons"></i>
+                </a>
               </div>
             </div>
           </div>
