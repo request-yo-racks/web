@@ -21,6 +21,7 @@
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "polymer": "Polymer/polymer#^2.6.0",
     "showdown": "^1.7.1",
+    "slate-font-awesome": "JeffLeFoll/slate-font-awesome#^4.7.3",
     "vaadin-grid": "^3.0.0",
     "vaadin-icons": "vaadin/vaadin-icons#^4.1.3",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7"
