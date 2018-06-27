@@ -193,7 +193,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="content">
       <div class="description">
       <h2 class="intro-description center color-secondary">
-        Create an email to request a free bike corral from the City of Austin
+        <strong>Make your voice heard!</strong> 
+        <br>
+        Request Yo Racks is a free, responsive web application that allows you to request bike corrals to be installed directly to the City of Austin, Texas.
       </h2>
       </div>
       <section id="intro">
@@ -246,6 +248,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <section id="preview">
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
         <h2 class="section-title bg-primary center">Preview</h2>
+        
+        <div class="warning-box">
+          <iron-icon icon="vaadin:warning"></iron-icon>
+          <p class="justify">
+            Make sure the business you chose supports your request. Without it, the request will be not be processed. You must also go talk to the businesses supporting their request in order for the bike rack to be installed.
+            <br>
+            <strong>There is no guarantee that the bike rack will be installed.</strong> 
+          </p>
+        </div>
+
         <div class="placeholder">
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
         </div>
@@ -261,13 +273,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <section id="instructions" class="color-black">
         <h2 class="section-title bg-secondary center">What to do next?</h2>
-        <div class="warning-box">
-          <iron-icon icon="vaadin:warning"></iron-icon>
-          <p class="justify">
-            Make sure a business is supporting your request. Without it, the request will be not be processed.
-          </p>
-        </div>
+        
         <div>
+
           <ol class="list-numbered">
             <li>
                 Copy the generated text using the copy button.
@@ -283,6 +291,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </ol>
         </div>
       </section>
+
     </div>
   </template>
 
