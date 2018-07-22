@@ -133,13 +133,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .warning-box iron-icon {
-        font-size: 2em;
-        min-width: 24px;
+        --iron-icon-height: 3em;
+        --iron-icon-width: 3em;
         margin-right: 10px;
       }
 
       .warning-box p {
-        display: inline;
+        display: block;
         text-align: center;
       }
 
@@ -183,18 +183,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-expandible-item-columns: 1;
         }
         .warning-box iron-icon {
-        /*
-        font-size: 20em;
-        min-width: 30px;
-        margin-right: 20px;*/
-        --iron-icon-height: 32px;
-        --iron-icon-width: 32px;
-        --iron-icon-fill-color: red;
-
+        --iron-icon-width: 20em;
         }
 
         .warning-box p {
-          display: inline;
           text-align: justify;
         }
       }
@@ -257,11 +249,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
         <h2 class="section-title bg-primary center">Preview</h2>
 
-        <div class="warning-box">
-          <iron-icon icon="vaadin:info-circle-o"></iron-icon>
-          <p>Make sure the business you chose supports your request. Without it, the request will be not be processed.
-            <strong>There is no guarantee that the bike rack will be installed.</strong></p> 
-        </div>
+          <div class="warning-box">
+            <iron-icon icon="vaadin:info-circle-o"></iron-icon>
+            <p>Make sure the business you chose supports your request. Without it, the request will be not be processed. <strong>There is no guarantee that the bike rack will be installed.</strong></p>
+          </div>
 
         <div class="placeholder">
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
