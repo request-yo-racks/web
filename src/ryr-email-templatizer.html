@@ -33,13 +33,21 @@
       _renderTemplate(templateVars) {
         let template =
           `
-Dear city of Austin,
+          Dear city of Austin,
 
-I would like to have a bike rack here: {{rackLocation | shout |blank>_not provided_}}.
+I would like to request a bike rack at {{Address}}, Geolocation  {{rackLocation}}.
 
-{{if businessName}}The business supporting this demand is {{businessName | blank>_not provided_}}{{if businessAddress }}, located at {{businessAddress | blank>_not provided_}}.{{else}}.{{/if}}{{/if}}
+The business supporting this demand is {{businessName}}, located at {{businessAddress}}.
 
-{{if contactName}}The point of contact is {{contactName | blank>_not provided_}} and can be contacted via phone ({{contactPhone | blank>_not provided_}}) or email ({{contactEmail | blank>_not provided_}}).{{/if}}
+{{if contactName}}
+    The point of contact is {{contactName | blank>_not provided_}} 
+    {{if contactPhone}} 
+        and can be contacted via phone ({{contactPhone}}) 
+    {{/if}}
+    {{if contactEmail}}
+        or email ({{contactEmail | blank>_not provided_}}).
+    {{/if}}
+{{/if}}
 
 {{if parkingInfo}}Current parking situation: {{parkingInfo | blank>_not provided_}}{{/if}}
 
@@ -47,6 +55,7 @@ I would like to have a bike rack here: {{rackLocation | shout |blank>_not provid
 
 Cheers,
 Request Yo Racks Team
+
         `;
 
         let options = {
