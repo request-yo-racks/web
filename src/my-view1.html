@@ -43,18 +43,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 15px;
       }
 
-      section:nth-of-type(odd) {
-        background-color: var(--app-primary-color);
-      }
-
-      section:nth-of-type(even) {
-        background-color: var(--app-secondary-color);
-      }
-
       granite-clipboard {
         display: block;
         margin: auto;
         @apply --paper-icon-button;
+      }
+
+      #intro h3 {
+        margin-bottom: 0.25em;
       }
 
       #intro p{
@@ -63,22 +59,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-align: center
       }
 
+      #location {
+        background-color: #2E5D2A;
+      }
+
       #location .item:first-child {
         @apply --app-grid-expandible-item;
       }
 
       #preview {
-        color: var(--ryr-preview-color, black);
+        background-color: #5AAD54;
+      }
+
+      #instructions {
+        background-color: #DDFDDF;
       }
 
       .circle {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 72px;
-        height: 72px;
+        width: 4.5em;
+        height: 4.5em;
         border-radius: 50%;
-        margin-top: 10px;
+        background-color: white;
+        color: #5AAD54;
       }
 
       .content {
@@ -104,23 +109,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .section-connector {
         width: 100%;
         height: 75px;
-        /* The margin-bottom of -4px is an ugly fix to solve a problem I don't understand. */
-        margin: 0 0 -4px 0;
+        margin-bottom: -1em;
         padding: 0;
       }
 
-      .section-connector:nth-of-type(odd) {
-        background-color: var(--app-secondary-color);
-        fill: var(--app-primary-color);
+      .section-connector-location {
+        background-color: #2E5D2A;
+        fill: white;
       }
 
-      .section-connector:nth-of-type(even) {
-        background-color: var(--app-primary-color);
-        fill: var(--app-secondary-color);
+      .section-connector-preview {
+        background-color: #5AAD54;
+        fill: #2E5D2A;
       }
 
-      .section-title h3 {
-        color: #333;
+      .section-connector-instructions {
+        background-color: #DDFDDF;
+        fill: #5AAD54;
       }
 
       .warning-box {
@@ -146,7 +151,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .warning-box .message {
+        text-align: left;
+      }
+
+      .preview-instructions {
         text-align: center;
+        color: white;
+        font-style: italic;
+        font-size: 0.8em;
+      }
+
+      .instruction-list {
+        margin: auto;
+        width: 70%;
       }
 
       .list-numbered {
@@ -203,97 +220,100 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         .warning-box .message {
           text-align: justify;
         }
+
+        .instruction-list {
+          width: 100%;
+        }
       }
     </style>
 
     <div class="content">
-      <div class="description">
 
+      <div class="description">
         <h2 class="intro-description center color-secondary">Request a bike rack from the city of Austin</h2>
         <p class="intro-description center color-secondary">Always park your bike securely</p>
       </div>
+
       <section id="intro">
-        <h1 class="center">How it Works</h1>
+        <h2 class="center">How does it Work?</h2>
         <div class="app-grid">
           <div class="item center color-black">
             <iron-icon class="icon-big" icon="vaadin:map-marker"></iron-icon>
-            <h3>Point</h3>
-            <p>
-              Point the location on the map where you would like to see a bike rack.
-            </p>
-          </div>
-          <div class="item center color-black">
-            <iron-icon class="icon-big" icon="vaadin:check-square-o"></iron-icon>
             <h3>Select</h3>
             <p>
-              Select the business sponsoring the request in the list.
+              the location
             </p>
           </div>
           <div class="item center color-black">
-            <iron-icon class="icon-big" icon="vaadin:envelope-o"></iron-icon>
-            <h3>Submit</h3>
+            <iron-icon class="icon-big" icon="vaadin:check-square"></iron-icon>
+            <h3>Review</h3>
             <p>
-              Submit the request to the city hall.
+              the petition
             </p>
           </div>
-        </div>
-        <div class="center">
-            <h2>Get started</h2>
-            <iron-icon class="icon-big color-black" icon="vaadin:angle-double-down"></iron-icon>
+          <div class="item center color-black">
+            <iron-icon class="icon-big" icon="vaadin:paperplane"></iron-icon>
+            <h3>Submit</h3>
+            <p>
+              the request
+            </p>
+          </div>
         </div>
       </section>
 
-      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+      <svg class="section-connector section-connector-location" viewBox="0 0 10 10" preserveAspectRatio="none">
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
       <section id="location">
-        <h2 class="section-title bg-secondary center">Select a location</h2>
+        <h2 class="center color-white">Select a location</h2>
         <div class="app-grid">
           <div class="item item-2cols"><ryr-location latlong="{{latlong}}"></ryr-location></div>
           <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
         </div>
       </section>
 
-      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+      <svg class="section-connector section-connector-preview" viewBox="0 0 10 10" preserveAspectRatio="none">
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
       <section id="preview">
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
-        <h2 class="section-title bg-primary center">Preview</h2>
+        <h2 class="center color-white">Preview</h2>
 
-          <div class="warning-box">
-            <div class="icon">
-              <iron-icon icon="vaadin:info-circle-o"></iron-icon>
-            </div>
-            <div class="message">
-              <p>Make sure the business you chose supports your request. Without it, the request will be not be processed.</p>
-              <p><strong>There is no guarantee that the bike rack will be installed.</strong></p>
-            </div>
-
+        <div class="warning-box">
+          <div class="icon">
+            <iron-icon icon="vaadin:info-circle-o"></iron-icon>
           </div>
+          <div class="message">
+            <p>Make sure the business you chose supports your request. Without it, the request will be not be processed.</p>
+            <p><strong>There is no guarantee that the bike rack will be installed.</strong></p>
+          </div>
+        </div>
 
         <div class="placeholder">
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
         </div>
+
+        <p class="preview-instructions">
+          Copy the generated text using the copy button
+        </p>
+
         <granite-clipboard text="[[md]]">
-          <div class="circle bg-secondary center">
-            <paper-icon-button class="icon-big color-black" icon="vaadin:copy-o" title="copy"></paper-icon-button>
+          <div class="circle center">
+            <paper-icon-button class="icon-big" icon="vaadin:copy" title="copy"></paper-icon-button>
           </div>
         </granite-clipboard>
       </section>
-      <svg class="section-connector" viewBox="0 0 10 10" preserveAspectRatio="none">
+
+      <svg class="section-connector section-connector-instructions" viewBox="0 0 10 10" preserveAspectRatio="none">
         <polygon points="0,0 10,0 5,10"/>
       </svg>
 
       <section id="instructions" class="color-black">
-        <h2 class="section-title bg-secondary center">What to do next?</h2>
-        <div>
+        <h2 class="center">What to do next?</h2>
+        <div class="instruction-list">
           <ol class="list-numbered">
-            <li>
-                Copy the generated text using the copy button.
-            </li>
             <li>
               Send your email to <a href="mailto:bicycleprogram@austintexas.gov?subject=Bicycle Corral Request">
                 bicycleprogram@austintexas.gov.
