@@ -90,8 +90,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-image: url('/images/bikes-on-rack.jpg');
-        height: 200px;
+        background-image: url('/images/header-image.jpg');
+        background-size: cover;
+        height: 300px;
       }
 
       .placeholder {
@@ -125,20 +126,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .warning-box {
         display: flex;
         align-items: center;
-        padding: 10px;
-        color: #9F6000;
-        background-color: #FEEFB3;
-        border-radius: 5px;
+        padding: 15px;
+        margin: 20px auto;
+        color: #4E78BA;
+        background-color: #C3DFEC;
+        border-radius: 6px;
       }
 
       .warning-box iron-icon {
-        font-size: 2em;
-        min-width: 24px;
+        --iron-icon-height: 3em;
+        --iron-icon-width: 3em;
         margin-right: 10px;
       }
 
       .warning-box p {
-        display: inline;
+        display: block;
         text-align: center;
       }
 
@@ -169,6 +171,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       	counter-increment: line;
       	content: counter(line);
       }
+      strong {
+        font-weight: bolder;
+      }
 
       @media (max-width: 600px) {
         :host {
@@ -178,9 +183,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
         }
+        .warning-box iron-icon {
+        --iron-icon-width: 20em;
+        }
+
+
+       .content .description {
+          height: 200px;
+        }
 
         .warning-box p {
-          display: inline;
           text-align: justify;
         }
       }
@@ -188,7 +200,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="content">
       <div class="description">
-      <div class="description">
+
         <h2 class="intro-description center color-secondary">Request a bike rack from the city of Austin</h2>
         <p class="intro-description center color-secondary">Always park your bike securely</p>
       </div>
@@ -242,6 +254,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <section id="preview">
         <ryr-email-templatizer templatevars="{{apivars}}" htmlrenderedtemplate="{{buffer}}" markdownrenderedtemplate="{{md}}"></ryr-email-templatizer>
         <h2 class="section-title bg-primary center">Preview</h2>
+
+          <div class="warning-box">
+            <iron-icon icon="vaadin:info-circle-o"></iron-icon>
+            <p>Make sure the business you chose supports your request. Without it, the request will be not be processed. <strong>There is no guarantee that the bike rack will be installed.</strong></p>
+          </div>
+
         <div class="placeholder">
           <ryr-preview previewtitle="Preview" htmlrenderedtemplate="[[buffer]]"></ryr-preview>
         </div>
@@ -257,12 +275,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <section id="instructions" class="color-black">
         <h2 class="section-title bg-secondary center">What to do next?</h2>
-        <div class="warning-box">
-          <iron-icon icon="vaadin:warning"></iron-icon>
-          <p class="justify">
-            Make sure a business is supporting your request. Without it, the request will be not be processed.
-          </p>
-        </div>
         <div>
           <ol class="list-numbered">
             <li>
