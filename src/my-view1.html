@@ -125,9 +125,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .warning-box {
         display: flex;
-        align-items: center;
-        padding: 15px;
-        margin: 20px auto;
+        flex-direction: row;
+        padding: 1em;
+        margin: 1em auto;
         color: #4E78BA;
         background-color: #C3DFEC;
         border-radius: 6px;
@@ -136,11 +136,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .warning-box iron-icon {
         --iron-icon-height: 3em;
         --iron-icon-width: 3em;
-        margin-right: 10px;
+        margin-right: 1em;
       }
 
-      .warning-box p {
-        display: block;
+      .warning-box .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .warning-box .message {
         text-align: center;
       }
 
@@ -171,9 +176,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       	counter-increment: line;
       	content: counter(line);
       }
-      strong {
-        font-weight: bolder;
-      }
 
       @media (max-width: 600px) {
         :host {
@@ -183,16 +185,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           --app-grid-gutter: 5px;
           --app-grid-expandible-item-columns: 1;
         }
-        .warning-box iron-icon {
-        --iron-icon-width: 20em;
-        }
-
 
        .content .description {
           height: 200px;
         }
 
-        .warning-box p {
+        .warning-box {
+          flex-direction: column;
+        }
+
+        .warning-box iron-icon {
+          --iron-icon-height: 5em;
+          --iron-icon-width: 5em;
+          margin-right: 0;
+        }
+
+        .warning-box .message {
           text-align: justify;
         }
       }
@@ -256,8 +264,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <h2 class="section-title bg-primary center">Preview</h2>
 
           <div class="warning-box">
-            <iron-icon icon="vaadin:info-circle-o"></iron-icon>
-            <p>Make sure the business you chose supports your request. Without it, the request will be not be processed. <strong>There is no guarantee that the bike rack will be installed.</strong></p>
+            <div class="icon">
+              <iron-icon icon="vaadin:info-circle-o"></iron-icon>
+            </div>
+            <div class="message">
+              <p>Make sure the business you chose supports your request. Without it, the request will be not be processed.</p>
+              <p><strong>There is no guarantee that the bike rack will be installed.</strong></p>
+            </div>
+
           </div>
 
         <div class="placeholder">
