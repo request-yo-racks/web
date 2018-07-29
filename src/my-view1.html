@@ -49,6 +49,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply --paper-icon-button;
       }
 
+      #intro {
+        padding-bottom: 5em;
+      }
+
       #intro h3 {
         margin-bottom: 0.25em;
       }
@@ -61,6 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #location {
         background-color: #2E5D2A;
+        padding-bottom: 5em;
       }
 
       #location .item:first-child {
@@ -163,7 +168,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .instruction-list {
         margin: auto;
-        width: 70%;
+        max-width: 450px;
       }
 
       .preview-instructions {
@@ -280,7 +285,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <section id="location">
         <h2 class="center color-white">Select a location</h2>
         <div class="app-grid">
-          <div class="item item-2cols"><ryr-location latlong="{{latlong}}"></ryr-location></div>
+          <div class="item"><ryr-location latlong="{{latlong}}"></ryr-location></div>
           <div class="item"><ryr-suggestion-list latlong="[[latlong]]" place-response={{apivars}}></ryr-suggestion-list></div>
         </div>
       </section>
@@ -308,7 +313,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
         <p class="preview-instructions">
-          Copy the generated text using the copy button
+          Copy the generated text using the copy button bellow.
         </p>
 
         <granite-clipboard text="[[md]]">
