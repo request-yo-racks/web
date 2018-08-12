@@ -8,3 +8,5 @@ rules:
         - review/gitmate
         - 'ci/circleci: wct-chrome'
         - 'ci/circleci: wct-firefox'
+    merge_strategy:
+      method: squash
