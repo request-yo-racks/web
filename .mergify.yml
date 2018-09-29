@@ -5,7 +5,7 @@ rules:
         required_approving_review_count: 1
       required_status_checks:
         contexts:
-        - review/gitmate
+        - review/gitmate/pr
         - 'ci/circleci: wct-chrome'
         - 'ci/circleci: wct-firefox'
     merge_strategy:

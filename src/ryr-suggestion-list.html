@@ -23,7 +23,10 @@
 
     <iron-ajax
       id="placeDetails"
+      method="post"
+      content-type="application/json"
       url="{{placeUrl}}"
+      body="{{placeBody}}"
       handle-as="json"
       on-response="_handlePlaceResponse"
     ></iron-ajax>
@@ -54,15 +57,24 @@
             type: String,
             notify: true
           },
+          placeName: {
+            type: String
+          },
+          placeAddress: {
+            type: String
+          },
           placeResponse: {
             type: Object,
             notify: true
+          },
+          placeBody: {
+            computed: '_computeplaceBody(placeId, placeName, placeAddress)'
           },
           placesUrl: {
             computed: '_computePlacesUrl(latlong)'
           },
           placeUrl: {
-            computed: '_computePlaceUrl(placeId)'
+            computed: '_computePlaceUrl()'
           },
           placesOptions: {
             computed: '_placesOptionsChanged(latlong)',
@@ -75,6 +87,8 @@
         this.$.grid.selectedItems = item ? [item] : [];
         if (item) {
           this.placeId = item.place_id;
+          this.placeName = item.name;
+          this.placeAddress = item.vicinity;
           this.$.placeDetails.generateRequest();
         }
       }
@@ -85,16 +99,22 @@
         }
       }
 
+      _computeplaceBody(placeId, placeName, placeAddress){
+        return {
+        	"place_id": placeId,
+        	"name": placeName,
+        	"address": placeAddress,
+        }
+      }
+
       _computePlacesUrl(latlong) {
         if (latlong) {
           return [`${config.API_BASE_URL}`, 'places', latlong].join('/');
         }
       }
 
-      _computePlaceUrl(placeId) {
-        if (placeId) {
-          return [`${config.API_BASE_URL}`, 'place', placeId].join('/');
-        }
+      _computePlaceUrl() {
+        return [`${config.API_BASE_URL}`, 'place'].join('/');
       }
 
       _handlePlaceResponse(event, request) {
