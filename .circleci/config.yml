@@ -1,103 +1,62 @@
+working_directory: &working_directory
+  ~/project
+
 defaults: &defaults
-  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.12.0-stretch
+  working_directory: *working_directory
+
+repo_cache_key: &repo_cache_key
+  dependencies-{{ checksum "package.json" }}
+
+restore_repo: &restore_repo
+  restore_cache:
+    key: *repo_cache_key
 
 version: 2
 jobs:
-  wct-chrome:
+  prepare:
     <<: *defaults
-    docker:
-      - image: circleci/node:8.11.3-stretch-browsers
-    environment:
-      - RYR_GLOBAL_CONFIG_DIR: "/root/.config/ryr"
-
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - dependency-cache-bower-{{ checksum "bower.json" }}
-
-      - run:
-          name: Prepare the test environment
-          command: |
-            sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
-            sudo bash -c "echo 'API_BASE_URL=http://api.192.168.99.100.nip.io/' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
-            sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' >> ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
-            sudo make bootstrap-npm setup
-
+          key: *repo_cache_key
+      - run: npm install
       - save_cache:
-          key: dependency-cache-bower-{{ checksum "bower.json" }}
           paths:
-            - .node_modules
-
-      - run:
-          name: Run the linters
-          command: make ci-linters
-
-      - run:
-          name: Run unit tests
-          command: sudo polymer test -l chrome
-
-      - run:
-          name: Run doc tests
-          command: make ci-docs
-
-  wct-firefox:
+            - node_modules
+          key: *repo_cache_key
+  format:
     <<: *defaults
-    docker:
-      - image: selenium/standalone-firefox:3.11.0
-    environment:
-      - RYR_GLOBAL_CONFIG_DIR: "/home/seluser/.config/ryr"
-
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-bower-{{ checksum "bower.json" }}
-
-      - run:
-          name: Install system tools
-          command: |
-            sudo apt-get update
-            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
-              curl \
-              git \
-              make
-            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
-              nodejs
-            npm -v
-            npm install npm@latest -g.
-
-      - run:
-          name: Prepare the test environment
-          command: |
-            sudo mkdir -p "${RYR_GLOBAL_CONFIG_DIR}"
-            sudo bash -c "echo 'API_BASE_URL=http://api.192.168.99.100.nip.io/' > ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
-            sudo bash -c "echo 'RYR_WEB_GOOGLE_MAPS_API_KEY=foo' >> ${RYR_GLOBAL_CONFIG_DIR}/ryr-env.sh"
-            sudo make bootstrap-npm setup
-
-      - save_cache:
-          key: dependency-cache-bower-{{ checksum "bower.json" }}
-          paths:
-            - .node_modules
-
-      - run:
-          name: Run the linters
-          command: make ci-linters
-
-      - run:
-          name: Run unit tests
-          command: |
-            sudo chown -R $USER:$(id -gn $USER) /home/seluser/.config
-            sudo polymer test -l firefox
-
-      - run:
-          name: Run doc tests
-          command: make ci-docs
+      - *restore_repo
+      - run: npm run lint:format
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_repo
+      - run: npm run lint:javascript
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_repo
+      - run: npm run test
 
 workflows:
   version: 2
-  wct:
+  gates:
     jobs:
-      - wct-chrome
-      - wct-firefox
+      - prepare
+      - format:
+          requires:
+            - prepare
+      - lint:
+          requires:
+            - prepare
+      - test:
+          requires:
+            - prepare
+
