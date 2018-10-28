@@ -1,12 +1,15 @@
-rules:
-  default:
-    protection:
-      required_pull_request_reviews:
-        required_approving_review_count: 1
-      required_status_checks:
-        contexts:
-        - review/gitmate/pr
-        - 'ci/circleci: wct-chrome'
-        - 'ci/circleci: wct-firefox'
-    merge_strategy:
+pull_request_rules:
+- actions:
+    merge:
       method: squash
+      rebase_fallback: merge
+  conditions:
+  - base=master
+  - label!=no-mergify
+  - '#approved-reviews-by>=1'
+  - status-success=review/gitmate/pr
+  - ' ci/circleci: prepare '
+  - ' ci/circleci: format '
+  - ' ci/circleci: lint '
+  - ' ci/circleci: test '
+  name: master
