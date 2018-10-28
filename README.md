@@ -7,19 +7,18 @@ Requesting bike racks to the city of Austin was never that easy.
 If you need to install tools that must be installed globally on your system (OSX only)
 (most likely the first time you run this project):
 ```bash
-make bootstrap
+bash tools/bootstrap-osx.sh
 ```
 
-This will globally install tools like node.js, polymer-cli, etc.
+This will globally install tools like node.js.
 
 Setup the local environment:
 ```bash
-make
+npm i
 ```
 
 This will download all the project dependencies.
 
-`make help` will show you the available targets that will help you work on this project.
 
 ## Setup the project
 
@@ -46,14 +45,18 @@ Clone the project:
 Prepare your development environment:
 ```bash
 cd "${RYR_PROJECT_DIR}/web"
-make
+npm i
 ```
 
 ## Local development
 
 To serve the project locally:
 ```bash
-polymer serve
+npm run dev
 ```
 
-`make help` will show you the available targets.
+To test the project locally (i.e. running the full list of ci-tasks):
+```bash
+npm run ci
+```
+The `scripts` section of the `package.json` file will show you all the available commands.
