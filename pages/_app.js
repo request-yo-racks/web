@@ -1,7 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 
-import ServiceWorker from '../components/ServiceWorker';
+import ServiceWorker from '../components/service-worker';
 
 class CustomApp extends App {
   static async getInitialProps({ Component, ctx }) {
