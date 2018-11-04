@@ -1,12 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-const footerIconSize = '3x';
-const footerIconStyle = { margin: '0 0.3em' };
+import RyrFooter from '../components/ryr-footer';
 
 const Index = () => (
   <div>
@@ -21,11 +16,7 @@ const Index = () => (
       <img src="/static/images/logos/ryr_logo-64x64.png" alt="RYR logo" />
       <h1>Request Yo Racks</h1>
     </div>
-    <div style={{ borderTop: 'solid black 1px', textAlign: 'center', paddingTop: '0.50em' }}>
-      <FontAwesomeIcon icon={faFacebook} size={footerIconSize} style={footerIconStyle} />
-      <FontAwesomeIcon icon={faTwitter} size={footerIconSize} style={footerIconStyle} />
-      <FontAwesomeIcon icon={faGithub} size={footerIconSize} style={footerIconStyle} />
-    </div>
+    <RyrFooter />
     <style jsx>
       {`
         h1 {
