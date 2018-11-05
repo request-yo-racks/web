@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 
 import RyrFooter from '../components/ryr-footer';
+import RyrHowItWorks from '../components/ryr-how-it-works';
 
 const Index = () => (
   <div>
@@ -16,6 +17,7 @@ const Index = () => (
       <img src="/static/images/logos/ryr_logo-64x64.png" alt="RYR logo" />
       <h1>Request Yo Racks</h1>
     </div>
+    <RyrHowItWorks />
     <RyrFooter />
     <style jsx>
       {`
