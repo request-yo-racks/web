@@ -9,10 +9,10 @@
     "ci": "run-s lint:* test",
     "export": "next export",
     "fix": "run-s fix:*",
-    "fix:format": "prettier --write 'pages/**/*.js' 'components/**/*.js'",
+    "fix:format": "prettier --write \"pages/**/*.js\" \"components/**/*.js\"",
     "fix:javascript": "eslint --ext js,html --fix pages components",
     "lint": "run-s lint:*",
-    "lint:format": "prettier -l --debug-check 'pages/**/*.js' 'components/**/*.js'",
+    "lint:format": "prettier -l --debug-check \"pages/**/*.js\" \"components/**/*.js\"",
     "lint:javascript": "eslint --ext js,html pages components",
     "start": "NODE_ENV=production node server.js",
     "test": "NODE_ENV=test jest"
