@@ -1,0 +1,9 @@
+{
+  "name": "Request Yo Racks",
+  "short_name": "RYR",
+  "description": "RYR landing page",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#B35C22",
+  "background_color": "#B35C22"
+}
