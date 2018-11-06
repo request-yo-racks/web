@@ -13,12 +13,32 @@ const Index = () => (
       <meta name="theme-color" content="#B35C22" />
       <link rel="manifest" href="/static/manifest.json" />
     </Head>
-    <div className="navbar">
+    <nav>
       <img src="/static/images/logos/ryr_logo-64x64.png" alt="RYR logo" />
       <h1>Request Yo Racks</h1>
-    </div>
-    <RyrHowItWorks />
-    <RyrFooter />
+    </nav>
+    <section
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        textAlign: 'center',
+        height: '300px',
+        backgroundImage: "url('/static/images/bike-rack-dark.png')",
+        backgroundPosition: '0 -150px',
+        backgroundRepeat: 'no-repeat',
+        color: 'white'
+      }}
+    >
+      <h2>Request a bike rack from the city of Austin</h2>
+      <p>Always park your bike securely</p>
+    </section>
+    <section>
+      <RyrHowItWorks />
+    </section>
+    <footer>
+      <RyrFooter />
+    </footer>
     <style jsx>
       {`
         h1 {
@@ -27,15 +47,22 @@ const Index = () => (
           margin-left: 0.5em;
         }
 
-        .navbar {
+        nav {
           padding: 0.75em;
         }
 
-        .navbar > * {
+        nav > * {
           vertical-align: middle;
         }
 
-        .;
+        section {
+          width: 80%;
+          margin: 0 auto 1em auto;
+        }
+
+        footer {
+          border-top: solid black 1px;
+        }
       `}
     </style>
   </div>
