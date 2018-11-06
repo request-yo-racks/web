@@ -12,7 +12,7 @@ const RyrHowItWorks = props => {
   const iconStyle = { marginBottom: '0.5em' };
   const containerStyle = {
     margin: '0 auto',
-    width: '60%',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'row',
