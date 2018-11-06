@@ -5,7 +5,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-const footerStyle = { borderTop: 'solid black 1px', textAlign: 'center', paddingTop: '0.50em' };
+const footerStyle = { textAlign: 'center', paddingTop: '0.50em' };
 const footerIconSize = '3x';
 const footerIconStyle = { margin: '0 0.3em' };
 
