@@ -3,6 +3,7 @@ import React from 'react';
 
 import RyrFooter from '../components/ryr-footer';
 import RyrHowItWorks from '../components/ryr-how-it-works';
+import RyrSectionConnector from '../components/ryr-section-connector';
 
 const Index = () => (
   <div>
@@ -35,6 +36,18 @@ const Index = () => (
     </section>
     <section>
       <RyrHowItWorks />
+      <RyrSectionConnector fill="white" bg="#2E5D2A" />
+    </section>
+    <section style={{ backgroundColor: '#2E5D2A' }}>
+      <div style={{ height: '150px' }} />
+      <RyrSectionConnector fill="#2E5D2A" bg="#5AAD54" />
+    </section>
+    <section style={{ backgroundColor: '#5AAD54' }}>
+      <div style={{ height: '150px' }} />
+      <RyrSectionConnector fill="#5AAD54" bg="#DDFDDF" />
+    </section>
+    <section style={{ backgroundColor: '#DDFDDF' }}>
+      <div style={{ height: '150px' }} />
     </section>
     <footer>
       <RyrFooter />
@@ -57,7 +70,8 @@ const Index = () => (
 
         section {
           width: 80%;
-          margin: 0 auto 1em auto;
+          margin: 0 auto;
+          padding-top: 1.5em;
         }
 
         footer {
