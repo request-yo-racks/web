@@ -29,7 +29,7 @@ const RyrInstructions = props => {
         <span style={circleShape}>1</span> Send your email to bicycleprogram@austintexas.gov.
       </p>
       <p style={InstTypes2}>
-        <span style={circleShape}>2</span> Set U+201C;Bicycle Corral RequestU+201D; as the subject.
+        <span style={circleShape}>2</span> Set &#8220;Bicycle Corral Request&#8221; as the subject.
       </p>
     </div>
   );
