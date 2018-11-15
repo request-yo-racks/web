@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import RyrPreview from '../components/ryr-preview';
 import RyrFooter from '../components/ryr-footer';
 import RyrHowItWorks from '../components/ryr-how-it-works';
-import RyrInstructions from '../components/ryr-instructions'
+import RyrInstructions from '../components/ryr-instructions';
 import RyrSectionConnector from '../components/ryr-section-connector';
 
 const RyrLocationSelector = dynamic(() => import('../components/ryr-location-selector'), {
