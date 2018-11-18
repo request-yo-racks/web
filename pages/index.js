@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 
 import RyrFooter from '../components/ryr-footer';
+import RyrHeader from '../components/ryr-header';
 import RyrHowItWorks from '../components/ryr-how-it-works';
 import RyrSectionConnector from '../components/ryr-section-connector';
 
@@ -15,8 +16,7 @@ const Index = () => (
       <link rel="manifest" href="/static/manifest.json" />
     </Head>
     <nav>
-      <img src="/static/images/logos/ryr_logo-64x64.png" alt="RYR logo" />
-      <h1>Request Yo Racks</h1>
+      <RyrHeader />
     </nav>
     <section
       style={{
@@ -54,20 +54,11 @@ const Index = () => (
     </footer>
     <style jsx>
       {`
-        h1 {
-          color: #b35c22;
-          display: inline-block;
-          margin-left: 0.5em;
-        }
-
         nav {
           padding: 0.75em;
         }
 
-        nav > * {
-          vertical-align: middle;
-        }
-
+        
         section {
           width: 80%;
           margin: 0 auto;
