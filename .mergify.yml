@@ -9,7 +9,6 @@ pull_request_rules:
   - '#approved-reviews-by>=1'
   - status-success=review/gitmate/pr
   - 'status-success=ci/circleci: prepare'
-  - 'status-success=ci/circleci: format'
   - 'status-success=ci/circleci: lint'
   - 'status-success=ci/circleci: test'
   name: master

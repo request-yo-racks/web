@@ -26,12 +26,6 @@ jobs:
           paths:
             - node_modules
           key: *repo_cache_key
-  format:
-    <<: *defaults
-    steps:
-      - checkout
-      - *restore_repo
-      - run: npm run lint:format
   lint:
     <<: *defaults
     steps:
@@ -50,9 +44,6 @@ workflows:
   gates:
     jobs:
       - prepare
-      - format:
-          requires:
-            - prepare
       - lint:
           requires:
             - prepare

@@ -4,3 +4,4 @@ build/
 src/config-dev.js
 node_modules/
 .next/
+static/

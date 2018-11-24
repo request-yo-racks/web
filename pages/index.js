@@ -1,9 +1,14 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React from 'react';
 
 import RyrFooter from '../components/ryr-footer';
 import RyrHowItWorks from '../components/ryr-how-it-works';
 import RyrSectionConnector from '../components/ryr-section-connector';
+
+const RyrLocationSelector = dynamic(() => import('../components/ryr-location-selector'), {
+  ssr: false
+});
 
 const Index = () => (
   <div>
@@ -39,7 +44,7 @@ const Index = () => (
       <RyrSectionConnector fill="white" bg="#2E5D2A" />
     </section>
     <section style={{ backgroundColor: '#2E5D2A' }}>
-      <div style={{ height: '150px' }} />
+      <RyrLocationSelector />
       <RyrSectionConnector fill="#2E5D2A" bg="#5AAD54" />
     </section>
     <section style={{ backgroundColor: '#5AAD54' }}>
