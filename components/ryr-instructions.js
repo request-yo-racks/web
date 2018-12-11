@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
-const RyrInstructions = props => {
-
+const RyrInstructions = () => {
   return (
     <div>
       <div id="instructions" className="color-black">
@@ -9,19 +8,17 @@ const RyrInstructions = props => {
         <div className="instruction-list">
           <ol className="list-numbered">
             <li>
-              Send your email to <a href="mailto:bicycleprogram@austintexas.gov?subject=Bicycle Corral Request">
+              Send your email to{' '}
+              <a href="mailto:bicycleprogram@austintexas.gov?subject=Bicycle Corral Request">
                 bicycleprogram@austintexas.gov
               </a>
             </li>
-            <li>
-                Set "Bicycle Corral Request" as the subject.
-            </li>
+            <li>Set &quot;Bicycle Corral Request&quot; as the subject.</li>
           </ol>
         </div>
       </div>
-    <style jsx>
-
-      {`
+      <style jsx>
+        {`
       h2 {
         text-align: center;
         margin-bottom: 1em;
@@ -111,7 +108,7 @@ const RyrInstructions = props => {
         }
       } 
       `}
-    </style>
+      </style>
     </div>
   );
 };
