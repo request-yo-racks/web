@@ -22,58 +22,17 @@ const RyrInstructions = () => {
       h2 {
         text-align: center;
         margin-bottom: 1em;
-      }
-      
-      section {
-        padding: 15px;
+        margin-top: 1em;
       }
 
       #instructions {
         background-color: #DDFDDF;
       }
 
-      .circle {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 4.5em;
-        height: 4.5em;
-        border-radius: 50%;
-        background-color: white;
-        color: #5AAD54;
-      }  
-
-      .section-connector {
-        width: 100%;
-        height: 75px;
-        margin-bottom: -1em;
-        padding: 0;
-      }
-
-      .section-connector-location {
-        background-color: #2E5D2A;
-        fill: white;
-      }
-
-      .section-connector-preview {
-        background-color: #5AAD54;
-        fill: #2E5D2A;
-      }
-
-      .section-connector-instructions {
-        background-color: #DDFDDF;
-        fill: #5AAD54;
-      }
-
       .instruction-list {
         margin: auto;
         max-width: 450px;
-      }
-
-      .instruction-list {
-        margin: auto;
-        width: 70%;
-
+        width: 100%;
       }
 
       .list-numbered {
@@ -103,10 +62,7 @@ const RyrInstructions = () => {
         counter-increment: line;
         content: counter(line);
       }
-      .instruction-list {
-          width: 100%;
-        }
-      } 
+
       `}
       </style>
     </div>
