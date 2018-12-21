@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import RyrPopupItem from './ryr-popup-item';
-
-// const CapitolSummaryInfo = { name: 'Texas State Capitol', address1: '1100 Congress Ave', address2: 'Austin, TX 78701' };
-// const CloakRoomSummaryInfo = { name: 'The Cloak Room', address1: '1300 Colorado St', address2: 'Austin, TX 78701' };
-// const TexasChiliParlorSummaryInfo = { name: 'Texas Chili Parlor', address1: '1409 Lavaca St', address2: 'Austin, TX 78701' };
-// const fakePlaces = [CapitolSummaryInfo, CloakRoomSummaryInfo, TexasChiliParlorSummaryInfo];
+import { selectLocation } from '../redux/store';
 
 class RyrPopup extends React.Component {
   constructor(props) {
@@ -16,6 +13,8 @@ class RyrPopup extends React.Component {
   }
 
   handleClick(index) {
+    const name = this.props.places[index].name;
+    this.props.selectLocation(name);
     this.setState(() => ({
       selected: index
     }));
@@ -52,7 +51,11 @@ class RyrPopup extends React.Component {
 }
 
 RyrPopup.propTypes = {
-  places: PropTypes.array
+  places: PropTypes.array,
+  selectLocation: PropTypes.func
 };
 
-export default RyrPopup;
+export default connect(
+  null,
+  { selectLocation }
+)(RyrPopup);

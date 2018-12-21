@@ -1,5 +1,6 @@
 import React from 'react';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
+
 import RyrPopup from './ryr-popup';
 
 class RyrLocationSelector extends React.Component {
@@ -30,8 +31,8 @@ class RyrLocationSelector extends React.Component {
   }
 
   fetchResult() {
-    // const apiUrl = 'http://api.192.168.99.100.nip.io'
-    const apiUrl = 'http://127.0.0.1:8000';
+    const apiUrl = 'http://api.192.168.99.100.nip.io';
+    // const apiUrl = 'http://127.0.0.1:8000';
     fetch(apiUrl + '/1.0/places?location=' + this.state.lat + ',' + this.state.lng)
       .then(res => res.json())
       .then(
@@ -73,7 +74,7 @@ class RyrLocationSelector extends React.Component {
         }}
       >
         <MapboxMap
-          accessToken={'pk.eyJ1IjoicmdyZWluaG9mZXIiLCJhIjoiY2pvamE2ZjBzMDMxcTNxbjFvMmgwMm4zZSJ9.gw2KbVBLQF_CbRQJ-ePyZQ'}
+          accessToken={''}
           coordinates={{ lng: this.state.lng, lat: this.state.lat }}
           className="map-container"
           zoom={13}
