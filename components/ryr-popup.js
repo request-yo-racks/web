@@ -39,6 +39,10 @@ class RyrPopup extends React.Component {
       >
         {places.map((place, index) => {
           const isSelected = index === this.state.selected;
+          if (isSelected) {
+            this.props.selectLocation(place.name);
+          }
+
           return (
             <div key={index} onClick={e => this.handleClick(index, e)}>
               <RyrPopupItem index={index} place={place} selected={isSelected} />
