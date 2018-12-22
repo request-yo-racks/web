@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { connect } from 'react-redux';
@@ -57,7 +58,7 @@ class Index extends React.Component {
           <RyrSectionConnector fill="white" bg="#2E5D2A" />
         </section>
         <section style={{ backgroundColor: '#2E5D2A' }}>
-          <RyrLocationSelector />
+          <RyrLocationSelector mapboxToken={this.props.mapboxToken} />
           <RyrSectionConnector fill="#2E5D2A" bg="#5AAD54" />
         </section>
         <section style={{ backgroundColor: '#5AAD54' }}>
@@ -101,5 +102,9 @@ class Index extends React.Component {
     );
   }
 }
+
+Index.propTypes = {
+  mapboxToken: PropTypes.string
+};
 
 export default connect()(Index);

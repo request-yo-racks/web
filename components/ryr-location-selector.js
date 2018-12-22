@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
@@ -74,7 +75,7 @@ class RyrLocationSelector extends React.Component {
         }}
       >
         <MapboxMap
-          accessToken={''}
+          accessToken={this.props.mapboxToken}
           coordinates={{ lng: this.state.lng, lat: this.state.lat }}
           className="map-container"
           zoom={13}
@@ -102,5 +103,9 @@ class RyrLocationSelector extends React.Component {
     );
   }
 }
+
+RyrLocationSelector.propTypes = {
+  mapboxToken: PropTypes.string
+};
 
 export default RyrLocationSelector;
