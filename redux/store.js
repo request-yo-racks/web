@@ -1,4 +1,9 @@
+import createSagaMiddleware from 'redux-saga'
 import { createStore, applyMiddleware } from 'redux';
+
+import rootSaga from './saga'
+
+const sagaMiddleware = createSagaMiddleware()
 
 // Apply the middlewares and enable the Redux DevTools if necessary.
 const bindMiddleware = (middleware) => {
@@ -56,8 +61,13 @@ export const selectLocation = location => ({
 });
 
 export const fetchPlaces = (placeSummaries) => ({
-  type: actionTypes.SELECT_LOCATION,
+  type: actionTypes.FETCH_PLACES,
   payload: { placeSummaries }
+});
+
+export const fetchPlacesAsync = (location) => ({
+  type: actionTypes.FETCH_PLACES_ASYNC,
+  payload: { location }
 });
 
 export const selectPlace = placeDetails => ({
@@ -67,5 +77,10 @@ export const selectPlace = placeDetails => ({
 
 // Initialize store.
 export function initializeStore(initialState = initialState) {
-  return createStore(reducer, initialState, bindMiddleware([]))
+  const store = createStore(reducer, initialState, bindMiddleware([sagaMiddleware]))
+  store.runSagaTask = () => {
+    store.sagaTask = sagaMiddleware.run(rootSaga)
+  }
+  store.runSagaTask()
+  return store
 }
