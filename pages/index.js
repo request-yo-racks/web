@@ -14,10 +14,8 @@ const RyrLocationSelector = dynamic(() => import('../components/ryr-location-sel
 });
 
 class Index extends React.Component {
-  static getInitialProps({ store }) {
+  static getInitialProps() {
     console.log('=> Mapbox Token: ' + process.env.RYR_WEB_MAPBOX_API_KEY);
-    // component will be able to read from store's state when rendered
-    store.dispatch({ type: 'SELECT_LOCATION', payload: 'nobody' });
 
     // you can pass some custom props to component from here
     return { custom: 'custom', mapboxToken: process.env.RYR_WEB_MAPBOX_API_KEY };
@@ -62,6 +60,7 @@ class Index extends React.Component {
           <RyrSectionConnector fill="#2E5D2A" bg="#5AAD54" />
         </section>
         <section style={{ backgroundColor: '#5AAD54' }}>
+          {/* <div style={{ height: '150px' }} /> */}
           <RyrEmail />
           <RyrSectionConnector fill="#5AAD54" bg="#DDFDDF" />
         </section>

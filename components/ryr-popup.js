@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import RyrPopupItem from './ryr-popup-item';
-import { selectLocation } from '../redux/store';
+import { selectPlace } from '../redux/store';
 
 class RyrPopup extends React.Component {
   constructor(props) {
@@ -13,8 +13,8 @@ class RyrPopup extends React.Component {
   }
 
   handleClick(index) {
-    const name = this.props.places[index].name;
-    this.props.selectLocation(name);
+    const selectedPlace = this.props.places[index];
+    this.props.selectPlace(selectedPlace);
     this.setState(() => ({
       selected: index
     }));
@@ -40,7 +40,8 @@ class RyrPopup extends React.Component {
         {places.map((place, index) => {
           const isSelected = index === this.state.selected;
           if (isSelected) {
-            this.props.selectLocation(place.name);
+            const selectedPlace = this.props.places[index];
+            this.props.selectPlace(selectedPlace);
           }
 
           return (
@@ -56,10 +57,10 @@ class RyrPopup extends React.Component {
 
 RyrPopup.propTypes = {
   places: PropTypes.array,
-  selectLocation: PropTypes.func
+  selectPlace: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { selectLocation }
+  { selectPlace }
 )(RyrPopup);

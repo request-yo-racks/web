@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 import RyrPopup from './ryr-popup';
+import { fetchPlaces, selectLocation } from '../redux/store';
 
 class RyrLocationSelector extends React.Component {
   constructor(props) {
     super(props);
     this.onMapLoad = this.onMapLoad.bind(this);
     this.state = {
-      lng: -97.740313,
-      lat: 30.274687,
       error: null,
-      isLoaded: false,
-      items: [{ name: 'Loading...' }]
+      isLoaded: false
     };
   }
 
@@ -24,23 +23,24 @@ class RyrLocationSelector extends React.Component {
 
   handleClick(e) {
     console.log(e.lngLat.lng + ', ' + e.lngLat.lat);
-    this.setState(() => ({
+    const location = {
       lng: e.lngLat.lng,
       lat: e.lngLat.lat
-    }));
+    };
+    this.props.selectLocation(location);
     this.fetchResult();
   }
 
   fetchResult() {
     const apiUrl = 'http://api.192.168.99.100.nip.io';
     // const apiUrl = 'http://127.0.0.1:8000';
-    fetch(apiUrl + '/1.0/places?location=' + this.state.lat + ',' + this.state.lng)
+    fetch(apiUrl + '/1.0/places?location=' + this.props.location.lat + ',' + this.props.location.lng)
       .then(res => res.json())
       .then(
         result => {
+          this.props.fetchPlaces(result.results.slice(1, 11));
           this.setState({
-            isLoaded: true,
-            items: result.results.slice(1, 11)
+            isLoaded: true
           });
         },
         // Note: it's important to handle errors here
@@ -63,7 +63,7 @@ class RyrLocationSelector extends React.Component {
     const viewportHeight = 50;
     let marker;
     if (this.map) {
-      marker = <Marker coordinates={{ lng: this.state.lng, lat: this.state.lat }} map={this.map} />;
+      marker = <Marker coordinates={{ lng: this.props.location.lng, lat: this.props.location.lat }} map={this.map} />;
     }
 
     return (
@@ -76,7 +76,7 @@ class RyrLocationSelector extends React.Component {
       >
         <MapboxMap
           accessToken={this.props.mapboxToken}
-          coordinates={{ lng: this.state.lng, lat: this.state.lat }}
+          coordinates={{ lng: this.props.location.lng, lat: this.props.location.lat }}
           className="map-container"
           zoom={13}
           onLoad={this.onMapLoad}
@@ -97,7 +97,7 @@ class RyrLocationSelector extends React.Component {
             overflow: 'scroll'
           }}
         >
-          <RyrPopup places={this.state.items} />
+          <RyrPopup places={this.props.placeSummaries} />
         </div>
       </div>
     );
@@ -105,7 +105,19 @@ class RyrLocationSelector extends React.Component {
 }
 
 RyrLocationSelector.propTypes = {
-  mapboxToken: PropTypes.string
+  fetchPlaces: PropTypes.func.isRequired,
+  location: PropTypes.object,
+  mapboxToken: PropTypes.string.isRequired,
+  placeSummaries: PropTypes.array,
+  selectLocation: PropTypes.func.isRequired
 };
 
-export default RyrLocationSelector;
+const mapStateToProps = state => {
+  const { placeSummaries, location } = state;
+  return { placeSummaries, location };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchPlaces, selectLocation }
+)(RyrLocationSelector);
