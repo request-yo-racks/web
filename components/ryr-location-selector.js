@@ -49,7 +49,7 @@ class RyrLocationSelector extends React.Component {
     return (
       <div
         style={{
-          height: viewportHeight + 'vh',
+          height: `${viewportHeight}vh`,
           width: '90%',
           margin: '0 auto'
         }}
@@ -65,14 +65,12 @@ class RyrLocationSelector extends React.Component {
           {marker}
         </MapboxMap>
         <div
-          id="coordinates"
-          className="coordinates"
           style={{
             position: 'relative',
-            top: '-' + (viewportHeight - 1) + 'vh',
+            top: `-${viewportHeight - 1}vh`,
             right: '1vw',
             float: 'right',
-            width: '33%',
+            maxWidth: '33%',
             maxHeight: '48vh',
             overflow: 'scroll'
           }}
