@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MapboxMap, { Marker } from 'react-mapbox-wrapper';
 
 import RyrPopup from './ryr-popup';
-import { fetchPlaces, selectLocation } from '../redux/store';
+import { fetchPlacesAsync, selectLocation } from '../redux/store';
 
 class RyrLocationSelector extends React.Component {
   constructor(props) {
@@ -28,35 +28,15 @@ class RyrLocationSelector extends React.Component {
       lat: e.lngLat.lat
     };
     this.props.selectLocation(location);
-    this.fetchResult();
-  }
-
-  fetchResult() {
-    const apiUrl = 'http://api.192.168.99.100.nip.io';
-    // const apiUrl = 'http://127.0.0.1:8000';
-    fetch(apiUrl + '/1.0/places?location=' + this.props.location.lat + ',' + this.props.location.lng)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.props.fetchPlaces(result.results.slice(1, 11));
-          this.setState({
-            isLoaded: true
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+    this.props.fetchPlacesAsync(location);
   }
 
   componentDidMount() {
-    this.fetchResult();
+    const location = {
+      lng: this.props.location.lng,
+      lat: this.props.location.lat
+    };
+    this.props.fetchPlacesAsync(location);
   }
 
   render() {
@@ -105,7 +85,7 @@ class RyrLocationSelector extends React.Component {
 }
 
 RyrLocationSelector.propTypes = {
-  fetchPlaces: PropTypes.func.isRequired,
+  fetchPlacesAsync: PropTypes.func.isRequired,
   location: PropTypes.object,
   mapboxToken: PropTypes.string.isRequired,
   placeSummaries: PropTypes.array,
@@ -119,5 +99,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchPlaces, selectLocation }
+  { fetchPlacesAsync, selectLocation }
 )(RyrLocationSelector);
