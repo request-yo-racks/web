@@ -29,11 +29,9 @@ class RyrPopup extends React.Component {
           color: '#000',
           padding: '0',
           margin: '0',
-          fontSize: '11px',
-          lineHeight: '18px',
+          fontSize: '0.66em',
+          lineHeight: '1.1em',
           borderRadius: '3px',
-          display: 'inline-block',
-          float: 'right',
           boxShadow: '3px 3px 5px 6px #ccc'
         }}
       >

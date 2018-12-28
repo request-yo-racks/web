@@ -89,7 +89,8 @@ class Index extends React.Component {
             section {
               width: 80%;
               margin: 0 auto;
-              padding-top: 1.5em;
+              padding-top: 2em;
+              padding-bottom: 2em;
             }
 
             footer {
