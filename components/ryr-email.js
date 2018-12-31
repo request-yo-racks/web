@@ -4,25 +4,23 @@ import ReactMarkdown from 'react-markdown';
 
 const RyrEmail = props => {
   let email = '';
-  if (props.placeDetails != undefined && props.placeDetails.geometry != undefined) {
+  if (props.placeDetails != undefined) {
     email = `
   Thanks for contacting us on behalf of ${props.placeDetails.name}.
 
   Dear city of Austin,
 
-  I would like to request a bike rack at ${props.placeDetails.vicinity}, (geolocation:
-  ${props.placeDetails.geometry.location.lat}, ${
-      props.placeDetails.geometry.location.lng
-    }). The business supporting this demand
+  I would like to request a bike rack at ${props.placeDetails.address}, (geolocation:
+  ${props.placeDetails.latitude}, ${props.placeDetails.longitude}). The business supporting this demand
   is ${props.placeDetails.name}.
 
-  The point of contact is ${props.placeDetails.name} and can be contacted via phone (${
-      props.placeDetails.name
-    }) or email (${props.placeDetails.name}).
+  The point of contact is ${props.placeDetails.contact_name} and can be contacted via phone (${
+      props.placeDetails.phone
+    }) or email (${props.placeDetails.email}).
 
-  Current parking situation: ${props.placeDetails.name}
+  Current parking situation: ${props.placeDetails.parking_info}
 
-  ${props.placeDetails.name}
+  ${props.placeDetails.extra_info}
 
   Cheers,
 

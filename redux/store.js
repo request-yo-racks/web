@@ -70,9 +70,14 @@ export const fetchPlacesAsync = (location) => ({
   payload: { location }
 });
 
-export const selectPlace = placeDetails => ({
+export const selectPlace = (placeDetails) => ({
   type: actionTypes.SELECT_PLACE,
   payload: { placeDetails }
+});
+
+export const selectPlaceAsync = (place) => ({
+  type: actionTypes.SELECT_PLACE_ASYNC,
+  payload: { place }
 });
 
 // Initialize store.
