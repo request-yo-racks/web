@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import RyrPopupItem from './ryr-popup-item';
-
-// const CapitolSummaryInfo = { name: 'Texas State Capitol', address1: '1100 Congress Ave', address2: 'Austin, TX 78701' };
-// const CloakRoomSummaryInfo = { name: 'The Cloak Room', address1: '1300 Colorado St', address2: 'Austin, TX 78701' };
-// const TexasChiliParlorSummaryInfo = { name: 'Texas Chili Parlor', address1: '1409 Lavaca St', address2: 'Austin, TX 78701' };
-// const fakePlaces = [CapitolSummaryInfo, CloakRoomSummaryInfo, TexasChiliParlorSummaryInfo];
+import { selectPlace } from '../redux/store';
 
 class RyrPopup extends React.Component {
   constructor(props) {
@@ -16,6 +13,8 @@ class RyrPopup extends React.Component {
   }
 
   handleClick(index) {
+    const selectedPlace = this.props.places[index];
+    this.props.selectPlace(selectedPlace);
     this.setState(() => ({
       selected: index
     }));
@@ -30,16 +29,19 @@ class RyrPopup extends React.Component {
           color: '#000',
           padding: '0',
           margin: '0',
-          fontSize: '11px',
-          lineHeight: '18px',
+          fontSize: '0.66em',
+          lineHeight: '1.1em',
           borderRadius: '3px',
-          display: 'inline-block',
-          float: 'right',
           boxShadow: '3px 3px 5px 6px #ccc'
         }}
       >
         {places.map((place, index) => {
           const isSelected = index === this.state.selected;
+          if (isSelected) {
+            const selectedPlace = this.props.places[index];
+            this.props.selectPlace(selectedPlace);
+          }
+
           return (
             <div key={index} onClick={e => this.handleClick(index, e)}>
               <RyrPopupItem index={index} place={place} selected={isSelected} />
@@ -52,7 +54,11 @@ class RyrPopup extends React.Component {
 }
 
 RyrPopup.propTypes = {
-  places: PropTypes.array
+  places: PropTypes.array,
+  selectPlace: PropTypes.func.isRequired
 };
 
-export default RyrPopup;
+export default connect(
+  null,
+  { selectPlace }
+)(RyrPopup);
