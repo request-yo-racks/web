@@ -2,6 +2,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
 import dynamic from 'next/dynamic';
+import styled from '@emotion/styled';
 import { connect } from 'react-redux';
 
 import RyrEmail from '../components/ryr-email';
@@ -22,6 +23,69 @@ class Index extends React.Component {
   }
 
   render() {
+    // Define the colors.
+    const darkGreen = '#2E5D2A';
+    const mediumGreen = '#5AAD54';
+    const lightGreen = '#DDFDDF';
+
+    // Define the styled components.
+    const Nav = styled.nav({
+      padding: '0.75em',
+      '&>*': {
+        verticalAlign: 'middle'
+      }
+    });
+    const H1 = styled.h1({
+      color: '#b35c22',
+      display: 'inline-block',
+      marginLeft: '0.5em'
+    });
+    const Section = styled.section(
+      {
+        width: '80%',
+        margin: '0 auto',
+        paddingTop: '2em',
+        paddingBottom: '2em'
+      },
+      props => ({ backgroundColor: props.backgroundColor })
+    );
+    // TODO(remyg): This `ArrowSection` component does not work, but I believe that's the way it should be.
+    // const ArrowSection = styled.section(
+    //   {
+    //     width: '80%',
+    //     margin: '0 auto',
+    //     paddingTop: '2em',
+    //     paddingBottom: '2em',
+    //     '&::after,::before': {
+    //       top: '100%',
+    //       left: '50%',
+    //       border: 'solid transparent',
+    //       content: ' ',
+    //       height: 0,
+    //       width: 0,
+    //       position: 'absolute',
+    //       pointerEvents: 'none'
+    //     },
+    //     '&::after': {
+    //       borderColor: 'rgba(136, 183, 213, 0)',
+    //       borderTopColor: '#88b7d5',
+    //       borderWidth: '30px',
+    //       marginLeft: '-30px'
+    //     },
+    //     '&::before': {
+    //       borderColor: 'rgba(194, 225, 245, 0)',
+    //       borderTopColor: '#c2e1f5',
+    //       borderWidth: '36px',
+    //       marginLeft: '-36px'
+    //     }
+    //   },
+    //   props => ({ backgroundColor: props.backgroundColor })
+    // );
+    const Footer = styled.footer({
+      borderTop: 'solid black 1px'
+    });
+
+    // Render it.
     return (
       <div>
         <Head>
@@ -31,11 +95,11 @@ class Index extends React.Component {
           <meta name="theme-color" content="#B35C22" />
           <link rel="manifest" href="/static/manifest.json" />
         </Head>
-        <nav>
+        <Nav>
           <img src="/static/images/logos/ryr_logo-64x64.png" alt="RYR logo" />
-          <h1>Request Yo Racks</h1>
-        </nav>
-        <section
+          <H1>Request Yo Racks</H1>
+        </Nav>
+        <Section
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -50,54 +114,25 @@ class Index extends React.Component {
         >
           <h2>Request a bike rack from the city of Austin</h2>
           <p>Always park your bike securely</p>
-        </section>
-        <section>
+        </Section>
+        <Section>
           <RyrHowItWorks />
-          <RyrSectionConnector fill="white" bg="#2E5D2A" />
-        </section>
-        <section style={{ backgroundColor: '#2E5D2A' }}>
+          <RyrSectionConnector fill="white" bg={darkGreen} />
+        </Section>
+        <Section backgroundColor={darkGreen}>
           <RyrLocationSelector mapboxToken={this.props.mapboxToken} />
-          <RyrSectionConnector fill="#2E5D2A" bg="#5AAD54" />
-        </section>
-        <section style={{ backgroundColor: '#5AAD54' }}>
-          {/* <div style={{ height: '150px' }} /> */}
+          <RyrSectionConnector fill={darkGreen} bg={mediumGreen} />
+        </Section>
+        <Section backgroundColor={mediumGreen}>
           <RyrEmail />
-          <RyrSectionConnector fill="#5AAD54" bg="#DDFDDF" />
-        </section>
-        <section style={{ backgroundColor: '#DDFDDF' }}>
+          <RyrSectionConnector fill={mediumGreen} bg={lightGreen} />
+        </Section>
+        <Section backgroundColor={lightGreen}>
           <div style={{ height: '150px' }} />
-        </section>
-        <footer>
+        </Section>
+        <Footer>
           <RyrFooter />
-        </footer>
-        <style jsx>
-          {`
-            h1 {
-              color: #b35c22;
-              display: inline-block;
-              margin-left: 0.5em;
-            }
-
-            nav {
-              padding: 0.75em;
-            }
-
-            nav > * {
-              vertical-align: middle;
-            }
-
-            section {
-              width: 80%;
-              margin: 0 auto;
-              padding-top: 2em;
-              padding-bottom: 2em;
-            }
-
-            footer {
-              border-top: solid black 1px;
-            }
-          `}
-        </style>
+        </Footer>
       </div>
     );
   }
