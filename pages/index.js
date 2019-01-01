@@ -85,7 +85,7 @@ class Index extends React.Component {
       borderTop: 'solid black 1px'
     });
 
-    // Render it.
+    // Render the component.
     return (
       <div>
         <Head>
