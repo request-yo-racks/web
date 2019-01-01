@@ -31,6 +31,7 @@ const RyrHowItWorks = props => {
   // Define the common styles.
   const iconStyle = { marginBottom: '0.5em' };
 
+  // Render the component.
   return (
     <div>
       <H2>How does it Work?</H2>
