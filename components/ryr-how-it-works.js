@@ -1,48 +1,56 @@
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-const defaultIconSize = '7x';
-
 const RyrHowItWorks = props => {
-  const iconSize = props.size || defaultIconSize;
-  const iconStyle = { marginBottom: '0.5em' };
-  const containerStyle = {
+  // Read the props or use default values.
+  const iconSize = props.size || '7x';
+
+  // Define the styled components.
+  const H2 = styled.h2({
+    textAlign: 'center',
+    marginBottom: '1em'
+  });
+  const Container = styled.div({
     margin: '0 auto',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'row',
     textAlign: 'center'
-  };
-  const itemStyle = {
+  });
+  const Item = styled.div({
     width: '33%',
     marginBottom: '2em'
-  };
+  });
+
+  // Define the common styles.
+  const iconStyle = { marginBottom: '0.5em' };
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center', marginBottom: '1em' }}>How does it Work?</h2>
-      <div style={containerStyle}>
-        <div style={itemStyle}>
+      <H2>How does it Work?</H2>
+      <Container>
+        <Item>
           <FontAwesomeIcon icon={faMapMarkerAlt} size={iconSize} style={iconStyle} />
           <h3>Select</h3>
           <p>the location</p>
-        </div>
-        <div style={itemStyle}>
+        </Item>
+        <Item>
           <FontAwesomeIcon icon={faCheckSquare} size={iconSize} style={iconStyle} />
           <h3>Review</h3>
           <p>the petition</p>
-        </div>
-        <div style={itemStyle}>
+        </Item>
+        <Item>
           <FontAwesomeIcon icon={faPaperPlane} size={iconSize} style={iconStyle} />
           <h3>Submit</h3>
           <p>the request</p>
-        </div>
-      </div>
+        </Item>
+      </Container>
     </div>
   );
 };
