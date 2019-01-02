@@ -113,7 +113,7 @@ class Index extends React.Component {
           }}
         >
           <h2>Request a bike rack from the city of Austin</h2>
-          <p>Always park your bike securely</p>
+          <p style={{ fontStyle: 'italic' }}>Always park your bike securely</p>
         </Section>
         <Section>
           <RyrHowItWorks />
