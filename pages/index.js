@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { connect } from 'react-redux';
 
-import RyrEmail from '../components/ryr-email';
+import RyrPreview from '../components/ryr-preview';
 import RyrFooter from '../components/ryr-footer';
 import RyrHowItWorks from '../components/ryr-how-it-works';
 import RyrSectionConnector from '../components/ryr-section-connector';
@@ -124,7 +124,7 @@ class Index extends React.Component {
           <RyrSectionConnector fill={darkGreen} bg={mediumGreen} />
         </Section>
         <Section backgroundColor={mediumGreen}>
-          <RyrEmail />
+          <RyrPreview />
           <RyrSectionConnector fill={mediumGreen} bg={lightGreen} />
         </Section>
         <Section backgroundColor={lightGreen}>
