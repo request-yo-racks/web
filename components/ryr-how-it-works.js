@@ -37,7 +37,7 @@ const RyrHowItWorks = props => {
   });
 
   // Define the common styles.
-  const IconDiv = styled.dev(
+  const IconDiv = styled.div(
     mq({
       fontSize: ['0.75em', '1em']
     })
