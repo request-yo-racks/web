@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import RyrPreview from '../components/ryr-preview';
 import RyrFooter from '../components/ryr-footer';
 import RyrHowItWorks from '../components/ryr-how-it-works';
+import RyrInstructions from '../components/ryr-instructions';
 import RyrSectionConnector from '../components/ryr-section-connector';
 
 const RyrLocationSelector = dynamic(() => import('../components/ryr-location-selector'), {
@@ -128,7 +129,7 @@ class Index extends React.Component {
           <RyrSectionConnector fill={mediumGreen} bg={lightGreen} />
         </Section>
         <Section backgroundColor={lightGreen}>
-          <div style={{ height: '150px' }} />
+          <RyrInstructions />
         </Section>
         <Footer>
           <RyrFooter />
