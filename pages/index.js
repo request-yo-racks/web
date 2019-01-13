@@ -129,7 +129,7 @@ class Index extends React.Component {
           <RyrSectionConnector fill={mediumGreen} bg={lightGreen} />
         </Section>
         <Section backgroundColor={lightGreen}>
-          <div style={{ height: '150px' }} />
+          <RyrInstructions />
         </Section>
         <Footer>
           <RyrFooter />

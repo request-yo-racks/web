@@ -19,51 +19,50 @@ const RyrInstructions = () => {
       </div>
       <style jsx>
         {`
-      h2 {
-        text-align: center;
-        margin-bottom: 1em;
-        margin-top: 1em;
-      }
+          h2 {
+            text-align: center;
+            margin-bottom: 1em;
+            margin-top: 1em;
+          }
 
-      #instructions {
-        background-color: #DDFDDF;
-      }
+          #instructions {
+            background-color: #ddfddf;
+          }
 
-      .instruction-list {
-        margin: auto;
-        max-width: 450px;
-        width: 100%;
-      }
+          .instruction-list {
+            margin: auto;
+            max-width: 450px;
+            width: 100%;
+          }
 
-      .list-numbered {
-        list-style: none;
-        margin-left: 1em;
-        counter-reset: line;
-      }
+          .list-numbered {
+            list-style: none;
+            margin-left: 1em;
+            counter-reset: line;
+          }
 
-      .list-numbered > li {
-        position: relative;
-        margin-bottom: 1.5em;
-      }
+          .list-numbered > li {
+            position: relative;
+            margin-bottom: 1.5em;
+          }
 
-      .list-numbered > li:before {
-        position: absolute;
-        left: -2.25em;
-        display: inline-block;
-        width: 1.25em;
-        height: 1.25em;
-        margin-right: 0.5em;
-        background-color: #129406;
-        border-radius: 50%;
-        color: #fff;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 1.25em;
-        counter-increment: line;
-        content: counter(line);
-      }
-
-      `}
+          .list-numbered > li:before {
+            position: absolute;
+            left: -2.25em;
+            display: inline-block;
+            width: 1.25em;
+            height: 1.25em;
+            margin-right: 0.5em;
+            background-color: #129406;
+            border-radius: 50%;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.25em;
+            counter-increment: line;
+            content: counter(line);
+          }
+        `}
       </style>
     </div>
   );
